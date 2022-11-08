@@ -1,2 +1,2 @@
-# tourify
+# 🧭 tourify
 Road Trip Planner Application
