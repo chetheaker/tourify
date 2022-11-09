@@ -1,0 +1,21 @@
+.trip-preview {
+  width: 250px;
+  height: 250px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* MAKE HOVER OUT SMOOTH */
+
+/* .trip-preview:hover {
+  transform: translateY(-4px);
+  transition: all 0.3s;
+}
+
+.trip-preview:active {
+  transform: translateY(4px);
+} */

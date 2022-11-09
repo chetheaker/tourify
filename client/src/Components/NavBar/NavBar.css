@@ -1,0 +1,37 @@
+.navbar {
+  background-color: white;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.navbar button {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar button > span {
+  color: #1fc28b;
+  font-size: 1.1rem;
+  font-family: 'Red Hat Text', sans-serif !important;
+  margin-left: 10px;
+}
+
+.navbar .left,
+.navbar .right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar .logo {
+  background: url('../../../public/assets/icons/tourify-1FC28B-white.png');
+  background-size: cover;
+  height: 50px;
+  width: 100px;
+}

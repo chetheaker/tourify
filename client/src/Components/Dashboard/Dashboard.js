@@ -2,10 +2,11 @@ import './Dashboard.css';
 
 import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../UserContext';
-import SideBar from '../SideBar/SideBar';
 import TripsContainer from '../TripsContainer/TripsContainer';
+import NavBar from '../NavBar/NavBar';
 
 // TODO Fix routing: At the moment the request to get the logged in user takes some time so if a user is logged in and goes to /dashboard, they go back to the login page for a brief moment before going back to the dashboard. Could lazy load + suspend?
+// TODO check frontedendjoe dashboard layouts
 function Dashboard() {
   const [activeUser] = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,16 +18,19 @@ function Dashboard() {
   }
 
   return (
-    <div className="container">
-      <SideBar />
-      <div className="dashboard">
-        <div className="welcome-container">
-          <h1 className="welcome">Welcome back, {activeUser.first_name}! 🙌</h1>
-          <h2 className="tag">Explore your trips.</h2>
+    <>
+      <NavBar />
+      <div className="container">
+        <div className="dashboard">
+          <div className="stats-container">
+            <h1 className="welcome">
+              Welcome back, {activeUser.first_name}! 🙌
+            </h1>
+          </div>
+          <TripsContainer />
         </div>
-        <TripsContainer />
       </div>
-    </div>
+    </>
   );
 }
 

@@ -1,12 +1,14 @@
-import SideBar from '../SideBar/SideBar';
 import './ExplorePage.css';
+import NavBar from '../NavBar/NavBar';
 
 function ExplorePage() {
   return (
-    <div className="container">
-      <SideBar />
-      <h1>EXPLORE</h1>
-    </div>
+    <>
+      <NavBar />
+      <div className="container">
+        <h1>EXPLORE</h1>
+      </div>
+    </>
   );
 }
 

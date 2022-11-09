@@ -1,8 +1,10 @@
 .side-bar {
-  width: 75px;
+  min-width: 75px;
   height: 100%;
   background-color: #ffffff;
-  transition: width 0.4s;
+  transition: min-width 0.4s;
+  /* position: sticky;
+  top: 0; */
 }
 
 .side-bar-inner {
@@ -56,7 +58,7 @@
 }
 
 .side-bar-open {
-  width: 280px;
+  min-width: 280px;
   padding-left: 100px;
 }
 
