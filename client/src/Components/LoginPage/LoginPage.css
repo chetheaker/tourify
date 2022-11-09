@@ -1,0 +1,363 @@
+.signup-login-container {
+  height: 95vh;
+  width: 97vw;
+  margin: 2.5vh 1.5vw;
+  border-radius: 20px;
+  background: rgb(17, 17, 43);
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 43, 1) 0%,
+    rgba(36, 31, 65, 1) 100%
+  );
+  display: flex;
+}
+
+.image {
+  background: url('../../../public/assets/backgrounds/bg1.jpeg');
+  height: 95%;
+  width: 63%;
+  background-size: cover;
+  background-position: right;
+  border-radius: inherit;
+  position: absolute;
+  transition: transform 1s ease;
+}
+
+@media screen and (max-width: 860px) {
+  .image {
+    width: 60%;
+  }
+  .signup-login-container .left {
+    transform: translateX(62%) !important;
+  }
+  .signup,
+  .login {
+    width: 38% !important;
+  }
+}
+
+.signup-login-container .left {
+  transform: translateX(54%);
+}
+
+.signup-login-container .hide {
+  visibility: hidden;
+}
+
+.image .overlay {
+  background-color: #11112b;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  border-radius: inherit;
+}
+
+.signup-login {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.signup-login .route-icon {
+  height: 20%;
+}
+
+.signup-login h1 {
+  color: #bdb9dd;
+  margin: 1.5rem 0;
+  font-size: 2.5rem;
+  width: 80%;
+}
+
+@media screen and (max-width: 1250px) {
+  .signup-login h1 {
+    font-size: 2rem;
+  }
+  .signup-login h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .signup-login h2 {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .signup-login h2 {
+    font-size: 1rem;
+  }
+  .signup-login p {
+    font-size: 0.7rem !important;
+  }
+}
+
+.signup-login h2 {
+  color: white;
+  font-weight: normal;
+  margin: 1.5rem 0;
+  width: 80%;
+}
+
+.signup-login .login-form,
+.signup-login .signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 80%;
+}
+
+@media screen and (max-width: 1100px) {
+  .signup-login .login-form,
+  .signup-login .signup-form,
+  .signup-login h2,
+  .signup-login h1 {
+    width: 90%;
+  }
+}
+
+.signup-login input {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: inherit;
+  background-color: #444157;
+  border: none;
+  color: #bdb9dd;
+  padding: 15px 7px;
+  border-radius: 10px;
+}
+
+.signup-login input::placeholder {
+  color: #bdb9dd;
+}
+
+.signup-login input:focus {
+  outline: solid #bdb9dd 2px;
+  background-color: #444157;
+}
+
+.signup-login .error {
+  outline: solid red 2px;
+}
+
+.signup-login button {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: inherit;
+  color: #11112b;
+  background-color: #bdb9dd;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 7px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.signup-login p {
+  color: white;
+  font-weight: 300;
+  max-width: 90%;
+}
+
+@media screen and (max-width: 1040px) {
+  .signup-login p {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .signup-login p {
+    font-size: 0.8rem;
+  }
+}
+
+.signup-login p button {
+  color: #bdb9dd;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: inherit;
+}
+
+.signup,
+.login {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-widget {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .signup-login-container .left {
+    transform: translateX(0%) !important;
+  }
+  .image {
+    width: 97.5%;
+  }
+  .signup-login-container .hide {
+    display: none;
+  }
+  .signup-login {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .signup-login h1 {
+    margin: 0;
+  }
+
+  .signup-login button {
+    margin-bottom: 1rem;
+  }
+  .signup,
+  .login {
+    z-index: 4;
+    background: rgb(17, 17, 43);
+    background: linear-gradient(
+      180deg,
+      rgba(17, 17, 43, 1) 0%,
+      rgba(36, 31, 65, 1) 100%
+    );
+    height: 60%;
+    width: 60% !important;
+    border-radius: 0 0 10px 10px;
+    justify-content: flex-end;
+  }
+  .signup p,
+  .login p,
+  .route-icon {
+    display: none;
+  }
+  .mobile-widget {
+    display: flex;
+    width: 60%;
+    height: 10%;
+    z-index: 5;
+    background-color: #bdb9dd;
+    border-radius: 10px 10px 0 0;
+  }
+  .mobile-widget .active {
+    background-color: rgb(17, 17, 43);
+    border-radius: inherit;
+    color: white;
+  }
+
+  .mobile-signup,
+  .mobile-signin {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .signup,
+  .login {
+    width: 70% !important;
+  }
+  .mobile-widget {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .signup,
+  .login {
+    width: 75% !important;
+  }
+  .mobile-widget {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .signup,
+  .login {
+    width: 85% !important;
+  }
+  .mobile-widget {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .signup h1,
+  .login h1 {
+    font-size: 1.4rem !important;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .mobile-signup,
+  .mobile-signin {
+    font-size: 1.5rem !important;
+  }
+  .signup h2,
+  .login h2 {
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .signup,
+  .login {
+    width: 90% !important;
+  }
+  .mobile-widget {
+    width: 90%;
+  }
+}
+
+@media screen and (max-height: 750px) {
+  .signup h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (max-height: 690px) {
+  .signup,
+  .login {
+    height: 65%;
+  }
+}
+
+@media screen and (max-height: 640px) {
+  .signup-form,
+  .login-form {
+    gap: 20px !important;
+  }
+}
+
+@media screen and (max-height: 584px) {
+  .signup,
+  .login {
+    height: 70%;
+  }
+}
+
+@media screen and (max-height: 543px) {
+  .signup h1,
+  .login h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-height: 527px) {
+  .signup,
+  .login {
+    height: 75%;
+  }
+}

@@ -1,0 +1,10 @@
+.signup-form .names {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.signup-form .names input {
+  width: 50%;
+}
