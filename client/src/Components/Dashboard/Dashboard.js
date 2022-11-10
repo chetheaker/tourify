@@ -27,7 +27,20 @@ function Dashboard() {
               Welcome back, {activeUser.first_name}! 🙌
             </h1>
           </div>
-          <TripsContainer />
+          <div className="trips">
+            <div className="header">
+              <div className="left">
+                <h1>Your Trips 🌎</h1>
+                <h2>Your carefully crafted road trips.</h2>
+              </div>
+              <div className="right">
+                <button>
+                  <span>Create Trip</span>
+                </button>
+              </div>
+            </div>
+            <TripsContainer />
+          </div>
         </div>
       </div>
     </>

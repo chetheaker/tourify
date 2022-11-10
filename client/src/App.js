@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserContext from './UserContext';
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { getUser } from './Utils/APIService';
+import { getUser } from './Utils/UserService';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 

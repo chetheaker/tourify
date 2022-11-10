@@ -1,6 +1,7 @@
 .trip-preview {
-  width: 250px;
-  height: 250px;
+  /* try to make width responsive to the columns (If there is too much space make them fill the space) */
+  width: 320px;
+  height: 320px;
   background-color: dodgerblue;
   display: flex;
   align-items: center;

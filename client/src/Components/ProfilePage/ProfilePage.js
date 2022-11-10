@@ -2,7 +2,7 @@ import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import UserContext from '../../UserContext';
-import { logoutUser } from '../../Utils/APIService';
+import { logoutUser } from '../../Utils/UserService';
 import NavBar from '../NavBar/NavBar';
 
 function ProfilePage() {

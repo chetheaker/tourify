@@ -1,5 +1,6 @@
 const express = require('express');
 const usersController = require('./controllers/users.controller');
+const tripsController = require('./controllers/trips.controller');
 
 const router = express.Router();
 
@@ -8,5 +9,13 @@ router.get('/user', usersController.get);
 router.post('/login', usersController.login);
 router.post('/register', usersController.register);
 router.post('/logout', usersController.logout);
+// router.delete('/user', usersController.deleteUser); ==> not made yet
+
+// TRIP ROUTES
+router.get('/trips/user', tripsController.getUserTrips);
+router.get('/trips/explore', tripsController.getExploreTrips);
+router.get('/trips/:id', tripsController.getTrip);
+router.post('/trips/create', tripsController.createTrip);
+router.put('/trips/:id', tripsController.updateTrip);
 
 module.exports = router;

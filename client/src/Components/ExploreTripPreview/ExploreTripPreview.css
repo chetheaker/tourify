@@ -1,0 +1,10 @@
+.explore-trip-preview {
+  /* try to make width responsive to the columns (If there is too much space make them fill the space) */
+  width: 320px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  cursor: pointer;
+}

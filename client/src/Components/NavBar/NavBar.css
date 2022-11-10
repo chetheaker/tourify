@@ -1,13 +1,16 @@
 .navbar {
   background-color: white;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+  position: fixed;
+  width: 100%;
 }
 
-.navbar button {
+.navbar button,
+.menu button {
   background: transparent;
   border: none;
   display: flex;
@@ -15,7 +18,8 @@
   cursor: pointer;
 }
 
-.navbar button > span {
+.navbar button > span,
+.menu button > span {
   color: #1fc28b;
   font-size: 1.1rem;
   font-family: 'Red Hat Text', sans-serif !important;
@@ -34,4 +38,90 @@
   background-size: cover;
   height: 50px;
   width: 100px;
+}
+
+#burger {
+  display: none;
+}
+
+.menu {
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  position: fixed;
+  top: 60px;
+  width: 100%;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 5rem;
+}
+
+.menu button > span {
+  font-size: 4rem;
+  margin-left: 30px;
+}
+
+.menu-open {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+  height: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .mobile-only {
+    display: inline;
+  }
+
+  .navbar button {
+    display: none;
+  }
+
+  #burger {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .menu button > span {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .menu button > span {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .menu {
+    padding: 3rem;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    translate: 0 100px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
+  }
+}
+
+.menu-open button {
+  animation: appear 0.5s both;
+}
+
+.menu-open button > span:hover {
+  transform: translateY(-2px);
+}
+
+.menu-open button > span:active {
+  transform: translateY(2px);
 }

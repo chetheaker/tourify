@@ -1,7 +1,7 @@
 import './SignIn.css';
 import { useToast } from '@chakra-ui/react';
 import { useState, useContext } from 'react';
-import { loginUser } from '../../Utils/APIService';
+import { loginUser } from '../../Utils/UserService';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
 

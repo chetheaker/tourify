@@ -3,6 +3,8 @@
   width: 100vw;
   display: flex;
   background-color: #c6f6e5;
+  position: relative;
+  top: 60px;
 }
 
 .dashboard {
@@ -19,4 +21,75 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin: 1rem;
+}
+
+.trips {
+  width: 50%;
+  height: 89%;
+  background-color: white;
+  border-radius: 25px;
+  padding: 1rem;
+  position: relative;
+  box-sizing: border-box;
+  margin: 1rem;
+}
+
+.trips .header {
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.trips .header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.trips .header h2 {
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.trips .right {
+  display: flex;
+  height: 70%;
+}
+
+.trips button {
+  display: inline-block;
+  font-family: 'Red Hat Text', sans-serif !important;
+  font-size: 1.2rem;
+  position: relative;
+  background: none;
+  border: none;
+  color: #1fc28b;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.trips button::after {
+  content: '';
+  width: 0;
+  height: 3px;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #1fc28b;
+}
+
+.trips button:hover::after {
+  width: 100%;
+}
+
+.trips button::after {
+  left: 0;
+  bottom: 0;
+  transition-delay: 0s;
+}
+
+.trips button:hover::after {
+  transition-delay: 0s;
+}
+.trips button:hover span::after {
+  transition-delay: 0.2s;
 }

@@ -1,0 +1,13 @@
+.explore-trips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-auto-rows: 10px;
+  gap: 10px;
+  justify-content: center;
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.explore-trips-container::-webkit-scrollbar {
+  display: none;
+}

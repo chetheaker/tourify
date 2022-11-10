@@ -4,9 +4,9 @@ import { useState, useContext } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../UserContext';
-import { registerUser, loginUser } from '../../Utils/APIService';
+import { registerUser, loginUser } from '../../Utils/UserService';
 
-// TODO Clean up code ==> refactor etc
+// TODO Clean up code ==> refactor  inputs into components etc
 // TODO Make custom hook to show error toast
 function SignUp({ setRightActive, rightActive }) {
   const navigate = useNavigate();
@@ -126,36 +126,6 @@ function SignUp({ setRightActive, rightActive }) {
     await loginUser({ email: email, password: password });
     setActiveUser(res);
     navigate('/dashboard');
-    // Axios({
-    //   url: 'http://localhost:4040/user/register',
-    //   method: 'POST',
-    //   withCredentials: true,
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   data: JSON.stringify(data)
-    // }).then((res) => {
-    //   if (res.data.existingEmail) {
-    //     renderErrorToast('Email already exists');
-    //     return;
-    //   }
-    //   Axios({
-    //     url: 'http://localhost:4040/user/login',
-    //     method: 'POST',
-    //     withCredentials: true,
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     data: JSON.stringify(data)
-    //   }).then((res) => {
-    //     if (res.data.user === false) {
-    //       renderErrorToast('Incorrect email or password');
-    //       return;
-    //     }
-    //     setActiveUser(res.data);
-    //     navigate('/dashboard');
-    //   });
-    // });
   };
 
   const moveToSignIn = () => setRightActive(false);
