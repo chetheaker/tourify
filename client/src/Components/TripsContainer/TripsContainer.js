@@ -5,13 +5,12 @@ import { RiRoadsterLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 
 // TODO Make the trips container a random offsetted collage of trips (maybe fireship has a video or hyperplexed?)
-function TripsContainer() {
+function TripsContainer({ planTrip }) {
   const [trips, setTrips] = useState([]);
 
   const getTrips = async () => {
     const userTrips = await getUserTrips();
-    console.log('useTrips', userTrips.trips);
-    setTrips(userTrips.trips);
+    setTrips(userTrips);
   };
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function TripsContainer() {
           <div className="no-trips">
             <RiRoadsterLine color="#1FC28B" size="5em" />
             <h1>You have no trips</h1>
-            <button>Create a trip now</button>
+            <button onClick={planTrip}>Create a trip now</button>
           </div>
         </div>
       )}

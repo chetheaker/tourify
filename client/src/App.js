@@ -4,15 +4,24 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { getUser } from './Utils/UserService';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
+import { useJsApiLoader } from '@react-google-maps/api';
 
 // COMPONENTS
 import ExplorePage from './Components/ExplorePage/ExplorePage';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
+import PlanTrip from './Components/PlanTrip/PlanTrip';
 const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
 const LoginPage = lazy(() => import('./Components/LoginPage/LoginPage'));
 
+const libraries = ['places'];
+
 function App() {
   const [activeUser, setActiveUser] = useState(null);
+
+  useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: libraries
+  });
 
   useEffect(() => {
     async function getUserFromAPI() {
@@ -34,6 +43,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/plan" element={<PlanTrip />} />
             </Route>
             <Route element={<PublicRoutes />}>
               <Route path="/" element={<LoginPage />} />

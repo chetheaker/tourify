@@ -4,10 +4,33 @@
   height: 320px;
   background-color: dodgerblue;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column-reverse;
+  justify-content: space-between;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.trip-preview .bottom {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.trip-preview .bottom h1 {
+  margin: 0.2rem 0 1rem 1rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.trip-preview .bottom h2 {
+  margin: 0 1rem;
+  font-size: 1rem;
+}
+
+.trip-preview .top {
+  display: flex;
+  width: 100%;
+  margin: 1rem;
+  gap: 5px;
 }
 
 /* MAKE HOVER OUT SMOOTH */
