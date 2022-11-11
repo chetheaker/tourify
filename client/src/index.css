@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   overflow: hidden;
   background-color: #444157 !important;

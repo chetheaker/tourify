@@ -25,7 +25,6 @@ function Dashboard() {
           <div className="header">
             <div className="left">
               <h1>Your Trips 🌎</h1>
-              <h2>Your carefully crafted road trips.</h2>
             </div>
             <div className="right">
               <button onClick={planTrip}>

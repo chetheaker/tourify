@@ -7,6 +7,7 @@ import { FiEdit } from 'react-icons/fi';
 import NavBar from '../NavBar/NavBar';
 import Loading from '../Loading/Loading';
 import Map from '../Map/Map';
+import StopsList from '../StopsList/StopsList';
 
 function TripDetails() {
   const params = useParams();
@@ -95,7 +96,9 @@ function TripDetails() {
               </button>
             </div>
             <div className="section">
-              <div id="route">ROUTE</div>
+              <div id="route">
+                <StopsList stops={trip.stops} />
+              </div>
               <div className="overlay"></div>
               <button className="icon-container">
                 <FiEdit color="#fff" size="1.5em" />
