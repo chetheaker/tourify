@@ -3,8 +3,8 @@ const tripsModel = require('../models/trips.model');
 const getUserTrips = async (req, res) => {
   try {
     if (req.user) {
-      console.log('user to get trips', req.user);
-      res.send({ trips: [] });
+      const trips = await tripsModel.findTripsByEmail(req.user.email);
+      res.send(trips);
     } else {
       res.send({ user: false });
     }
@@ -21,10 +21,14 @@ const getExploreTrips = async (req, res) => {
   }
 };
 
-const getTrip = async (req, res) => {
+const getUserTrip = async (req, res) => {
   try {
     if (req.user) {
-      res.send('user trip');
+      const id = req.params.id;
+      const trip = await tripsModel.findTripById(id);
+      if (trip === null) res.send({ _id: false });
+      else if (trip.user === req.user.email) res.send(trip);
+      else res.send({ user: false });
     } else {
       res.send({ user: false });
     }
@@ -33,10 +37,19 @@ const getTrip = async (req, res) => {
   }
 };
 
-const createTrip = (req, res) => {
+const createTrip = async (req, res) => {
   try {
     if (req.user) {
-      res.send('trip created');
+      const trip = {
+        ...req.body,
+        user: req.user.email,
+        itinerary: [],
+        checklists: []
+      };
+      const result = await tripsModel.postTrip(trip);
+      console.log('result', result);
+      res.status(201);
+      res.send(result);
     } else {
       res.send({ user: false });
     }
@@ -45,10 +58,13 @@ const createTrip = (req, res) => {
   }
 };
 
-const updateTrip = async (req, res) => {
+const updateTripName = async (req, res) => {
   try {
     if (req.user) {
-      res.send('trip updated');
+      const id = req.params.id;
+      const name = req.body.name;
+      const updated = await tripsModel.updateName(id, name);
+      res.send(updated);
     } else {
       res.send({ user: false });
     }
@@ -60,7 +76,7 @@ const updateTrip = async (req, res) => {
 module.exports = {
   getUserTrips,
   getExploreTrips,
-  getTrip,
+  getUserTrip,
   createTrip,
-  updateTrip
+  updateTripName
 };

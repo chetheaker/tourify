@@ -7,9 +7,11 @@ import dayjs from 'dayjs';
 import './PlanTrip.css';
 import { useRef } from 'react';
 import { createNewTrip } from '../../Utils/TripService';
+import { useNavigate } from 'react-router-dom';
 
 function PlanTrip() {
   const dateRef = useRef();
+  const navigate = useNavigate();
 
   const formatDates = () => {
     if (!dateRef.current.value) {
@@ -92,7 +94,8 @@ function PlanTrip() {
     };
 
     const res = await createNewTrip(trip);
-    console.log(res);
+    const tripId = res.insertedId;
+    navigate('/trips/' + tripId);
   };
 
   return (

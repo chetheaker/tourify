@@ -52,7 +52,6 @@ const register = async (req, res) => {
 
 const get = async (req, res) => {
   try {
-    console.log('session ', req.session);
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.user.email);
       res.send(user);

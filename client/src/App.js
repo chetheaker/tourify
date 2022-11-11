@@ -10,6 +10,8 @@ import { useJsApiLoader } from '@react-google-maps/api';
 import ExplorePage from './Components/ExplorePage/ExplorePage';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
 import PlanTrip from './Components/PlanTrip/PlanTrip';
+import TripDetails from './Components/TripDetails/TripDetails';
+import Loading from './Components/Loading/Loading';
 const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
 const LoginPage = lazy(() => import('./Components/LoginPage/LoginPage'));
 
@@ -17,8 +19,9 @@ const libraries = ['places'];
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useJsApiLoader({
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries
   });
@@ -30,9 +33,12 @@ function App() {
         setActiveUser(user);
       }
       console.log('active user: ', user);
+      setIsLoading(false);
     }
     getUserFromAPI();
   }, []);
+
+  if (!isLoaded || isLoading) return <Loading />;
 
   return (
     <UserContext.Provider value={[activeUser, setActiveUser]}>
@@ -44,6 +50,7 @@ function App() {
               <Route path="/explore" element={<ExplorePage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/plan" element={<PlanTrip />} />
+              <Route path="/trips/:tripId" element={<TripDetails />} />
             </Route>
             <Route element={<PublicRoutes />}>
               <Route path="/" element={<LoginPage />} />

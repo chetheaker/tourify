@@ -14,8 +14,8 @@ router.post('/logout', usersController.logout);
 // TRIP ROUTES
 router.get('/trips/user', tripsController.getUserTrips);
 router.get('/trips/explore', tripsController.getExploreTrips);
-router.get('/trips/:id', tripsController.getTrip);
+router.get('/trips/:id', tripsController.getUserTrip);
 router.post('/trips/create', tripsController.createTrip);
-router.put('/trips/:id', tripsController.updateTrip);
+router.put('/trips/:id/name', tripsController.updateTripName);
 
 module.exports = router;

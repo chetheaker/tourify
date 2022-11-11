@@ -1,8 +1,11 @@
 import './TripPreview.css';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 function TripPreview({ trip }) {
+  const navigate = useNavigate();
+
   const formatDate = (date) => {
     const day = dayjs(date).date();
     const month = formatMonth(dayjs(date).month());
@@ -38,9 +41,12 @@ function TripPreview({ trip }) {
     }
   };
 
-  console.log(trip);
+  const handleTripDetails = () => {
+    navigate('/trips/' + trip._id);
+  };
+
   return (
-    <div className="trip-preview">
+    <div className="trip-preview" onClick={handleTripDetails}>
       <div className="bottom">
         <h1>{trip.trip_name}</h1>
         <h2>
