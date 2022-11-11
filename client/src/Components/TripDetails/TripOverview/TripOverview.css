@@ -1,0 +1,21 @@
+#overview .top,
+#overview .bottom {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+#overview {
+  gap: 1rem;
+}
+
+#overview .widget {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 50%;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 15px;
+}
