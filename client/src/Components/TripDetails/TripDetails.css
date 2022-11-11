@@ -7,6 +7,7 @@
 .details {
   height: 100%;
   width: 60%;
+  overflow-y: scroll;
 }
 
 .details .trip-details-header {
@@ -47,4 +48,73 @@
   height: 100%;
   width: 100%;
   border-radius: inherit;
+}
+
+.details .trip-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#trip-nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  font-size: 1.7rem;
+  border-bottom: solid 2px black;
+}
+
+#trip-nav button {
+  cursor: pointer;
+}
+
+.details .section {
+  width: 90%;
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.details .section .overlay {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+
+.details .section:hover > .overlay {
+  opacity: 0.1;
+}
+
+.details .section:hover > .icon-container {
+  opacity: 1;
+}
+
+#route {
+  position: relative;
+  z-index: 1;
+}
+
+.section .icon-container {
+  background-color: #1fc28b;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  opacity: 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

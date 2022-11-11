@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import UserContext from './UserContext';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { getUser } from './Utils/UserService';
@@ -42,22 +43,24 @@ function App() {
 
   return (
     <UserContext.Provider value={[activeUser, setActiveUser]}>
-      <Suspense fallback={<h1>LOADING...</h1>}>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<PrivateRoutes />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/explore" element={<ExplorePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/plan" element={<PlanTrip />} />
-              <Route path="/trips/:tripId" element={<TripDetails />} />
-            </Route>
-            <Route element={<PublicRoutes />}>
-              <Route path="/" element={<LoginPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </Suspense>
+      <ChakraProvider>
+        <Suspense fallback={<h1>LOADING...</h1>}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<PrivateRoutes />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/explore" element={<ExplorePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/plan" element={<PlanTrip />} />
+                <Route path="/trips/:tripId" element={<TripDetails />} />
+              </Route>
+              <Route element={<PublicRoutes />}>
+                <Route path="/" element={<LoginPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </Suspense>
+      </ChakraProvider>
     </UserContext.Provider>
   );
 }
