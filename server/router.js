@@ -17,5 +17,6 @@ router.get('/trips/explore', tripsController.getExploreTrips);
 router.get('/trips/:id', tripsController.getUserTrip);
 router.post('/trips/create', tripsController.createTrip);
 router.put('/trips/:id/name', tripsController.updateTripName);
+router.put('/trips/:id/route', tripsController.updateTripRoute);
 
 module.exports = router;

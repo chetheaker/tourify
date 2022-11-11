@@ -80,20 +80,20 @@ function TripDetails() {
 
     setDirectionsResponse(null);
 
-    const waypoints = trip.stops
-      .slice(1, trip.stops.length - 1)
+    const waypoints = stops
+      .slice(1, stops.length - 1)
       .map((place) => ({ location: place.stop, stopover: true }));
 
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
-      origin: trip.stops[0].stop,
-      destination: trip.stops[trip.stops.length - 1].stop,
+      origin: stops[0].stop,
+      destination: stops[trip.stops.length - 1].stop,
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
       waypoints: [...waypoints]
     });
-    console.log(results);
+    console.log('directions response:', results);
     setDirectionsResponse(results);
   };
 
@@ -125,6 +125,9 @@ function TripDetails() {
               stops={stops}
               setStops={setStops}
               tripStops={trip.stops}
+              id={trip._id}
+              renderToast={renderToast}
+              setTrip={setTrip}
             />
             <TripItinerary />
             <TripChecklist />

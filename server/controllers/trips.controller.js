@@ -73,10 +73,26 @@ const updateTripName = async (req, res) => {
   }
 };
 
+const updateTripRoute = async (req, res) => {
+  try {
+    if (req.user) {
+      const id = req.params.id;
+      const route = req.body.route;
+      const updated = await tripsModel.updateRoute(id, route);
+      res.send(updated);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('error updating trip route', e);
+  }
+};
+
 module.exports = {
   getUserTrips,
   getExploreTrips,
   getUserTrip,
   createTrip,
-  updateTripName
+  updateTripName,
+  updateTripRoute
 };

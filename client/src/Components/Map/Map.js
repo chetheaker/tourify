@@ -13,6 +13,8 @@ function Map({ directionsResponse }) {
     []
   );
 
+  console.log(directionsResponse);
+
   return (
     <div id="map">
       <GoogleMap

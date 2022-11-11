@@ -35,4 +35,22 @@ const updateName = (id, name) => {
   }
 };
 
-module.exports = { postTrip, findTripsByEmail, findTripById, updateName };
+const updateRoute = (id, route) => {
+  try {
+    const update = trips.updateOne(
+      { _id: ObjectId(id) },
+      { $set: { stops: route } }
+    );
+    return update;
+  } catch (e) {
+    console.log('Error updating route in model', e);
+  }
+};
+
+module.exports = {
+  postTrip,
+  findTripsByEmail,
+  findTripById,
+  updateName,
+  updateRoute
+};

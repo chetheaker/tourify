@@ -26,8 +26,6 @@ function StopInput({ isEdit, setStops }) {
       arrival: false,
       departure: false
     };
-
-    console.log(newStop);
     setStops((prev) => [...prev, newStop]);
     e.target.stop.value = '';
   };
