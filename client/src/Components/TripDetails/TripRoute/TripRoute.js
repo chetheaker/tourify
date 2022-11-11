@@ -4,6 +4,7 @@ import { FiEdit } from 'react-icons/fi';
 import { useState } from 'react';
 import StopInput from '../../StopInput/StopInput';
 import { updateTripRoute } from '../../../Utils/TripService';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
   const [isEdit, setIsEdit] = useState(false);
@@ -33,10 +34,28 @@ function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
     }
   };
 
+  const onDragEnd = (result) => {
+    const { destination, source } = result;
+
+    if (!destination) return; // destination is null
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return; // if destination is same as source
+
+    const newStops = Array.from(stops);
+    const removed = newStops.splice(source.index, 1);
+    newStops.splice(destination.index, 0, removed[0]);
+    setStops(newStops);
+  };
+
   return (
     <div className={`section ${isEdit ? 'editable' : ''}`}>
       <div id="route">
-        <StopsList stops={stops} setStops={setStops} isEdit={isEdit} />
+        <DragDropContext onDragEnd={onDragEnd}>
+          <StopsList stops={stops} setStops={setStops} isEdit={isEdit} />
+        </DragDropContext>
         <StopInput isEdit={isEdit} setStops={setStops} />
         <div className={`buttons ${isEdit ? 'show-btns' : 'hide-btns'}`}>
           <button className="cancel-changes" onClick={cancelChanges}>
