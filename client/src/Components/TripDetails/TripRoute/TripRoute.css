@@ -1,0 +1,32 @@
+.section .hidden {
+  display: none;
+}
+
+.section .show {
+  display: block;
+}
+
+.section .save-changes {
+  padding-left: 0.5rem;
+  border-left: 0.5px solid black;
+}
+
+.section .hide-btns {
+  display: none;
+}
+
+.editable {
+  background-color: #e6e6e6;
+}
+
+.section .show-btns {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.section .cancel-changes {
+  padding-right: 0.5rem;
+  border-right: 0.5px solid black;
+}

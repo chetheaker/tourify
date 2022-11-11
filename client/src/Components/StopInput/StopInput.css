@@ -1,0 +1,35 @@
+.stop-input-container {
+  display: none;
+}
+
+.editable .stop-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 15px;
+  background-color: white;
+  margin-top: 1rem;
+}
+
+.stop-input-container .autocomplete {
+  width: 70%;
+}
+
+.stop-input-container .location-icon {
+  margin-left: 1rem;
+}
+
+.stop-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 0.7rem;
+  border-radius: 15px 0 0 15px;
+  font-size: 1.2rem;
+}
+
+.stop-input-button {
+  width: 30%;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  height: 100%;
+  border-left: 2px solid #e6e6e6;
+}

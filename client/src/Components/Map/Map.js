@@ -1,8 +1,8 @@
 import './Map.css';
-import { GoogleMap } from '@react-google-maps/api';
+import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import { useMemo } from 'react';
 
-function Map() {
+function Map({ directionsResponse }) {
   const center = useMemo(() => ({ lat: 0, lng: 0 }), []);
   const options = useMemo(
     () => ({
@@ -20,7 +20,11 @@ function Map() {
         center={center}
         mapContainerStyle={{ height: '100%', width: '100%' }}
         options={options}
-      ></GoogleMap>
+      >
+        {directionsResponse ? (
+          <DirectionsRenderer directions={directionsResponse} />
+        ) : null}
+      </GoogleMap>
     </div>
   );
 }

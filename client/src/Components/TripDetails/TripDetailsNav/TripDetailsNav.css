@@ -1,0 +1,13 @@
+#trip-nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  font-size: 1.7rem;
+  border-bottom: solid 2px black;
+}
+
+#trip-nav button {
+  cursor: pointer;
+}

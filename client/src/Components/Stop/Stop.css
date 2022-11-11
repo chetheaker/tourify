@@ -1,0 +1,28 @@
+.stops-list .stop {
+  padding: 1rem;
+  border-radius: 15px;
+  background-color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stops-list .stop h1 {
+  margin-left: 10px;
+  font-size: 1.2rem;
+}
+
+.stops-list .stop .left {
+  display: flex;
+  align-items: center;
+}
+
+.stops-list .stop .hide {
+  display: none;
+}
+
+.stops-list .stop .show {
+  cursor: pointer;
+  display: block;
+}

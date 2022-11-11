@@ -58,20 +58,6 @@
   align-items: center;
 }
 
-#trip-nav {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 75%;
-  font-size: 1.7rem;
-  border-bottom: solid 2px black;
-}
-
-#trip-nav button {
-  cursor: pointer;
-}
-
 .details .section {
   width: 90%;
   border-radius: 20px;
@@ -104,6 +90,7 @@
 #route {
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .section .icon-container {
