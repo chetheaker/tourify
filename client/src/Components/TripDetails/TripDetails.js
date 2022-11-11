@@ -120,7 +120,7 @@ function TripDetails() {
           </div>
           <div className="trip-details">
             <TripDetailsNav />
-            <TripOverview />
+            <TripOverview trip={trip} />
             <TripRoute
               stops={stops}
               setStops={setStops}

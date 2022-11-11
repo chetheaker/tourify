@@ -4,7 +4,7 @@ import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { GrLocation } from 'react-icons/gr';
 
-function TripOverview() {
+function TripOverview({ trip }) {
   return (
     <div id="overview" className="section">
       <div className="top">
@@ -24,7 +24,7 @@ function TripOverview() {
         </div>
         <div className="widget total-stops">
           <GrLocation size="1.25em" />
-          <h1>Road Trip Stops: 4</h1>
+          <h1>Road Trip Stops: {trip.stops.length}</h1>
         </div>
       </div>
       <div className="overlay"></div>
