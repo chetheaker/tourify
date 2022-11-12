@@ -58,3 +58,17 @@ export const updateTripRoute = async (id, newRoute) => {
   const json = await res.json();
   return json;
 };
+
+export const updateTripItinerary = async (id, newItinerary) => {
+  const res = await fetch(baseUrl + '/trips/' + id + '/itinerary', {
+    method: 'PUT',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({ itinerary: newItinerary })
+  });
+
+  const json = await res.json();
+  return json;
+};

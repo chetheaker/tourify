@@ -29,3 +29,8 @@
   border-radius: 15px;
   margin: 0.5rem 0;
 }
+
+.notes-container .icon {
+  height: 25px;
+  width: 25px;
+}

@@ -133,9 +133,9 @@ function TripDetails() {
             <TripItinerary
               itinerary={itinerary}
               setItinerary={setItinerary}
-              tripItinerary={trip.itinerary}
               renderToast={renderToast}
               setTrip={setTrip}
+              tripId={params.tripId}
             />
             <TripChecklist />
           </div>

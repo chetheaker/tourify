@@ -1,0 +1,32 @@
+.places-container .heading,
+.notes-container .heading {
+  margin: 0.3rem 0;
+  font-size: 1.3rem;
+}
+
+.places-container .place,
+.notes-container .note {
+  background-color: #c6f6e5;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.places-container .place .left,
+.notes-container .note .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.places-container .delete-icon,
+.notes-container .delete-icon {
+  cursor: pointer;
+}
+
+.places-container .place {
+  margin: 0.5rem 0;
+}

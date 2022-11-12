@@ -47,10 +47,19 @@ const updateRoute = (id, route) => {
   }
 };
 
+const updateItinerary = async (id, itinerary) => {
+  const update = await trips.updateOne(
+    { _id: ObjectId(id) },
+    { $set: { itinerary: itinerary } }
+  );
+  return update;
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
   findTripById,
   updateName,
-  updateRoute
+  updateRoute,
+  updateItinerary
 };

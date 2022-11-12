@@ -86,11 +86,28 @@ const updateTripRoute = async (req, res) => {
   }
 };
 
+const updateTripItinerary = async (req, res) => {
+  try {
+    if (req.user) {
+      const id = req.params.id;
+      const itinerary = req.body.itinerary;
+      console.log('itinerary', itinerary);
+      const updated = await tripsModel.updateItinerary(id, itinerary);
+      res.send(updated);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('Error updateTripItinerary in controller', e);
+  }
+};
+
 module.exports = {
   getUserTrips,
   getExploreTrips,
   getUserTrip,
   createTrip,
   updateTripName,
-  updateTripRoute
+  updateTripRoute,
+  updateTripItinerary
 };

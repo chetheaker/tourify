@@ -8,7 +8,7 @@ import Places from './Places/Places';
 import Notes from './Notes/Notes';
 import Checklists from './Checklists/Checklists';
 
-function ItineraryDay({ day, index }) {
+function ItineraryDay({ day, index, itinerary, setItinerary, renderToast }) {
   const [places, setPlaces] = useState([]);
   const [notes, setNotes] = useState([]);
   const [checklists, setChecklists] = useState([]);
@@ -20,7 +20,7 @@ function ItineraryDay({ day, index }) {
     setPlaces(day.places);
     setNotes(day.notes);
     setChecklists(day.checklists);
-  }, [day.checklists, day.notes, day.places]);
+  }, [day.checklists, day.notes, day.places, itinerary]);
 
   return (
     <div className="itinerary-day">
@@ -50,8 +50,19 @@ function ItineraryDay({ day, index }) {
       checklistsInputActive ||
       notesInputActive ? (
         <div className="itinerary-content">
-          <Places places={places} placesInputActive={placesInputActive} />
-          <Notes notes={notes} notesInputActive={notesInputActive} />
+          <Places
+            places={places}
+            setPlaces={setPlaces}
+            placesInputActive={placesInputActive}
+            setItinerary={setItinerary}
+            dayIndex={index}
+            renderToast={renderToast}
+          />
+          <Notes
+            notes={notes}
+            notesInputActive={notesInputActive}
+            setNotes={setNotes}
+          />
           <Checklists
             checklists={checklists}
             checklistsInputActive={checklistsInputActive}
