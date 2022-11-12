@@ -22,6 +22,24 @@ function ItineraryDay({ day, index, itinerary, setItinerary, renderToast }) {
     setChecklists(day.checklists);
   }, [day.checklists, day.notes, day.places, itinerary]);
 
+  const togglePlacesInput = () => {
+    setPlacesInputActive(!placesInputActive);
+    setNotesInputActive(false);
+    setChecklistsInputActive(false);
+  };
+
+  const toggleNotesInput = () => {
+    setNotesInputActive(!notesInputActive);
+    setPlacesInputActive(false);
+    setChecklistsInputActive(false);
+  };
+
+  const toggleChecklistsInput = () => {
+    setChecklistsInputActive(!checklistsInputActive);
+    setNotesInputActive(false);
+    setPlacesInputActive(false);
+  };
+
   return (
     <div className="itinerary-day">
       <div className="header">
@@ -29,18 +47,9 @@ function ItineraryDay({ day, index, itinerary, setItinerary, renderToast }) {
           Day {index + 1}: {formatDate(day.date)}
         </div>
         <div className="right">
-          <GrLocation
-            size="1.3em"
-            onClick={() => setPlacesInputActive(!placesInputActive)}
-          />
-          <BiNote
-            size="1.3em"
-            onClick={() => setNotesInputActive(!notesInputActive)}
-          />
-          <MdOutlineChecklistRtl
-            size="1.3em"
-            onClick={() => setChecklistsInputActive(!checklistsInputActive)}
-          />
+          <GrLocation size="1.3em" onClick={togglePlacesInput} />
+          <BiNote size="1.3em" onClick={toggleNotesInput} />
+          <MdOutlineChecklistRtl size="1.3em" onClick={toggleChecklistsInput} />
         </div>
       </div>
       {places.length ||
@@ -62,6 +71,9 @@ function ItineraryDay({ day, index, itinerary, setItinerary, renderToast }) {
             notes={notes}
             notesInputActive={notesInputActive}
             setNotes={setNotes}
+            setItinerary={setItinerary}
+            dayIndex={index}
+            renderToast={renderToast}
           />
           <Checklists
             checklists={checklists}
