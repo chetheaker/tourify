@@ -92,7 +92,6 @@ function PlanTrip() {
     };
 
     const itinerary = getItineraryDates(dates[0], dates[1]);
-    console.log(itinerary);
 
     const trip = {
       trip_name: name,

@@ -51,8 +51,6 @@ function TripOverview({ trip, directionsResponse }) {
     const daysBetween = (end - start) / (1000 * 60 * 60 * 24) + 1;
     return daysBetween === 1 ? `${daysBetween} day` : `${daysBetween} days`;
   };
-
-  console.log('response in overview', directionsResponse);
   if (!directionsResponse) return <Loading />;
 
   return (
