@@ -93,7 +93,6 @@ function TripDetails() {
       travelMode: google.maps.TravelMode.DRIVING,
       waypoints: [...waypoints]
     });
-    console.log('directions response:', results);
     setDirectionsResponse(results);
   };
 
@@ -120,7 +119,7 @@ function TripDetails() {
           </div>
           <div className="trip-details">
             <TripDetailsNav />
-            <TripOverview trip={trip} />
+            <TripOverview trip={trip} directionsResponse={directionsResponse} />
             <TripRoute
               stops={stops}
               setStops={setStops}

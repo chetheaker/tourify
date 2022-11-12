@@ -44,7 +44,7 @@ function App() {
   return (
     <UserContext.Provider value={[activeUser, setActiveUser]}>
       <ChakraProvider>
-        <Suspense fallback={<h1>LOADING...</h1>}>
+        <Suspense fallback={<Loading />}>
           <BrowserRouter>
             <Routes>
               <Route element={<PrivateRoutes />}>

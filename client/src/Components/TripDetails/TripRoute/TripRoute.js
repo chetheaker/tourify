@@ -54,7 +54,12 @@ function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
     <div className={`section ${isEdit ? 'editable' : ''}`}>
       <div id="route">
         <DragDropContext onDragEnd={onDragEnd}>
-          <StopsList stops={stops} setStops={setStops} isEdit={isEdit} />
+          <StopsList
+            stops={stops}
+            setStops={setStops}
+            isEdit={isEdit}
+            renderToast={renderToast}
+          />
         </DragDropContext>
         <StopInput isEdit={isEdit} setStops={setStops} />
         <div className={`buttons ${isEdit ? 'show-btns' : 'hide-btns'}`}>

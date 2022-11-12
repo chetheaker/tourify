@@ -3,8 +3,13 @@ import { GrLocation } from 'react-icons/gr';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Draggable } from 'react-beautiful-dnd';
 
-function Stop({ setStops, stop, isEdit, index }) {
+function Stop({ setStops, stop, isEdit, index, stops, renderToast }) {
   const deleteStop = () => {
+    if (stops.length === 2) {
+      // toast
+      renderToast('Error', 'error', 'Trip must have at least 2 stops');
+      return;
+    }
     setStops((prev) => prev.filter((s) => s.id !== stop.id));
   };
 
