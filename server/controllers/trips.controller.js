@@ -47,7 +47,6 @@ const createTrip = async (req, res) => {
         checklists: []
       };
       const result = await tripsModel.postTrip(trip);
-      console.log('result', result);
       res.status(201);
       res.send(result);
     } else {
