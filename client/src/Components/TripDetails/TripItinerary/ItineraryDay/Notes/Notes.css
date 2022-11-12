@@ -33,4 +33,27 @@
 .notes-container .icon {
   height: 15px;
   width: 15px;
+  cursor: pointer;
+}
+
+.notes-container .note .right {
+  display: flex;
+  gap: 5px;
+}
+
+.note {
+  margin: 0.5rem 0;
+}
+
+.note .left {
+  width: 100%;
+}
+
+.note .note-content {
+  width: 100%;
+  background-color: #c6f6e5;
+}
+
+.note .hide {
+  display: none;
 }

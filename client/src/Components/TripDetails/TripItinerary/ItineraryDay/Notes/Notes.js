@@ -1,7 +1,7 @@
 import './Notes.css';
-import { BiNote } from 'react-icons/bi';
-import { AiOutlineDelete } from 'react-icons/ai';
 import { v4 as uuidv4 } from 'uuid';
+import { BiNote } from 'react-icons/bi';
+import Note from './Note/Note';
 
 function Notes({
   notesInputActive,
@@ -62,16 +62,14 @@ function Notes({
         <div className="notes-container">
           <h1 className="heading">Notes:</h1>
           {notes.map((note, index) => (
-            <div className="note" key={index}>
-              <div className="left">
-                <BiNote className="icon" />
-                <h1>{note.note}</h1>
-              </div>
-              <AiOutlineDelete
-                className="delete-icon icon"
-                onClick={() => deleteNote(note)}
-              />
-            </div>
+            <Note
+              note={note}
+              key={index}
+              deleteNote={deleteNote}
+              setItinerary={setItinerary}
+              dayIndex={dayIndex}
+              renderToast={renderToast}
+            />
           ))}
         </div>
       ) : null}
