@@ -17,6 +17,7 @@ function TripDetails() {
   const navigate = useNavigate();
   const [trip, setTrip] = useState(null);
   const [stops, setStops] = useState([]);
+  const [itinerary, setItinerary] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   // const [activeSection, setActiveSection] = useState('overview');
   const [directionsResponse, setDirectionsResponse] = useState(null);
@@ -50,6 +51,7 @@ function TripDetails() {
       console.log('trip: ', t);
       setTrip(t);
       setStops(t.stops);
+      setItinerary(t.itinerary);
       setIsLoading(false);
     };
     getTrip();
@@ -128,7 +130,13 @@ function TripDetails() {
               renderToast={renderToast}
               setTrip={setTrip}
             />
-            <TripItinerary />
+            <TripItinerary
+              itinerary={itinerary}
+              setItinerary={setItinerary}
+              tripItinerary={trip.itinerary}
+              renderToast={renderToast}
+              setTrip={setTrip}
+            />
             <TripChecklist />
           </div>
         </div>

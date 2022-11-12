@@ -1,0 +1,31 @@
+.notes-text {
+  width: 100%;
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+.notes-input-container .note-icon {
+  background-color: #e6e6e6;
+  width: 40px;
+  height: 40px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: solid 2px white;
+  position: absolute;
+  top: -20px;
+}
+
+.notes-input-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.notes-input-container .add-note {
+  align-self: flex-end;
+  border-radius: 15px;
+  margin: 0.5rem 0;
+}

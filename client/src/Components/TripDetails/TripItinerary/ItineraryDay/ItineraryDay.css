@@ -1,0 +1,74 @@
+.itinerary-day {
+  width: 100%;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.itinerary-day .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: solid 1px #e6e6e6;
+}
+
+.itinerary-day .header .right {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.itinerary-day .places-input {
+  background-color: #e6e6e6;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.no-itinerary {
+  background-color: #e6e6e6;
+  width: 50%;
+  margin: 2rem 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.no-itinerary h1 {
+  padding: 1rem 0;
+}
+
+.itinerary-content .show-input {
+  width: 65%;
+  margin: 1rem 0;
+  border-radius: 0;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+}
+
+.itinerary-content .input-container {
+  display: flex;
+  align-items: center;
+}
+
+.itinerary-content .input-container .icon {
+  margin: 1rem 0;
+  background-color: #e6e6e6;
+  height: 40px;
+  padding: 0 0.5rem;
+  border-radius: 15px 0 0 15px;
+  width: 10%;
+  padding: 0.7rem 0;
+}
+
+.itinerary-content .input-btn {
+  background-color: #e6e6e6;
+  margin: 1rem 0;
+  width: 25%;
+  border-radius: 0 15px 15px 0;
+  height: 40px;
+}

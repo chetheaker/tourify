@@ -112,7 +112,12 @@ function PlanTrip() {
 
     const itinerary = [];
     while (date1 <= date2) {
-      itinerary.push({ date: new Date(date1) });
+      itinerary.push({
+        date: new Date(date1),
+        checklists: [],
+        notes: [],
+        places: []
+      });
       date1 += 1000 * 60 * 60 * 24;
     }
 
