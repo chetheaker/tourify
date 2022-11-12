@@ -43,7 +43,7 @@
 }
 
 .itinerary-content .show-input {
-  width: 65%;
+  width: 100%;
   margin: 1rem 0;
   border-radius: 0;
   border-right: 1px solid white;
@@ -63,6 +63,10 @@
   border-radius: 15px 0 0 15px;
   width: 10%;
   padding: 0.7rem 0;
+}
+
+.itinerary-content .auto {
+  width: 65%;
 }
 
 .itinerary-content .input-btn {

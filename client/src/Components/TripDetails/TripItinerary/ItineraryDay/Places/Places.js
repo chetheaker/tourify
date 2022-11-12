@@ -1,5 +1,6 @@
 import './Places.css';
 import { GrLocation } from 'react-icons/gr';
+import { Autocomplete } from '@react-google-maps/api';
 
 function Places({ placesInputActive, places }) {
   return (
@@ -7,13 +8,15 @@ function Places({ placesInputActive, places }) {
       {placesInputActive ? (
         <div className="input-container">
           <GrLocation className="icon" />
-          <input
-            type="text"
-            className={`places-input ${
-              placesInputActive ? 'show-input' : 'hide-input'
-            }`}
-            placeholder="Add a place..."
-          />
+          <Autocomplete className="auto">
+            <input
+              type="text"
+              className={`places-input ${
+                placesInputActive ? 'show-input' : 'hide-input'
+              }`}
+              placeholder="Add a place..."
+            />
+          </Autocomplete>
           <button className="add-place input-btn">Add Place</button>
         </div>
       ) : null}
