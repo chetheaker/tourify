@@ -48,7 +48,7 @@ function TripOverview({ trip, directionsResponse }) {
   const getTotalDays = () => {
     const start = Date.parse(trip.start_date);
     const end = Date.parse(trip.end_date);
-    const daysBetween = (end - start) / (1000 * 60 * 60 * 24);
+    const daysBetween = (end - start) / (1000 * 60 * 60 * 24) + 1;
     return daysBetween === 1 ? `${daysBetween} day` : `${daysBetween} days`;
   };
 

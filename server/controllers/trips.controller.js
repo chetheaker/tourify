@@ -43,7 +43,6 @@ const createTrip = async (req, res) => {
       const trip = {
         ...req.body,
         user: req.user.email,
-        itinerary: [],
         checklists: []
       };
       const result = await tripsModel.postTrip(trip);

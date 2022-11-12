@@ -19,13 +19,18 @@ function PlanTrip() {
       alert('dates cannot be empty');
       return;
     }
+
+    console.log('raw data', dateRef.current.value);
     const dates = dateRef.current.value
       .split(' – ')
       .map((date) => date.replace(',', '').split(' '));
 
+    console.log('split dates', dates);
+
     let start =
-      dates[0][2] + ' ' + monthFormat(dates[0][0]) + ' ' + dates[0][1];
-    let end = dates[1][2] + ' ' + monthFormat(dates[0][0]) + ' ' + dates[1][1];
+      dates[0][2] + '/' + monthFormat(dates[0][0]) + '/' + dates[0][1];
+    let end = dates[1][2] + '/' + monthFormat(dates[0][0]) + '/' + dates[1][1];
+
     return [new Date(start), new Date(end)];
   };
 
@@ -66,7 +71,7 @@ function PlanTrip() {
 
     if (!start || !end) {
       // send error toast
-      alert('Please enter locations');
+      alert('Must have a start location and end destination');
       return;
     }
     const dates = formatDates();
@@ -86,16 +91,33 @@ function PlanTrip() {
       arrival: dates[1]
     };
 
+    const itinerary = getItineraryDates(dates[0], dates[1]);
+    console.log(itinerary);
+
     const trip = {
       trip_name: name,
       start_date: dates[0],
       end_date: dates[1],
-      stops: [startLocation, endLocation]
+      stops: [startLocation, endLocation],
+      itinerary: itinerary
     };
 
     const res = await createNewTrip(trip);
     const tripId = res.insertedId;
     navigate('/trips/' + tripId);
+  };
+
+  const getItineraryDates = (start, end) => {
+    let date1 = Date.parse(start);
+    const date2 = Date.parse(end);
+
+    const itinerary = [];
+    while (date1 <= date2) {
+      itinerary.push({ date: new Date(date1) });
+      date1 += 1000 * 60 * 60 * 24;
+    }
+
+    return itinerary;
   };
 
   return (
