@@ -1,13 +1,25 @@
 #trip-nav {
-  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
+  width: 100%;
   font-size: 1.7rem;
-  border-bottom: solid 2px black;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
 }
 
 #trip-nav button {
   cursor: pointer;
+  padding: 1rem;
+}
+
+#trip-nav .active {
+  color: #1fc28b;
+  /* border-bottom: solid 2px #1fc28b; */
 }
