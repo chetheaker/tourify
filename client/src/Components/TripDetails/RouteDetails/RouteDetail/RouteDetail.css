@@ -1,0 +1,57 @@
+.leg {
+  background-color: #e6e6e6;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.leg .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #c6f6e5;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.leg .heading .google-map {
+  background: url('../../../../../public/assets/icons/google-maps-icon.png');
+  height: 25px;
+  width: 25px;
+  background-position: center;
+  background-size: cover;
+}
+
+.leg h3 {
+  font-size: 1.2rem;
+}
+
+.leg h3 span {
+  font-weight: bold;
+}
+
+.leg .leg-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.leg .leg-details .leg-detail {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
+  border-radius: 1rem;
+  flex: 1;
+  text-align: center;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.leg-detail .info {
+  cursor: pointer;
+}

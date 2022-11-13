@@ -11,6 +11,8 @@ import TripRoute from './TripRoute/TripRoute';
 import TripItinerary from './TripItinerary/TripItinerary';
 import TripChecklist from './TripChecklist/TripChecklist';
 import TripDetailsNav from './TripDetailsNav/TripDetailsNav';
+import TripSuggestions from './TripSuggestions/TripSuggestions';
+import RouteDetails from './RouteDetails/RouteDetails';
 
 function TripDetails() {
   const params = useParams();
@@ -130,6 +132,8 @@ function TripDetails() {
               renderToast={renderToast}
               setTrip={setTrip}
             />
+            <RouteDetails directionsResponse={directionsResponse} />
+            <TripSuggestions />
             <TripItinerary
               itinerary={itinerary}
               setItinerary={setItinerary}
