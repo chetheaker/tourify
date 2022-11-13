@@ -30,27 +30,27 @@ function SuggestedResults({ place, category, directionsResponse }) {
       }
       console.log(location);
 
-      // // eslint-disable-next-line no-undef
-      // const map = new google.maps.Map(
-      //   document.getElementById('places-map-div'),
-      //   {
-      //     center: location,
-      //     zoom: 15
-      //   }
-      // );
+      // eslint-disable-next-line no-undef
+      const map = new google.maps.Map(
+        document.getElementById('places-map-div'),
+        {
+          center: location,
+          zoom: 15
+        }
+      );
 
-      // const request = {
-      //   location: location,
-      //   radius: '2000',
-      //   type: [type]
-      // };
-      // // eslint-disable-next-line no-undef
-      // const service = new google.maps.places.PlacesService(map);
-      // service.nearbySearch(request, (results, status) => {
-      //   if (status === 'OK') {
-      //     setSuggestedPlaces(results);
-      //   }
-      // });
+      const request = {
+        location: location,
+        radius: '2000',
+        type: ['lodging']
+      };
+      // eslint-disable-next-line no-undef
+      const service = new google.maps.places.PlacesService(map);
+      service.nearbySearch(request, (results, status) => {
+        if (status === 'OK') {
+          setSuggestedPlaces(results);
+        }
+      });
     };
 
     getPlaces();
