@@ -113,7 +113,7 @@ function TripDetails() {
     <div className="container">
       <NavBar />
       <div className="trip-details-container">
-        <div className="details">
+        <div className="details" id="trip">
           <div className="trip-details-header">
             <input
               type="text"

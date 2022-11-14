@@ -7,11 +7,16 @@ function TripDetailsNav() {
 
   const handleClick = (id, scrollId) => {
     setActiveNavLink(id);
-    console.log(document.getElementById(scrollId));
-    document.getElementById(scrollId).scrollIntoView({ behavior: 'smooth' });
-  };
+    const elementToShow = document.getElementById(scrollId);
+    elementToShow.scrollIntoView({ behavior: 'smooth' });
+    //const tripDiv = document.getElementById('trip');
+    //tripDiv.scrollBy({ top: -60 });
+    // const yOffset = -60;
+    // const y = elementToShow.getBoundingClientRect().top + yOffset;
 
-  console.log(activeNavLink);
+    // console.log(tripDiv);
+    // tripDiv.scrollTo({ top: y, behavior: 'smooth' });
+  };
 
   return (
     <div id="trip-nav">
