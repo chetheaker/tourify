@@ -4,6 +4,16 @@
   gap: 10px;
 }
 
+.notif-btn {
+  position: relative;
+}
+
+.notification-alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .notif-header {
   font-weight: bold;
 }

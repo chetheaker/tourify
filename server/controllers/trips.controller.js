@@ -26,6 +26,19 @@ const getExploreTrips = async (req, res) => {
   }
 };
 
+const getFriendTrips = async (req, res) => {
+  try {
+    if (req.user) {
+      const trips = await tripsModel.getFriendTrips(req.user.email);
+      res.send(trips);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log("error getting users' trips", e);
+  }
+};
+
 const getUserTrip = async (req, res) => {
   try {
     if (req.user) {
@@ -190,5 +203,6 @@ module.exports = {
   getTripUser,
   inviteUser,
   acceptInvite,
-  declineInvite
+  declineInvite,
+  getFriendTrips
 };

@@ -112,6 +112,11 @@ const declineInvite = async (id, email) => {
   return removedNotif;
 };
 
+const getFriendTrips = async (email) => {
+  const friendTrips = await trips.find({ attendees: [email] }).toArray();
+  return friendTrips;
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
@@ -124,5 +129,6 @@ module.exports = {
   getTripUser,
   inviteUser,
   acceptInvite,
-  declineInvite
+  declineInvite,
+  getFriendTrips
 };

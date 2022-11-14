@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
 import TripsContainer from '../TripsContainer/TripsContainer';
+import FriendsTrips from '../FriendsTrips/FriendsTrips';
 import NavBar from '../NavBar/NavBar';
 
 // TODO check frontedendjoe dashboard layouts
@@ -19,6 +20,7 @@ function Dashboard() {
       <div className="dashboard">
         <div className="stats-container">
           <h1 className="welcome">Welcome back, {activeUser.first_name}! 🙌</h1>
+          <FriendsTrips />
         </div>
         <div className="trips">
           <div className="header">

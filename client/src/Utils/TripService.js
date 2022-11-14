@@ -96,6 +96,16 @@ export const getExploreTrips = async () => {
   return json;
 };
 
+export const getFriendTrips = async () => {
+  const res = await fetch(baseUrl + '/trips/friends', {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const json = res.json();
+  return json;
+};
+
 export const inviteUser = async (id, email) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/invite/' + email, {
     method: 'POST',

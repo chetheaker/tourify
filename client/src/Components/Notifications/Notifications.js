@@ -1,5 +1,6 @@
 import './Notifications.css';
 import { IoMdNotifications } from 'react-icons/io';
+import { GoPrimitiveDot } from 'react-icons/go';
 import {
   Popover,
   PopoverTrigger,
@@ -43,8 +44,11 @@ function Notifications() {
   return (
     <Popover variant="responsive" className="notifications-container" size="lg">
       <PopoverTrigger>
-        <button>
+        <button className="notif-btn">
           <IoMdNotifications color="#1FC28B" size="2em" className="icon" />
+          {activeUser.notifications.length ? (
+            <GoPrimitiveDot className="notification-alert" />
+          ) : null}
         </button>
       </PopoverTrigger>
       <PopoverContent border="1px" borderColor="#E2E8F0">
