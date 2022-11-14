@@ -55,11 +55,17 @@ const updateItinerary = async (id, itinerary) => {
   return update;
 };
 
+const deleteOne = async (id) => {
+  const deleted = await trips.deleteOne({ _id: ObjectId(id) });
+  return deleted;
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
   findTripById,
   updateName,
   updateRoute,
-  updateItinerary
+  updateItinerary,
+  deleteOne
 };

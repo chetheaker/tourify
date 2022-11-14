@@ -13,6 +13,7 @@ import TripChecklist from './TripChecklist/TripChecklist';
 import TripDetailsNav from './TripDetailsNav/TripDetailsNav';
 import TripSuggestions from './TripSuggestions/TripSuggestions';
 import RouteDetails from './RouteDetails/RouteDetails';
+import DeleteTrip from './DeleteTrip/DeleteTrip';
 
 function TripDetails() {
   const params = useParams();
@@ -148,6 +149,7 @@ function TripDetails() {
               tripId={params.tripId}
             />
             <TripChecklist />
+            <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
           </div>
         </div>
         <Map directionsResponse={directionsResponse} />

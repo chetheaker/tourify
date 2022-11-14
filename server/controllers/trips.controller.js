@@ -101,6 +101,20 @@ const updateTripItinerary = async (req, res) => {
   }
 };
 
+const deleteTrip = async (req, res) => {
+  try {
+    if (req.user) {
+      const id = req.params.id;
+      const deleted = await tripsModel.deleteOne(id);
+      res.send(deleted);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('Error deleteTrip in controller', e);
+  }
+};
+
 module.exports = {
   getUserTrips,
   getExploreTrips,
@@ -108,5 +122,6 @@ module.exports = {
   createTrip,
   updateTripName,
   updateTripRoute,
-  updateTripItinerary
+  updateTripItinerary,
+  deleteTrip
 };

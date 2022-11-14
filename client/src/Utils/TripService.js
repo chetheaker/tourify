@@ -72,3 +72,16 @@ export const updateTripItinerary = async (id, newItinerary) => {
   const json = await res.json();
   return json;
 };
+
+export const deleteTrip = async (id) => {
+  const res = await fetch(baseUrl + '/trips/' + id + '/delete', {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+  const json = await res.json();
+  return json;
+};
