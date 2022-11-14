@@ -6,7 +6,6 @@ import UserContext from '../../Context/UserContext';
 import TripsContainer from '../TripsContainer/TripsContainer';
 import NavBar from '../NavBar/NavBar';
 
-// TODO Fix routing: At the moment the request to get the logged in user takes some time so if a user is logged in and goes to /dashboard, they go back to the login page for a brief moment before going back to the dashboard. Could lazy load + suspend?
 // TODO check frontedendjoe dashboard layouts
 function Dashboard() {
   const navigate = useNavigate();
