@@ -89,9 +89,11 @@ const inviteUser = async (id, email) => {
     },
     inviter: { firstName: inviter.first_name, lastName: inviter.last_name }
   };
-  console.log('notification', notification);
-
-  // const updateInviteeNotifications = await users.updateOne({ email: email }, { $push: {notifications: }})
+  const updateInviteeNotifications = await users.updateOne(
+    { email: email },
+    { $push: { notifications: notification } }
+  );
+  return updateInviteeNotifications;
 };
 
 module.exports = {

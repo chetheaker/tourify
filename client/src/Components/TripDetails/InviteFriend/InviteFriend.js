@@ -11,13 +11,14 @@ import {
 } from '@chakra-ui/react';
 import { useContext, useRef, useState } from 'react';
 import UserContext from '../../../Context/UserContext';
+import { inviteUser } from '../../../Utils/TripService';
 
-function InviteFriend({ renderToast }) {
+function InviteFriend({ renderToast, tripId }) {
   const [activeUser] = useContext(UserContext);
   const [inviteEmail, setInviteEmail] = useState('');
   const inviteRef = useRef();
 
-  const handleInvite = () => {
+  const handleInvite = async () => {
     if (activeUser.email === inviteEmail) {
       renderToast(
         'Error',
@@ -28,8 +29,20 @@ function InviteFriend({ renderToast }) {
       inviteRef.current.value = '';
       return;
     }
-
     console.log(inviteEmail);
+    console.log(tripId);
+    const res = await inviteUser(tripId, inviteEmail);
+    if (res.acknowledged) {
+      renderToast('Success', 'success', 'Invite sucessfully sent');
+    }
+    if (res.invitee === false) {
+      renderToast(
+        'Error',
+        'error',
+        'Invitee not found. Make sure they have an account!'
+      );
+    }
+    inviteRef.current.value = '';
   };
 
   return (

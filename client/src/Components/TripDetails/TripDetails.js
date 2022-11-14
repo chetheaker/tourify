@@ -139,7 +139,10 @@ function TripDetails() {
             )}
             {isAuth ? (
               <div className="invite">
-                <InviteFriend renderToast={renderToast} />
+                <InviteFriend
+                  renderToast={renderToast}
+                  tripId={params.tripId}
+                />
               </div>
             ) : null}
             <div className="overlay"></div>

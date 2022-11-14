@@ -95,3 +95,17 @@ export const getExploreTrips = async () => {
   const json = await res.json();
   return json;
 };
+
+export const inviteUser = async (id, email) => {
+  const res = await fetch(baseUrl + '/trips/' + id + '/invite/' + email, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+
+  const json = await res.json();
+  return json;
+};

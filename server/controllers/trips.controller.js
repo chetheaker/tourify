@@ -141,7 +141,7 @@ const inviteUser = async (req, res) => {
       console.log('id', id);
       console.log('email', email);
       const result = await tripsModel.inviteUser(id, email);
-      res.send({ notif: true });
+      res.send(result);
     } else {
       res.send({ user: false });
     }
