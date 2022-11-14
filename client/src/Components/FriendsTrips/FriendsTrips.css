@@ -17,4 +17,7 @@
 .friends-trips-container {
   width: 100%;
   height: 80%;
+  overflow-x: scroll;
+  display: flex;
+  gap: 1rem;
 }
