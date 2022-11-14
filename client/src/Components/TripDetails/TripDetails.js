@@ -113,6 +113,11 @@ function TripDetails() {
     // eslint-disable-next-line
   }, [trip?.stops]);
 
+  useEffect(() => {
+    if (!trip) return;
+    setIsAuth(activeUser.email === trip.user);
+  }, [isAuth, activeUser.email, trip]);
+
   if (isLoading) return <Loading />;
 
   return (

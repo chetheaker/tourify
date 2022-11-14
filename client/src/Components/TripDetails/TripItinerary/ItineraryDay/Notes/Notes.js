@@ -9,7 +9,8 @@ function Notes({
   setNotes,
   setItinerary,
   dayIndex,
-  renderToast
+  renderToast,
+  isAuth
 }) {
   const addNote = (e) => {
     e.preventDefault();
@@ -69,6 +70,7 @@ function Notes({
               setItinerary={setItinerary}
               dayIndex={dayIndex}
               renderToast={renderToast}
+              isAuth={isAuth}
             />
           ))}
         </div>

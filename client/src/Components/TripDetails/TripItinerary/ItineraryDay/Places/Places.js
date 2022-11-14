@@ -10,7 +10,8 @@ function Places({
   setPlaces,
   setItinerary,
   dayIndex,
-  renderToast
+  renderToast,
+  isAuth
 }) {
   const addPlace = async (e) => {
     e.preventDefault();
@@ -68,10 +69,12 @@ function Places({
                 <GrLocation />
                 <h1>{place.place}</h1>
               </div>
-              <AiOutlineDelete
-                className="delete-icon"
-                onClick={() => deletePlace(place)}
-              />
+              {isAuth ? (
+                <AiOutlineDelete
+                  className="delete-icon"
+                  onClick={() => deletePlace(place)}
+                />
+              ) : null}
             </div>
           ))}
         </div>

@@ -4,7 +4,14 @@ import { FiEdit } from 'react-icons/fi';
 import { BiNote } from 'react-icons/bi';
 import { useRef, useState } from 'react';
 
-function Note({ note, deleteNote, setItinerary, dayIndex, renderToast }) {
+function Note({
+  note,
+  deleteNote,
+  setItinerary,
+  dayIndex,
+  renderToast,
+  isAuth
+}) {
   const [isEdit, setIsEdit] = useState(false);
   const noteRef = useRef();
 
@@ -60,17 +67,19 @@ function Note({ note, deleteNote, setItinerary, dayIndex, renderToast }) {
           autoFocus={true}
         />
       </div>
-      <div className="right">
-        {!isEdit ? (
-          <FiEdit className="icon" onClick={handleEditStart} />
-        ) : (
-          <MdSaveAlt className="icon" onClick={handleEditEnd} />
-        )}
-        <AiOutlineDelete
-          className="delete-icon icon"
-          onClick={() => deleteNote(note)}
-        />
-      </div>
+      {isAuth ? (
+        <div className="right">
+          {!isEdit ? (
+            <FiEdit className="icon" onClick={handleEditStart} />
+          ) : (
+            <MdSaveAlt className="icon" onClick={handleEditEnd} />
+          )}
+          <AiOutlineDelete
+            className="delete-icon icon"
+            onClick={() => deleteNote(note)}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

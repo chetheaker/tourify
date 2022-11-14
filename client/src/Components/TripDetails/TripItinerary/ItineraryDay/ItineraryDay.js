@@ -78,6 +78,7 @@ function ItineraryDay({
             setItinerary={setItinerary}
             dayIndex={index}
             renderToast={renderToast}
+            isAuth={isAuth}
           />
           <Notes
             notes={notes}
@@ -86,6 +87,7 @@ function ItineraryDay({
             setItinerary={setItinerary}
             dayIndex={index}
             renderToast={renderToast}
+            isAuth={isAuth}
           />
           <Checklists
             checklists={checklists}
