@@ -5,12 +5,14 @@ import { Avatar, Skeleton } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { randomPhoto } from '../../Utils/image';
 import { getUserByTrip } from '../../Utils/UserService';
+import { useNavigate } from 'react-router-dom';
 
 function ExploreTripPreview({ stopScroll, startScroll, trip }) {
   const [tripUser, setTripUser] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState(null);
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const getRandomSize = () => {
     const index = Math.floor(Math.random() * 3);
@@ -31,7 +33,7 @@ function ExploreTripPreview({ stopScroll, startScroll, trip }) {
   }, [trip._id]);
 
   const handleTripDetails = () => {
-    console.log('do something');
+    navigate('/trips/' + trip._id);
   };
 
   if (isLoading) return <Skeleton style={styles[size]} />;

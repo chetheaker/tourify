@@ -32,8 +32,7 @@ const getUserTrip = async (req, res) => {
       const id = req.params.id;
       const trip = await tripsModel.findTripById(id);
       if (trip === null) res.send({ _id: false });
-      else if (trip.user === req.user.email) res.send(trip);
-      else res.send({ user: false });
+      else res.send(trip);
     } else {
       res.send({ user: false });
     }

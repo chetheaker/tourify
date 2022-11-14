@@ -2,7 +2,7 @@ import './TripDetails.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavContextProvider from '../../Context/NavContext';
 import { useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getUserTripById, updateTripName } from '../../Utils/TripService';
 import NavBar from '../NavBar/NavBar';
 import Loading from '../Loading/Loading';
@@ -15,6 +15,7 @@ import TripDetailsNav from './TripDetailsNav/TripDetailsNav';
 import TripSuggestions from './TripSuggestions/TripSuggestions';
 import RouteDetails from './RouteDetails/RouteDetails';
 import DeleteTrip from './DeleteTrip/DeleteTrip';
+import UserContext from '../../Context/UserContext';
 
 function TripDetails() {
   const params = useParams();
@@ -25,6 +26,8 @@ function TripDetails() {
   const [isLoading, setIsLoading] = useState(true);
   // const [activeSection, setActiveSection] = useState('overview');
   const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [activeUser] = useContext(UserContext);
+  const [isAuth, setIsAuth] = useState(false);
 
   const toast = useToast();
 
@@ -53,13 +56,16 @@ function TripDetails() {
         return;
       }
       console.log('trip: ', t);
+      if (activeUser.email === t.user) {
+        setIsAuth(true);
+      }
       setTrip(t);
       setStops(t.stops);
       setItinerary(t.itinerary);
       setIsLoading(false);
     };
     getTrip();
-  }, [params.tripId, navigate]);
+  }, [params.tripId, navigate, activeUser.email]);
 
   const handleNameChangeBlur = async (e) => {
     // HANDLE UPDATE NAME
@@ -115,12 +121,16 @@ function TripDetails() {
       <div className="trip-details-container">
         <div className="details" id="trip">
           <div className="trip-details-header">
-            <input
-              type="text"
-              className="trip-name"
-              defaultValue={trip.trip_name}
-              onBlur={handleNameChangeBlur}
-            />
+            {isAuth ? (
+              <input
+                type="text"
+                className="trip-name"
+                defaultValue={trip.trip_name}
+                onBlur={handleNameChangeBlur}
+              />
+            ) : (
+              <h1 className="trip-name">{trip.trip_name}</h1>
+            )}
             <div className="overlay"></div>
           </div>
           <div className="trip-details">
