@@ -5,7 +5,7 @@ import { MdExplore } from 'react-icons/md';
 import { IoMdNotifications } from 'react-icons/io';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { useState, useContext } from 'react';
-import UserContext from '../../UserContext';
+import UserContext from '../../Context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../Utils/APIService';
 

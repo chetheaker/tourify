@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import UserContext from './UserContext';
+import UserContext from './Context/UserContext';
 
 function PublicRoutes() {
   const [activeUser] = useContext(UserContext);

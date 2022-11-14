@@ -2,7 +2,7 @@ import './LoginPage.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
-import UserContext from '../../UserContext';
+import UserContext from '../../Context/UserContext';
 
 //COMPONENTS
 import SignUp from '../SignUp/SignUp';

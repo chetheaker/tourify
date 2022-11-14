@@ -3,7 +3,7 @@ import './SignUp.css';
 import { useState, useContext } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../../UserContext';
+import UserContext from '../../Context/UserContext';
 import { registerUser, loginUser } from '../../Utils/UserService';
 
 // TODO Clean up code ==> refactor  inputs into components etc

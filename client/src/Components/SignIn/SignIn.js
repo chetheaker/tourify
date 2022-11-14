@@ -3,7 +3,7 @@ import { useToast } from '@chakra-ui/react';
 import { useState, useContext } from 'react';
 import { loginUser } from '../../Utils/UserService';
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../../UserContext';
+import UserContext from '../../Context/UserContext';
 
 function SignIn({ rightActive, setRightActive }) {
   const navigate = useNavigate();

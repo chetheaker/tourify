@@ -1,5 +1,6 @@
 import './TripDetails.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import NavContextProvider from '../../Context/NavContext';
 import { useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { getUserTripById, updateTripName } from '../../Utils/TripService';
@@ -9,7 +10,7 @@ import Map from '../Map/Map';
 import TripOverview from './TripOverview/TripOverview';
 import TripRoute from './TripRoute/TripRoute';
 import TripItinerary from './TripItinerary/TripItinerary';
-import TripChecklist from './TripChecklist/TripChecklist';
+// import TripChecklist from './TripChecklist/TripChecklist';
 import TripDetailsNav from './TripDetailsNav/TripDetailsNav';
 import TripSuggestions from './TripSuggestions/TripSuggestions';
 import RouteDetails from './RouteDetails/RouteDetails';
@@ -123,32 +124,37 @@ function TripDetails() {
             <div className="overlay"></div>
           </div>
           <div className="trip-details">
-            <TripDetailsNav />
-            <TripOverview trip={trip} directionsResponse={directionsResponse} />
-            <TripRoute
-              stops={stops}
-              setStops={setStops}
-              tripStops={trip.stops}
-              id={trip._id}
-              renderToast={renderToast}
-              setTrip={setTrip}
-            />
-            <RouteDetails directionsResponse={directionsResponse} />
-            <TripSuggestions
-              stops={stops}
-              renderToast={renderToast}
-              directionsResponse={directionsResponse}
-              itinerary={itinerary}
-              setItinerary={setItinerary}
-            />
-            <TripItinerary
-              itinerary={itinerary}
-              setItinerary={setItinerary}
-              renderToast={renderToast}
-              setTrip={setTrip}
-              tripId={params.tripId}
-            />
-            <TripChecklist />
+            <NavContextProvider>
+              <TripDetailsNav />
+              <TripOverview
+                trip={trip}
+                directionsResponse={directionsResponse}
+              />
+              <TripRoute
+                stops={stops}
+                setStops={setStops}
+                tripStops={trip.stops}
+                id={trip._id}
+                renderToast={renderToast}
+                setTrip={setTrip}
+              />
+              <RouteDetails directionsResponse={directionsResponse} />
+              <TripSuggestions
+                stops={stops}
+                renderToast={renderToast}
+                directionsResponse={directionsResponse}
+                itinerary={itinerary}
+                setItinerary={setItinerary}
+              />
+              <TripItinerary
+                itinerary={itinerary}
+                setItinerary={setItinerary}
+                renderToast={renderToast}
+                setTrip={setTrip}
+                tripId={params.tripId}
+              />
+            </NavContextProvider>
+            {/* <TripChecklist /> */}
             <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
           </div>
         </div>

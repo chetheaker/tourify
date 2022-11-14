@@ -2,7 +2,7 @@ import './Dashboard.css';
 
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../../UserContext';
+import UserContext from '../../Context/UserContext';
 import TripsContainer from '../TripsContainer/TripsContainer';
 import NavBar from '../NavBar/NavBar';
 

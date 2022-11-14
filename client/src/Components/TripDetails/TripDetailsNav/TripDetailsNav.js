@@ -1,32 +1,43 @@
 import './TripDetailsNav.css';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { NavContext } from '../../../Context/NavContext';
 
 function TripDetailsNav() {
-  const [active, setActive] = useState('overview');
+  const [active, setActive] = useContext(NavContext);
+
+  const handleClick = (id, scrollId) => {
+    setActive(id);
+    console.log(document.getElementById(scrollId));
+    document.getElementById(scrollId).scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div id="trip-nav">
       <button
-        onClick={() => setActive('overview')}
-        className={`${active === 'overview' ? 'active' : ''}`}
+        onClick={() => handleClick('overview-nav', 'overview')}
+        className={`${active === 'overview-nav' ? 'active' : ''}`}
+        id="overview-nav"
       >
         Overview
       </button>
       <button
-        onClick={() => setActive('route')}
-        className={`${active === 'route' ? 'active' : ''}`}
+        onClick={() => handleClick('route-nav', 'route')}
+        className={`${active === 'route-nav' ? 'active' : ''}`}
+        id="route-nav"
       >
         Route
       </button>
       <button
-        onClick={() => setActive('suggestions')}
-        className={`${active === 'suggestions' ? 'active' : ''}`}
+        onClick={() => handleClick('suggestions-nav', 'suggestions')}
+        className={`${active === 'suggestions-nav' ? 'active' : ''}`}
+        id="suggestions-nav"
       >
         For You
       </button>
       <button
-        onClick={() => setActive('itinerary')}
-        className={`${active === 'itinerary' ? 'active' : ''}`}
+        onClick={() => handleClick('itinerary-nav', 'itinerary')}
+        className={`${active === 'itinerary-nav' ? 'active' : ''}`}
+        id="itinerary-nav"
       >
         Itinerary
       </button>

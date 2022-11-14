@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import UserContext from './UserContext';
+import UserContext from './Context/UserContext';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { getUser } from './Utils/UserService';
 import PublicRoutes from './PublicRoutes';
