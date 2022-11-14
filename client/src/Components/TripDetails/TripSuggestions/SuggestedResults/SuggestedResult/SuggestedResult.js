@@ -31,6 +31,7 @@ function SuggestedResult({ place, itinerary, setItinerary }) {
   const [isAdded, setIsAdded] = useState(false);
   const [activeDay, setActiveDay] = useState(itinerary[0].date);
   const [activeDayIndex, setActiveDayIndex] = useState(0);
+  const [placeId, setPlaceId] = useState(null);
   const toast = useToast();
 
   useEffect(() => {
@@ -57,7 +58,16 @@ function SuggestedResult({ place, itinerary, setItinerary }) {
         setPlaceUrl(placeRes.url);
       }
     }
-  }, [place]);
+
+    for (let i = 0; i < itinerary.length; i++) {
+      for (let j = 0; j < itinerary[i].places.length; j++) {
+        if (itinerary[i].places[j].place === place.name) {
+          setPlaceId(itinerary[i].places[j].id);
+          setIsAdded(true);
+        }
+      }
+    }
+  }, [place, itinerary]);
 
   if (placeUrl === '' || !place.photos || !place.rating) return;
 
@@ -92,6 +102,17 @@ function SuggestedResult({ place, itinerary, setItinerary }) {
   };
 
   const handlePlaceRemove = () => {
+    setItinerary((prev) => {
+      const newItinerary = [];
+      for (let i = 0; i < prev.length; i++) {
+        newItinerary.push({
+          ...prev[i],
+          places: prev[i].places.filter((p) => p.id !== placeId)
+        });
+      }
+      console.log('newItinerary', newItinerary);
+      return newItinerary;
+    });
     setIsAdded(false);
   };
 
