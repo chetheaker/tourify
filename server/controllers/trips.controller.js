@@ -91,7 +91,6 @@ const updateTripItinerary = async (req, res) => {
     if (req.user) {
       const id = req.params.id;
       const itinerary = req.body.itinerary;
-      console.log('itinerary', itinerary);
       const updated = await tripsModel.updateItinerary(id, itinerary);
       res.send(updated);
     } else {

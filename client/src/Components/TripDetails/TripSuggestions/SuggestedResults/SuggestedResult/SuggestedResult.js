@@ -2,6 +2,7 @@ import './SuggestedResult.css';
 import { useState, useEffect } from 'react';
 import { MdReviews } from 'react-icons/md';
 import { formatDate } from '../../../../../Utils/date';
+import { v4 as uuidv4 } from 'uuid';
 import {
   AiFillStar,
   AiOutlineHeart,
@@ -21,13 +22,16 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  useToast
 } from '@chakra-ui/react';
 
 function SuggestedResult({ place, itinerary, setItinerary }) {
   const [placeUrl, setPlaceUrl] = useState('');
   const [isAdded, setIsAdded] = useState(false);
   const [activeDay, setActiveDay] = useState(itinerary[0].date);
+  const [activeDayIndex, setActiveDayIndex] = useState(0);
+  const toast = useToast();
 
   useEffect(() => {
     const request = {
@@ -58,11 +62,42 @@ function SuggestedResult({ place, itinerary, setItinerary }) {
   if (placeUrl === '' || !place.photos || !place.rating) return;
 
   const handlePlaceAdd = () => {
+    const newPlace = {
+      place: place.name,
+      id: uuidv4()
+    };
+    setItinerary((prev) => {
+      const newItinerary = [];
+      for (let i = 0; i < prev.length; i++) {
+        if (i === activeDayIndex) {
+          newItinerary.push({
+            ...prev[i],
+            places: [...prev[i].places, newPlace]
+          });
+        } else {
+          newItinerary.push(prev[i]);
+        }
+      }
+      return newItinerary;
+    });
+    toast({
+      position: 'bottom-left',
+      title: 'Success',
+      description: 'Itinerary updated successfully',
+      status: 'success',
+      duration: 3000,
+      isClosable: true
+    });
     setIsAdded(true);
   };
 
   const handlePlaceRemove = () => {
     setIsAdded(false);
+  };
+
+  const handleDayChange = (day, index) => {
+    setActiveDay(day.date);
+    setActiveDayIndex(index);
   };
 
   return (
@@ -113,10 +148,10 @@ function SuggestedResult({ place, itinerary, setItinerary }) {
                       {formatDate(activeDay)}
                     </MenuButton>
                     <MenuList>
-                      {itinerary.map((day) => (
+                      {itinerary.map((day, index) => (
                         <MenuItem
                           key={day.date}
-                          onClick={() => setActiveDay(day.date)}
+                          onClick={() => handleDayChange(day, index)}
                         >
                           {formatDate(day.date)}
                         </MenuItem>

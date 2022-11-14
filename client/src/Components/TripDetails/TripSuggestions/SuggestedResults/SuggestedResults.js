@@ -67,8 +67,6 @@ function SuggestedResults({
     getPlaces();
   }, [place, category, directionsResponse]);
 
-  console.log('places', suggestedPlaces);
-
   if (isLoading) {
     return (
       <div className="skeleton-loading">
