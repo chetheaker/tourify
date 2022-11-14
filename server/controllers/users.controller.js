@@ -64,27 +64,18 @@ const get = async (req, res) => {
   }
 };
 
-// const inviteUser = async (req, res) => {
-//   try {
-//     if (req.user) {
-//       // get inviter user (to use in email)
-//       const user = await usersModel.findUserByEmail(req.user.email);
-//       // check to see if invitee alrady has an account
-//       let invitee = await usersModel.findUserByEmail(req.body.email);
-//       if (invitee) {
-//         // invitee already has account
-//         sendInvite(user, invitee, true);
-//       } else {
-//         invitee = req.body.email;
-//         // invitee does not have an account
-//         sendInvite(user, invitee, false);
-//       }
-//     }
-//     res.send();
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+const getUserByEmail = async (req, res) => {
+  try {
+    if (req.user) {
+      const user = await usersModel.findUserByEmail(req.params.email);
+      res.send(user);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('Error getuserByEmail in controller', e);
+  }
+};
 
 const deleteUser = async (req, res) => {
   try {
@@ -106,5 +97,6 @@ module.exports = {
   login,
   get,
   logout,
-  deleteUser
+  deleteUser,
+  getUserByEmail
 };

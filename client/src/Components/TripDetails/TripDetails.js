@@ -138,7 +138,7 @@ function TripDetails() {
             ) : (
               <h1 className="trip-name">{trip.trip_name}</h1>
             )}
-            <Attendees attendees={trip.attendees} />
+            <Attendees attendees={trip.attendees} adminUser={trip.user} />
             {isAuth ? (
               <div className="invite">
                 <InviteFriend

@@ -9,6 +9,15 @@ export const getUser = async () => {
   return json;
 };
 
+export const getUserByEmail = async (email) => {
+  const user = await fetch(baseUrl + '/user/' + email, {
+    method: 'GET',
+    credentials: 'include'
+  });
+  const json = await user.json();
+  return json;
+};
+
 export const getUserByTrip = async (id) => {
   const user = await fetch(baseUrl + '/get-user/' + id, {
     method: 'GET',
