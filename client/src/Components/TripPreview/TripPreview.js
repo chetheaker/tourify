@@ -12,6 +12,8 @@ function TripPreview({ trip }) {
 
   return (
     <div className="trip-preview" onClick={handleTripDetails}>
+      <img className="preview-img" src="" alt="" />
+      <div className="overlay"></div>
       <div className="bottom">
         <h1>{trip.trip_name}</h1>
         <h2>

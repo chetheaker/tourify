@@ -1,78 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import ExploreTripPreview from '../ExploreTripPreview/ExploreTripPreview';
 import './ExploreTripsContainer.css';
-
-const arr = [
-  'small',
-  'medium',
-  'large',
-  'medium',
-  'large',
-  'medium',
-  'small',
-  'small',
-  'large',
-  'small',
-  'medium',
-  'small',
-  'medium',
-  'large',
-  'medium',
-  'large',
-  'medium',
-  'small',
-  'small',
-  'large',
-  'small',
-  'medium',
-  'small',
-  'medium',
-  'large',
-  'medium',
-  'large',
-  'medium',
-  'small',
-  'small',
-  'large',
-  'small',
-  'medium',
-  'small',
-  'medium',
-  'large',
-  'medium',
-  'large',
-  'medium',
-  'small',
-  'small',
-  'large',
-  'small',
-  'medium',
-  'small',
-  'medium',
-  'large',
-  'medium',
-  'large',
-  'medium',
-  'small',
-  'small',
-  'large',
-  'small',
-  'medium',
-  'small',
-  'medium',
-  'large',
-  'medium',
-  'large',
-  'medium',
-  'small',
-  'small',
-  'large',
-  'small',
-  'medium'
-];
+import { getExploreTrips } from '../../Utils/TripService';
 
 function ExploreTripsContainer() {
   const [scrollID, setScrollID] = useState(null);
+  const [exploreTrips, setExploreTrips] = useState([]);
   const containerRef = useRef();
 
   const startScroll = () => {
@@ -96,12 +29,28 @@ function ExploreTripsContainer() {
     //eslint-disable-next-line
   }, [containerRef]);
 
+  useEffect(() => {
+    const fetchTrips = async () => {
+      const trips = await getExploreTrips();
+      setExploreTrips(trips);
+    };
+    fetchTrips();
+  }, []);
+
+  const getRandomSize = () => {
+    const index = Math.floor(Math.random() * 3);
+    if (index === 2) return 'large';
+    else if (index === 1) return 'medium';
+    else return 'small';
+  };
+
   return (
     <div className="explore-trips-container" ref={containerRef}>
-      {arr.map((trip, index) => (
+      {exploreTrips.map((trip, index) => (
         <ExploreTripPreview
           key={index}
-          size={trip}
+          size={getRandomSize()}
+          trip={trip}
           stopScroll={stopScroll}
           startScroll={startScroll}
         />

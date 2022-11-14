@@ -15,7 +15,12 @@ const getUserTrips = async (req, res) => {
 
 const getExploreTrips = async (req, res) => {
   try {
-    res.send('explore trips');
+    if (req.user) {
+      const trips = await tripsModel.getAllTrips();
+      res.send(trips);
+    } else {
+      res.send({ user: false });
+    }
   } catch (e) {
     console.log("error getting users' trips", e);
   }

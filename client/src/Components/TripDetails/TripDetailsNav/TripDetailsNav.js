@@ -9,13 +9,6 @@ function TripDetailsNav() {
     setActiveNavLink(id);
     const elementToShow = document.getElementById(scrollId);
     elementToShow.scrollIntoView({ behavior: 'smooth' });
-    //const tripDiv = document.getElementById('trip');
-    //tripDiv.scrollBy({ top: -60 });
-    // const yOffset = -60;
-    // const y = elementToShow.getBoundingClientRect().top + yOffset;
-
-    // console.log(tripDiv);
-    // tripDiv.scrollTo({ top: y, behavior: 'smooth' });
   };
 
   return (

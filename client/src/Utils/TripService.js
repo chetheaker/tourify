@@ -85,3 +85,13 @@ export const deleteTrip = async (id) => {
   const json = await res.json();
   return json;
 };
+
+export const getExploreTrips = async () => {
+  const res = await fetch(baseUrl + '/trips/explore', {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const json = await res.json();
+  return json;
+};

@@ -60,6 +60,11 @@ const deleteOne = async (id) => {
   return deleted;
 };
 
+const getAllTrips = async () => {
+  const exploreTrips = await trips.find({}).toArray();
+  return exploreTrips;
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
@@ -67,5 +72,6 @@ module.exports = {
   updateName,
   updateRoute,
   updateItinerary,
-  deleteOne
+  deleteOne,
+  getAllTrips
 };
