@@ -7,10 +7,13 @@ export const NavContext = createContext();
 function NavContextProvider({ children }) {
   const [activeNavLink, setActiveNavLink] = useState('');
 
+  const providerValue = {
+    activeNavLink,
+    setActiveNavLink
+  };
+
   return (
-    <NavContext.Provider value={[activeNavLink, setActiveNavLink]}>
-      {children}
-    </NavContext.Provider>
+    <NavContext.Provider value={providerValue}>{children}</NavContext.Provider>
   );
 }
 

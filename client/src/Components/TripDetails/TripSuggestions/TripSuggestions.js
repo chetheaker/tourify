@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import SuggestionCategories from './SuggestionCategories/SuggestionCategories';
+import { useNav } from '../../../Hooks/useNav';
 
 function TripSuggestions({
   stops,
@@ -13,6 +14,7 @@ function TripSuggestions({
 }) {
   const [activeStop, setActiveStop] = useState({ stop: 'a place' });
   const [showCat, setShowCat] = useState(false);
+  const suggestionsRef = useNav('suggestions');
 
   const handleStopChoice = (stop) => {
     setActiveStop(stop);
@@ -27,7 +29,7 @@ function TripSuggestions({
     }
   };
   return (
-    <div id="suggestions">
+    <div id="suggestions" ref={suggestionsRef}>
       <div className="heading">
         <h1>Explore:</h1>
         <Menu className="menu">

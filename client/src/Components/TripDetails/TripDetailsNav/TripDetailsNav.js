@@ -3,40 +3,42 @@ import { useContext } from 'react';
 import { NavContext } from '../../../Context/NavContext';
 
 function TripDetailsNav() {
-  const [active, setActive] = useContext(NavContext);
+  const { activeNavLink, setActiveNavLink } = useContext(NavContext);
 
   const handleClick = (id, scrollId) => {
-    setActive(id);
+    setActiveNavLink(id);
     console.log(document.getElementById(scrollId));
     document.getElementById(scrollId).scrollIntoView({ behavior: 'smooth' });
   };
+
+  console.log(activeNavLink);
 
   return (
     <div id="trip-nav">
       <button
         onClick={() => handleClick('overview-nav', 'overview')}
-        className={`${active === 'overview-nav' ? 'active' : ''}`}
+        className={`${activeNavLink === 'overview' ? 'active' : ''}`}
         id="overview-nav"
       >
         Overview
       </button>
       <button
         onClick={() => handleClick('route-nav', 'route')}
-        className={`${active === 'route-nav' ? 'active' : ''}`}
+        className={`${activeNavLink === 'route' ? 'active' : ''}`}
         id="route-nav"
       >
         Route
       </button>
       <button
         onClick={() => handleClick('suggestions-nav', 'suggestions')}
-        className={`${active === 'suggestions-nav' ? 'active' : ''}`}
+        className={`${activeNavLink === 'suggestions' ? 'active' : ''}`}
         id="suggestions-nav"
       >
         For You
       </button>
       <button
         onClick={() => handleClick('itinerary-nav', 'itinerary')}
-        className={`${active === 'itinerary-nav' ? 'active' : ''}`}
+        className={`${activeNavLink === 'itinerary' ? 'active' : ''}`}
         id="itinerary-nav"
       >
         Itinerary

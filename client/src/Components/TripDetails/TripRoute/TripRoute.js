@@ -5,9 +5,11 @@ import { useState } from 'react';
 import StopInput from '../../StopInput/StopInput';
 import { updateTripRoute } from '../../../Utils/TripService';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { useNav } from '../../../Hooks/useNav';
 
 function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
   const [isEdit, setIsEdit] = useState(false);
+  const routeRef = useNav('route');
 
   const cancelChanges = () => {
     setStops(tripStops);
@@ -52,7 +54,7 @@ function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
 
   return (
     <div className={`section ${isEdit ? 'editable' : ''}`}>
-      <div id="route">
+      <div id="route" ref={routeRef}>
         <DragDropContext onDragEnd={onDragEnd}>
           <StopsList
             stops={stops}

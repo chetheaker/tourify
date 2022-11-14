@@ -4,8 +4,10 @@ import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { GrLocation } from 'react-icons/gr';
 import Loading from '../../Loading/Loading';
+import { useNav } from '../../../Hooks/useNav';
 
 function TripOverview({ trip, directionsResponse }) {
+  const overviewRef = useNav('overview');
   const getTotalDistance = () => {
     const units =
       directionsResponse.routes[0].legs[0].distance.text.split(' ')[1];
@@ -54,7 +56,7 @@ function TripOverview({ trip, directionsResponse }) {
   if (!directionsResponse) return <Loading />;
 
   return (
-    <div id="overview" className="section">
+    <div id="overview" className="section" ref={overviewRef}>
       <div className="top">
         <div className="widget total-distance">
           <GiPathDistance size="1.25em" />

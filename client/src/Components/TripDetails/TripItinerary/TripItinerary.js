@@ -2,8 +2,10 @@ import './TripItinerary.css';
 import ItineraryList from './ItineraryList/ItineraryList';
 import { updateTripItinerary } from '../../../Utils/TripService';
 import { useEffect } from 'react';
+import { useNav } from '../../../Hooks/useNav';
 
 function TripItinerary({ itinerary, setItinerary, tripId, renderToast }) {
+  const itineraryRef = useNav('itinerary');
   useEffect(() => {
     const updateItinerary = async () => {
       await updateTripItinerary(tripId, itinerary);
@@ -13,7 +15,7 @@ function TripItinerary({ itinerary, setItinerary, tripId, renderToast }) {
 
   return (
     <div className="section editable ">
-      <div id="itinerary">
+      <div id="itinerary" ref={itineraryRef}>
         <ItineraryList
           itinerary={itinerary}
           setItinerary={setItinerary}
