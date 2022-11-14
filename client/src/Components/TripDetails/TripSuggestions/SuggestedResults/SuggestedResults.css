@@ -1,0 +1,14 @@
+.suggested-results {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  gap: 1rem;
+}
+
+.skeleton-loading {
+  display: flex;
+  overflow: hidden;
+  gap: 1rem;
+  height: 250px;
+  width: 100%;
+}

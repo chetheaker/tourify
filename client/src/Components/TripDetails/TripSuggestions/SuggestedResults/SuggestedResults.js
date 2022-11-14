@@ -1,11 +1,21 @@
 import { useEffect, useState } from 'react';
 import './SuggestedResults.css';
+import SuggestedResult from './SuggestedResult/SuggestedResult';
+import { Skeleton } from '@chakra-ui/react';
 
-function SuggestedResults({ place, category, directionsResponse }) {
+function SuggestedResults({
+  place,
+  category,
+  directionsResponse,
+  itinerary,
+  setItinerary
+}) {
   const [suggestedPlaces, setSuggestedPlaces] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (!directionsResponse) return;
     const getPlaces = () => {
+      setIsLoading(true);
       setSuggestedPlaces([]);
       let location;
       for (let i = 0; i < directionsResponse.routes[0].legs.length; i++) {
@@ -21,14 +31,14 @@ function SuggestedResults({ place, category, directionsResponse }) {
         // eslint-disable-next-line no-undef
         location = new google.maps.LatLng(
           directionsResponse.routes[0].legs[
-            directionsResponse.routes[0].legs.length
-          ].start_location.lat(),
+            directionsResponse.routes[0].legs.length - 1
+          ].end_location.lat(),
           directionsResponse.routes[0].legs[
-            directionsResponse.routes[0].legs.length
-          ].start_location.lng()
+            directionsResponse.routes[0].legs.length - 1
+          ].end_location.lng()
         );
       }
-      console.log(location);
+      console.log('location', location);
 
       // eslint-disable-next-line no-undef
       const map = new google.maps.Map(
@@ -42,13 +52,14 @@ function SuggestedResults({ place, category, directionsResponse }) {
       const request = {
         location: location,
         radius: '2000',
-        type: ['lodging']
+        type: [category]
       };
       // eslint-disable-next-line no-undef
       const service = new google.maps.places.PlacesService(map);
       service.nearbySearch(request, (results, status) => {
         if (status === 'OK') {
           setSuggestedPlaces(results);
+          setIsLoading(false);
         }
       });
     };
@@ -56,11 +67,29 @@ function SuggestedResults({ place, category, directionsResponse }) {
     getPlaces();
   }, [place, category, directionsResponse]);
 
+  console.log('places', suggestedPlaces);
+
+  if (isLoading) {
+    return (
+      <div className="skeleton-loading">
+        <Skeleton height="250px" minWidth="150px" />
+        <Skeleton height="250px" minWidth="150px" />
+        <Skeleton height="250px" minWidth="150px" />
+        <Skeleton height="250px" minWidth="150px" />
+      </div>
+    );
+  }
+
   return (
     <div className="suggested-results">
-      <h1>
-        {category} in {place.stop}
-      </h1>
+      {suggestedPlaces.map((place, index) => (
+        <SuggestedResult
+          key={index}
+          place={place}
+          itinerary={itinerary}
+          setItinerary={setItinerary}
+        />
+      ))}
     </div>
   );
 }

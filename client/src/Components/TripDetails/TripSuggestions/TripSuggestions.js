@@ -4,7 +4,13 @@ import { Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import SuggestionCategories from './SuggestionCategories/SuggestionCategories';
 
-function TripSuggestions({ stops, renderToast, directionsResponse }) {
+function TripSuggestions({
+  stops,
+  renderToast,
+  directionsResponse,
+  itinerary,
+  setItinerary
+}) {
   const [activeStop, setActiveStop] = useState({ stop: 'a place' });
   const [showCat, setShowCat] = useState(false);
 
@@ -44,6 +50,8 @@ function TripSuggestions({ stops, renderToast, directionsResponse }) {
         <SuggestionCategories
           place={activeStop}
           directionsResponse={directionsResponse}
+          itinerary={itinerary}
+          setItinerary={setItinerary}
         />
       )}
     </div>

@@ -2,8 +2,13 @@ import { useState } from 'react';
 import './SuggestionCategories.css';
 import SuggestedResults from '../SuggestedResults/SuggestedResults';
 
-function SuggestionCategories({ place, directionsResponse }) {
-  const [active, setActive] = useState('things to do');
+function SuggestionCategories({
+  place,
+  directionsResponse,
+  itinerary,
+  setItinerary
+}) {
+  const [active, setActive] = useState('tourist_attraction');
 
   const handleCategoryChange = (category) => {
     setActive(category);
@@ -13,8 +18,8 @@ function SuggestionCategories({ place, directionsResponse }) {
     <>
       <div className="suggestion-categories">
         <button
-          className={`category ${active === 'things to do' && 'active'}`}
-          onClick={() => handleCategoryChange('things to do')}
+          className={`category ${active === 'tourist_attraction' && 'active'}`}
+          onClick={() => handleCategoryChange('tourist_attraction')}
         >
           Things To Do
         </button>
@@ -25,20 +30,20 @@ function SuggestionCategories({ place, directionsResponse }) {
           Parking
         </button>
         <button
-          className={`category ${active === 'fuel stations' && 'active'}`}
-          onClick={() => handleCategoryChange('fuel stations')}
+          className={`category ${active === 'gas_station' && 'active'}`}
+          onClick={() => handleCategoryChange('gas_station')}
         >
           Fuel Stations
         </button>
         <button
-          className={`category ${active === 'restaurants' && 'active'}`}
-          onClick={() => handleCategoryChange('restaurants')}
+          className={`category ${active === 'restaurant' && 'active'}`}
+          onClick={() => handleCategoryChange('restaurant')}
         >
           Restaurants
         </button>
         <button
-          className={`category ${active === 'hotels' && 'active'}`}
-          onClick={() => handleCategoryChange('hotels')}
+          className={`category ${active === 'lodging' && 'active'}`}
+          onClick={() => handleCategoryChange('lodging')}
         >
           Hotels
         </button>
@@ -47,6 +52,8 @@ function SuggestionCategories({ place, directionsResponse }) {
         category={active}
         place={place}
         directionsResponse={directionsResponse}
+        itinerary={itinerary}
+        setItinerary={setItinerary}
       />
     </>
   );

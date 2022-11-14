@@ -137,6 +137,8 @@ function TripDetails() {
               stops={stops}
               renderToast={renderToast}
               directionsResponse={directionsResponse}
+              itinerary={itinerary}
+              setItinerary={setItinerary}
             />
             <TripItinerary
               itinerary={itinerary}
