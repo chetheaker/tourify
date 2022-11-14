@@ -79,7 +79,6 @@ const getTripUser = async (id) => {
 const inviteUser = async (id, email) => {
   const trip = await trips.findOne({ _id: ObjectId(id) });
   const inviter = await usersModel.findUserByEmail(trip.user);
-  if (!inviter) return { invitee: false };
   const notification = {
     trip: {
       name: trip.trip_name,
@@ -96,6 +95,23 @@ const inviteUser = async (id, email) => {
   return updateInviteeNotifications;
 };
 
+const acceptInvite = async (id, email) => {
+  // remove notif
+  await usersModel.removeNotification(id, email);
+
+  // add invitee to atendees arr
+  const updateTrip = await trips.updateOne(
+    { _id: ObjectId(id) },
+    { $push: { attendees: email } }
+  );
+  return updateTrip;
+};
+
+const declineInvite = async (id, email) => {
+  const removedNotif = await usersModel.removeNotification(id, email);
+  return removedNotif;
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
@@ -106,5 +122,7 @@ module.exports = {
   deleteOne,
   getAllTrips,
   getTripUser,
-  inviteUser
+  inviteUser,
+  acceptInvite,
+  declineInvite
 };

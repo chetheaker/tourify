@@ -17,6 +17,7 @@ import RouteDetails from './RouteDetails/RouteDetails';
 import DeleteTrip from './DeleteTrip/DeleteTrip';
 import UserContext from '../../Context/UserContext';
 import InviteFriend from './InviteFriend/InviteFriend';
+import Attendees from './Attendees/Attendees';
 
 function TripDetails() {
   const params = useParams();
@@ -137,6 +138,7 @@ function TripDetails() {
             ) : (
               <h1 className="trip-name">{trip.trip_name}</h1>
             )}
+            <Attendees attendees={trip.attendees} />
             {isAuth ? (
               <div className="invite">
                 <InviteFriend

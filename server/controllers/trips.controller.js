@@ -138,8 +138,6 @@ const inviteUser = async (req, res) => {
   try {
     if (req.user) {
       const { id, email } = req.params;
-      console.log('id', id);
-      console.log('email', email);
       const result = await tripsModel.inviteUser(id, email);
       res.send(result);
     } else {
@@ -147,6 +145,36 @@ const inviteUser = async (req, res) => {
     }
   } catch (e) {
     console.log('Error inviting user', e);
+  }
+};
+
+const acceptInvite = async (req, res) => {
+  try {
+    if (req.user) {
+      const { id } = req.params;
+      const { email } = req.user;
+      const accepted = await tripsModel.acceptInvite(id, email);
+      res.send(accepted);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('error accepting invite', e);
+  }
+};
+
+const declineInvite = async (req, res) => {
+  try {
+    if (req.user) {
+      const { id } = req.params;
+      const { email } = req.user;
+      const declined = await tripsModel.declineInvite(id, email);
+      res.send(declined);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('error declining invite', e);
   }
 };
 
@@ -160,5 +188,7 @@ module.exports = {
   updateTripItinerary,
   deleteTrip,
   getTripUser,
-  inviteUser
+  inviteUser,
+  acceptInvite,
+  declineInvite
 };

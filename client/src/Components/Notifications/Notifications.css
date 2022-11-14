@@ -1,3 +1,37 @@
+.notifications-container {
+  width: 500px;
+  display: flex;
+  gap: 10px;
+}
+
 .notif-header {
   font-weight: bold;
+}
+
+.notification {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.notification .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accept {
+  background-color: #2f8559 !important;
+  color: white;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+}
+
+.decline {
+  background-color: #c42f30 !important;
+  color: white;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
 }

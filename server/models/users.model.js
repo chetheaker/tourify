@@ -23,4 +23,26 @@ const deleteOne = async (id) => {
   return deleted;
 };
 
-module.exports = { postUser, findUserByEmail, findUserById, deleteOne };
+const removeNotification = async (id, email) => {
+  const user = await users.findOne({ email: email });
+  console.log('user with notification', user);
+  const { notifications } = user;
+  const newNotifs = notifications.filter((notif) => {
+    return notif.trip.id != id;
+  });
+  // user.notifications = newNotifs;
+  // console.log('new Notifcs', newNotifs);
+  const updatedNotifs = await users.updateOne(
+    { email: email },
+    { $set: { notifications: newNotifs } }
+  );
+  return updatedNotifs;
+};
+
+module.exports = {
+  postUser,
+  findUserByEmail,
+  findUserById,
+  deleteOne,
+  removeNotification
+};

@@ -109,3 +109,31 @@ export const inviteUser = async (id, email) => {
   const json = await res.json();
   return json;
 };
+
+export const acceptInvite = async (id) => {
+  const res = await fetch(baseUrl + '/trips/' + id + '/accept', {
+    method: 'PUT',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+
+  const json = await res.json();
+  return json;
+};
+
+export const declineInvite = async (id) => {
+  const res = await fetch(baseUrl + '/trips/' + id + '/decline', {
+    method: 'PUT',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+
+  const json = await res.json();
+  return json;
+};

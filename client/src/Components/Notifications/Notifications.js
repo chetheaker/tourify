@@ -6,19 +6,42 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
-  Button
+  PopoverCloseButton
 } from '@chakra-ui/react';
 import { useContext } from 'react';
 import UserContext from '../../Context/UserContext';
+import { acceptInvite, declineInvite } from '../../Utils/TripService';
 
 function Notifications() {
   const [activeUser, setActiveUser] = useContext(UserContext);
 
+  const handleAccept = async (notification) => {
+    const res = await acceptInvite(notification.trip.id);
+    if (res.modifiedCount) {
+      setActiveUser((prev) => ({
+        ...prev,
+        notifications: prev.notifications.filter(
+          (notif) => notif.trip.id !== notification.trip.id
+        )
+      }));
+    }
+  };
+
+  const handleDecline = async (notification) => {
+    const res = await declineInvite(notification.trip.id);
+    if (res.modifiedCount) {
+      setActiveUser((prev) => ({
+        ...prev,
+        notifications: prev.notifications.filter(
+          (notif) => notif.trip.id !== notification.trip.id
+        )
+      }));
+    }
+  };
+
   return (
-    <Popover>
+    <Popover variant="responsive" className="notifications-container" size="lg">
       <PopoverTrigger>
         <button>
           <IoMdNotifications color="#1FC28B" size="2em" className="icon" />
@@ -32,18 +55,40 @@ function Notifications() {
         <PopoverCloseButton />
         <PopoverBody>
           {activeUser.notifications.length ? (
-            activeUser.notifications.map((notification) => (
-              <h1>{notification.body}</h1>
+            activeUser.notifications.map((notification, index) => (
+              <div className="notification" key={index}>
+                <h1>
+                  {notification.inviter.firstName}{' '}
+                  {notification.inviter.lastName} has invited you to a road
+                  trip.
+                </h1>
+                <div className="buttons">
+                  <button
+                    className="accept"
+                    onClick={() => handleAccept(notification)}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className="decline"
+                    onClick={() => handleDecline(notification)}
+                  >
+                    Decline
+                  </button>
+                </div>
+              </div>
             ))
           ) : (
             <h1>You have no new notifications</h1>
           )}
         </PopoverBody>
-        <PopoverFooter>
+        {/* <PopoverFooter>
           {activeUser.notifications.length ? (
-            <button className="clear-notifications">Clear Notifications</button>
+            <button className="clear-notifications">
+              Clear All Notifications
+            </button>
           ) : null}
-        </PopoverFooter>
+        </PopoverFooter> */}
       </PopoverContent>
     </Popover>
   );

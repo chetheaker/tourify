@@ -32,10 +32,10 @@ function InviteFriend({ renderToast, tripId }) {
     console.log(inviteEmail);
     console.log(tripId);
     const res = await inviteUser(tripId, inviteEmail);
-    if (res.acknowledged) {
+    if (res.modifiedCount) {
       renderToast('Success', 'success', 'Invite sucessfully sent');
     }
-    if (res.invitee === false) {
+    if (res.modifiedCount === 0) {
       renderToast(
         'Error',
         'error',
