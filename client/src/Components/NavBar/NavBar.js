@@ -1,5 +1,6 @@
 import './NavBar.css';
 import { useNavigate } from 'react-router-dom';
+import Notifications from '../Notifications/Notifications';
 
 // ICON IMPORTS
 import Hamburger from 'hamburger-react'; // for mobile
@@ -30,9 +31,7 @@ function NavBar() {
           <button className="burger mobile-only" id="burger">
             <Hamburger toggled={isOpen} toggle={setIsOpen} color="#1FC28B" />
           </button>
-          <button>
-            <IoMdNotifications color="#1FC28B" size="2em" className="icon" />
-          </button>
+          <Notifications />
           <button onClick={() => navigate('/profile')}>
             <FaUser color="#1FC28B" size="1.5em" className="icon" />
           </button>

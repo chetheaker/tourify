@@ -39,7 +39,8 @@ const register = async (req, res) => {
       first_name: first_name,
       last_name: last_name,
       email: email,
-      password: hashedPassword
+      password: hashedPassword,
+      notifications: []
     };
     const user = await usersModel.postUser(newUser);
     res.status(201);
