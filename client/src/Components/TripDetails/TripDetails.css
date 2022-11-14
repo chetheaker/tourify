@@ -25,6 +25,14 @@
   position: relative;
 }
 
+.trip-details-header .invite {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  z-index: 3;
+}
+
 .trip-details-header .trip-name,
 .trip-details-header h1 {
   height: 40px;

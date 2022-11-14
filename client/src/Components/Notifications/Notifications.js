@@ -11,8 +11,12 @@ import {
   PopoverCloseButton,
   Button
 } from '@chakra-ui/react';
+import { useContext } from 'react';
+import UserContext from '../../Context/UserContext';
 
 function Notifications() {
+  const [activeUser, setActiveUser] = useContext(UserContext);
+
   return (
     <Popover>
       <PopoverTrigger>
@@ -22,13 +26,23 @@ function Notifications() {
       </PopoverTrigger>
       <PopoverContent border="1px" borderColor="#E2E8F0">
         <PopoverArrow />
-        <PopoverHeader>Notifications</PopoverHeader>
+        <PopoverHeader>
+          <span className="notif-header">Notifications</span>
+        </PopoverHeader>
         <PopoverCloseButton />
         <PopoverBody>
-          <Button colorScheme="blue">Button</Button>
+          {activeUser.notifications.length ? (
+            activeUser.notifications.map((notification) => (
+              <h1>{notification.body}</h1>
+            ))
+          ) : (
+            <h1>You have no new notifications</h1>
+          )}
         </PopoverBody>
         <PopoverFooter>
-          <button>Clear Notifications</button>
+          {activeUser.notifications.length ? (
+            <button className="clear-notifications">Clear Notifications</button>
+          ) : null}
         </PopoverFooter>
       </PopoverContent>
     </Popover>

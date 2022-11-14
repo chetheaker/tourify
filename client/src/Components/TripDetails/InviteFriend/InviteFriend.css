@@ -1,0 +1,13 @@
+.invite-header {
+  font-weight: bold;
+}
+
+.invite-body .invite-input {
+  width: 80%;
+  padding: 0 0.3rem;
+}
+
+.invite-body {
+  display: flex;
+  width: 100%;
+}

@@ -1,4 +1,5 @@
 const client = require('./db');
+const usersModel = require('./users.model');
 
 const trips = client.db('tourify').collection('trips');
 const users = client.db('tourify').collection('users');
@@ -75,6 +76,24 @@ const getTripUser = async (id) => {
   return user;
 };
 
+const inviteUser = async (id, email) => {
+  const trip = await trips.findOne({ _id: ObjectId(id) });
+  const inviter = await usersModel.findUserByEmail(trip.user);
+  if (!inviter) return { invitee: false };
+  const notification = {
+    trip: {
+      name: trip.trip_name,
+      id: trip._id,
+      start: trip.start_date,
+      end: trip.end_date
+    },
+    inviter: { firstName: inviter.first_name, lastName: inviter.last_name }
+  };
+  console.log('notification', notification);
+
+  // const updateInviteeNotifications = await users.updateOne({ email: email }, { $push: {notifications: }})
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
@@ -84,5 +103,6 @@ module.exports = {
   updateItinerary,
   deleteOne,
   getAllTrips,
-  getTripUser
+  getTripUser,
+  inviteUser
 };

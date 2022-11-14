@@ -16,6 +16,7 @@ import TripSuggestions from './TripSuggestions/TripSuggestions';
 import RouteDetails from './RouteDetails/RouteDetails';
 import DeleteTrip from './DeleteTrip/DeleteTrip';
 import UserContext from '../../Context/UserContext';
+import InviteFriend from './InviteFriend/InviteFriend';
 
 function TripDetails() {
   const params = useParams();
@@ -136,6 +137,11 @@ function TripDetails() {
             ) : (
               <h1 className="trip-name">{trip.trip_name}</h1>
             )}
+            {isAuth ? (
+              <div className="invite">
+                <InviteFriend renderToast={renderToast} />
+              </div>
+            ) : null}
             <div className="overlay"></div>
           </div>
           <div className="trip-details">

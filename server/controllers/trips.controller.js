@@ -47,7 +47,8 @@ const createTrip = async (req, res) => {
       const trip = {
         ...req.body,
         user: req.user.email,
-        checklists: []
+        checklists: [],
+        attendees: []
       };
       const result = await tripsModel.postTrip(trip);
       res.status(201);
@@ -133,6 +134,22 @@ const getTripUser = async (req, res) => {
   }
 };
 
+const inviteUser = async (req, res) => {
+  try {
+    if (req.user) {
+      const { id, email } = req.params;
+      console.log('id', id);
+      console.log('email', email);
+      const result = await tripsModel.inviteUser(id, email);
+      res.send({ notif: true });
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('Error inviting user', e);
+  }
+};
+
 module.exports = {
   getUserTrips,
   getExploreTrips,
@@ -142,5 +159,6 @@ module.exports = {
   updateTripRoute,
   updateTripItinerary,
   deleteTrip,
-  getTripUser
+  getTripUser,
+  inviteUser
 };

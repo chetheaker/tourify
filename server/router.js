@@ -21,5 +21,6 @@ router.put('/trips/:id/name', tripsController.updateTripName);
 router.put('/trips/:id/route', tripsController.updateTripRoute);
 router.put('/trips/:id/itinerary', tripsController.updateTripItinerary);
 router.delete('/trips/:id/delete', tripsController.deleteTrip);
+router.post('/trips/:id/invite/:email', tripsController.inviteUser);
 
 module.exports = router;
