@@ -7,7 +7,15 @@ import { updateTripRoute } from '../../../Utils/TripService';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useNav } from '../../../Hooks/useNav';
 
-function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
+function TripRoute({
+  tripStops,
+  stops,
+  setStops,
+  id,
+  renderToast,
+  setTrip,
+  isAuth
+}) {
   const [isEdit, setIsEdit] = useState(false);
   const routeRef = useNav('route');
 
@@ -74,7 +82,7 @@ function TripRoute({ tripStops, stops, setStops, id, renderToast, setTrip }) {
         </div>
       </div>
       <div className={`overlay ${isEdit ? 'hidden' : ''}`}></div>
-      <button className={`icon-container ${isEdit ? 'hidden' : ''}`}>
+      <button className={`icon-container ${isEdit || !isAuth ? 'hidden' : ''}`}>
         <FiEdit color="#fff" size="1.5em" onClick={() => setIsEdit(true)} />
       </button>
     </div>

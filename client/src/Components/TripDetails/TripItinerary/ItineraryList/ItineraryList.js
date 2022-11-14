@@ -1,7 +1,7 @@
 import './ItineraryList.css';
 import ItineraryDay from '../ItineraryDay/ItineraryDay';
 
-function ItineraryList({ itinerary, setItinerary, renderToast }) {
+function ItineraryList({ itinerary, setItinerary, renderToast, isAuth }) {
   return (
     <div className="itinerary-list">
       {itinerary.map((day, index) => (
@@ -12,6 +12,7 @@ function ItineraryList({ itinerary, setItinerary, renderToast }) {
           itinerary={itinerary}
           setItinerary={setItinerary}
           renderToast={renderToast}
+          isAuth={isAuth}
         />
       ))}
     </div>

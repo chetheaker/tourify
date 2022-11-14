@@ -8,7 +8,14 @@ import Places from './Places/Places';
 import Notes from './Notes/Notes';
 import Checklists from './Checklists/Checklists';
 
-function ItineraryDay({ day, index, itinerary, setItinerary, renderToast }) {
+function ItineraryDay({
+  day,
+  index,
+  itinerary,
+  setItinerary,
+  renderToast,
+  isAuth
+}) {
   const [places, setPlaces] = useState([]);
   const [notes, setNotes] = useState([]);
   const [checklists, setChecklists] = useState([]);
@@ -46,11 +53,16 @@ function ItineraryDay({ day, index, itinerary, setItinerary, renderToast }) {
         <div className="left">
           Day {index + 1}: {formatDate(day.date)}
         </div>
-        <div className="right">
-          <GrLocation size="1.3em" onClick={togglePlacesInput} />
-          <BiNote size="1.3em" onClick={toggleNotesInput} />
-          <MdOutlineChecklistRtl size="1.3em" onClick={toggleChecklistsInput} />
-        </div>
+        {isAuth ? (
+          <div className="right">
+            <GrLocation size="1.3em" onClick={togglePlacesInput} />
+            <BiNote size="1.3em" onClick={toggleNotesInput} />
+            <MdOutlineChecklistRtl
+              size="1.3em"
+              onClick={toggleChecklistsInput}
+            />
+          </div>
+        ) : null}
       </div>
       {places.length ||
       notes.length ||

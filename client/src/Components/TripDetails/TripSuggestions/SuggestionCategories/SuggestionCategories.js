@@ -6,7 +6,8 @@ function SuggestionCategories({
   place,
   directionsResponse,
   itinerary,
-  setItinerary
+  setItinerary,
+  isAuth
 }) {
   const [active, setActive] = useState('tourist_attraction');
 
@@ -54,6 +55,7 @@ function SuggestionCategories({
         directionsResponse={directionsResponse}
         itinerary={itinerary}
         setItinerary={setItinerary}
+        isAuth={isAuth}
       />
     </>
   );

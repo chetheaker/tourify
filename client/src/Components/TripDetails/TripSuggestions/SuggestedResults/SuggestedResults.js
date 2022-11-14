@@ -8,7 +8,8 @@ function SuggestedResults({
   category,
   directionsResponse,
   itinerary,
-  setItinerary
+  setItinerary,
+  isAuth
 }) {
   const [suggestedPlaces, setSuggestedPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -86,6 +87,7 @@ function SuggestedResults({
           place={place}
           itinerary={itinerary}
           setItinerary={setItinerary}
+          isAuth={isAuth}
         />
       ))}
     </div>

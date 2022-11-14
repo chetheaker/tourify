@@ -147,6 +147,7 @@ function TripDetails() {
                 id={trip._id}
                 renderToast={renderToast}
                 setTrip={setTrip}
+                isAuth={isAuth}
               />
               <RouteDetails directionsResponse={directionsResponse} />
               <TripSuggestions
@@ -155,6 +156,7 @@ function TripDetails() {
                 directionsResponse={directionsResponse}
                 itinerary={itinerary}
                 setItinerary={setItinerary}
+                isAuth={isAuth}
               />
               <TripItinerary
                 itinerary={itinerary}
@@ -162,10 +164,13 @@ function TripDetails() {
                 renderToast={renderToast}
                 setTrip={setTrip}
                 tripId={params.tripId}
+                isAuth={isAuth}
               />
             </NavContextProvider>
             {/* <TripChecklist /> */}
-            <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
+            {isAuth ? (
+              <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
+            ) : null}
           </div>
         </div>
         <Map directionsResponse={directionsResponse} />

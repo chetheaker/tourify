@@ -4,7 +4,13 @@ import { updateTripItinerary } from '../../../Utils/TripService';
 import { useEffect } from 'react';
 import { useNav } from '../../../Hooks/useNav';
 
-function TripItinerary({ itinerary, setItinerary, tripId, renderToast }) {
+function TripItinerary({
+  itinerary,
+  setItinerary,
+  tripId,
+  renderToast,
+  isAuth
+}) {
   const itineraryRef = useNav('itinerary');
   useEffect(() => {
     const updateItinerary = async () => {
@@ -20,6 +26,7 @@ function TripItinerary({ itinerary, setItinerary, tripId, renderToast }) {
           itinerary={itinerary}
           setItinerary={setItinerary}
           renderToast={renderToast}
+          isAuth={isAuth}
         />
       </div>
     </div>

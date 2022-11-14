@@ -10,7 +10,8 @@ function TripSuggestions({
   renderToast,
   directionsResponse,
   itinerary,
-  setItinerary
+  setItinerary,
+  isAuth
 }) {
   const [activeStop, setActiveStop] = useState({ stop: 'a place' });
   const [showCat, setShowCat] = useState(false);
@@ -54,6 +55,7 @@ function TripSuggestions({
           directionsResponse={directionsResponse}
           itinerary={itinerary}
           setItinerary={setItinerary}
+          isAuth={isAuth}
         />
       )}
     </div>
