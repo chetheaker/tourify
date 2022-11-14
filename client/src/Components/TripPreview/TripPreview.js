@@ -2,6 +2,7 @@ import './TripPreview.css';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../Utils/date';
+import { randomPhoto } from '../../Utils/image';
 
 function TripPreview({ trip }) {
   const navigate = useNavigate();
@@ -12,7 +13,11 @@ function TripPreview({ trip }) {
 
   return (
     <div className="trip-preview" onClick={handleTripDetails}>
-      <img className="preview-img" src="" alt="" />
+      <img
+        className="preview-img"
+        src={require(`../../media/${randomPhoto()}`)}
+        alt=""
+      />
       <div className="overlay"></div>
       <div className="bottom">
         <h1>{trip.trip_name}</h1>

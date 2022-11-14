@@ -9,6 +9,16 @@ export const getUser = async () => {
   return json;
 };
 
+export const getUserByTrip = async (id) => {
+  const user = await fetch(baseUrl + '/get-user/' + id, {
+    method: 'GET',
+    credentials: 'include'
+  });
+
+  const json = await user.json();
+  return json;
+};
+
 export const loginUser = async (user) => {
   const res = await fetch(baseUrl + '/login', {
     method: 'POST',

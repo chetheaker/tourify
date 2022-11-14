@@ -12,7 +12,7 @@
   width: 50%;
   height: 40%;
   border-radius: 20px;
-  background: url('../../../public/assets/backgrounds/bg1.jpeg');
+  background: url('../../media/bg1.jpeg');
   background-size: cover;
   position: relative;
 }

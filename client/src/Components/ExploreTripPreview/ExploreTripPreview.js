@@ -1,22 +1,29 @@
 import './ExploreTripPreview.css';
 import { formatDate } from '../../Utils/date';
 import { AiOutlineCalendar } from 'react-icons/ai';
+import { Avatar, Skeleton } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { randomPhoto } from '../../Utils/image';
+import { getUserByTrip } from '../../Utils/UserService';
 
 function ExploreTripPreview({ size, stopScroll, startScroll, trip }) {
-  const randomPhoto = () => {
-    const randIndex = Math.ceil(Math.random() * 4);
-    if (randIndex === 1) {
-      return '../../../public/assets/backgrounds/bg1.jpeg';
-    } else {
-      return `../../../public/assets/backgrounds/bg${randIndex}.jpg`;
-    }
-  };
+  const [tripUser, setTripUser] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log(randomPhoto());
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await getUserByTrip(trip._id);
+      setTripUser(user);
+      setIsLoading(false);
+    };
+    getUser();
+  }, [trip._id]);
 
   const handleTripDetails = () => {
     console.log('do omething');
   };
+
+  if (isLoading) return <Skeleton style={styles[size]} />;
 
   return (
     <div
@@ -24,22 +31,28 @@ function ExploreTripPreview({ size, stopScroll, startScroll, trip }) {
       style={styles[size]}
       onMouseEnter={stopScroll}
       onMouseLeave={startScroll}
+      onClick={handleTripDetails}
     >
-      <div className="trip-preview" onClick={handleTripDetails}>
-        <img className="preview-img" src="" alt="" />
-        <div className="overlay"></div>
-        <div className="bottom">
-          <h1>{trip.trip_name}</h1>
-          <h2>
-            📍 {trip.stops[0].stop} - {trip.stops[trip.stops.length - 1].stop}
-          </h2>
-        </div>
-        <div className="top">
-          <AiOutlineCalendar />
-          <h2>
-            {formatDate(trip.start_date)} - {formatDate(trip.end_date)}
-          </h2>
-        </div>
+      <img
+        className="preview-img"
+        width="320px"
+        height="320px"
+        src={require(`../../media/${randomPhoto()}`)}
+        alt=""
+      />
+      <div className="overlay"></div>
+      <div className="bottom">
+        <h1>{trip.trip_name}</h1>
+        <h2>
+          📍 {trip.stops[0].stop} - {trip.stops[trip.stops.length - 1].stop}
+        </h2>
+      </div>
+      <div className="top">
+        <AiOutlineCalendar />
+        <h2>
+          {formatDate(trip.start_date)} - {formatDate(trip.end_date)}
+        </h2>
+        <Avatar name={`${tripUser.first_name} ${tripUser.last_name}`} />
       </div>
     </div>
   );

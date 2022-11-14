@@ -13,6 +13,7 @@ router.delete('/user', usersController.deleteUser);
 
 // TRIP ROUTES
 router.get('/trips/user', tripsController.getUserTrips);
+router.get('/get-user/:id', tripsController.getTripUser);
 router.get('/trips/explore', tripsController.getExploreTrips);
 router.get('/trips/:id', tripsController.getUserTrip);
 router.post('/trips/create', tripsController.createTrip);

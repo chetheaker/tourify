@@ -1,10 +1,55 @@
 .explore-trip-preview {
   /* try to make width responsive to the columns (If there is too much space make them fill the space) */
   width: 320px;
-  background-color: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column-reverse;
+  justify-content: space-between;
   border-radius: 20px;
   cursor: pointer;
+  position: relative;
+  color: white;
+}
+
+.explore-trip-preview .overlay {
+  background-color: #11112b;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  border-radius: inherit;
+  position: absolute;
+}
+
+.explore-trip-preview .preview-img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.explore-trip-preview .bottom {
+  z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.explore-trip-preview .bottom h1 {
+  margin: 0.2rem 0 1rem 1rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.explore-trip-preview .bottom h2 {
+  margin: 0 1rem;
+  font-size: 1rem;
+}
+
+.explore-trip-preview .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  gap: 5px;
+  z-index: 1;
 }

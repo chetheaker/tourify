@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import ExploreTripPreview from '../ExploreTripPreview/ExploreTripPreview';
 import './ExploreTripsContainer.css';
 import { getExploreTrips } from '../../Utils/TripService';
+import Loading from '../Loading/Loading';
 
 function ExploreTripsContainer() {
   const [scrollID, setScrollID] = useState(null);
   const [exploreTrips, setExploreTrips] = useState([]);
   const containerRef = useRef();
+  const [isLoading, setIsLoading] = useState(true);
 
   const startScroll = () => {
     const id = setInterval(() => {
@@ -23,6 +25,7 @@ function ExploreTripsContainer() {
   };
 
   useEffect(() => {
+    console.log('running');
     startScroll();
 
     return () => stopScroll();
@@ -33,6 +36,7 @@ function ExploreTripsContainer() {
     const fetchTrips = async () => {
       const trips = await getExploreTrips();
       setExploreTrips(trips);
+      setIsLoading(false);
     };
     fetchTrips();
   }, []);
@@ -43,6 +47,8 @@ function ExploreTripsContainer() {
     else if (index === 1) return 'medium';
     else return 'small';
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="explore-trips-container" ref={containerRef}>

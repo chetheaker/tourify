@@ -1,6 +1,7 @@
 const client = require('./db');
 
 const trips = client.db('tourify').collection('trips');
+const users = client.db('tourify').collection('users');
 
 const { ObjectId } = require('mongodb');
 
@@ -65,6 +66,15 @@ const getAllTrips = async () => {
   return exploreTrips;
 };
 
+const getTripUser = async (id) => {
+  const trip = await trips.findOne({ _id: ObjectId(id) });
+  const email = trip.user;
+  console.log('email', email);
+  const user = await users.findOne({ email: email });
+  console.log('user', user);
+  return user;
+};
+
 module.exports = {
   postTrip,
   findTripsByEmail,
@@ -73,5 +83,6 @@ module.exports = {
   updateRoute,
   updateItinerary,
   deleteOne,
-  getAllTrips
+  getAllTrips,
+  getTripUser
 };

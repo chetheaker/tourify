@@ -13,7 +13,7 @@
 }
 
 .image {
-  background: url('../../../public/assets/backgrounds/bg1.jpeg');
+  background: url('../../media/bg1.jpeg');
   height: 95%;
   width: 63%;
   background-size: cover;
