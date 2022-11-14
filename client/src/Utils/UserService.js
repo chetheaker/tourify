@@ -51,3 +51,16 @@ export const logoutUser = async () => {
   const json = await res.json();
   return json;
 };
+
+export const deleteUser = async () => {
+  const res = await fetch(baseUrl + '/user', {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+  const json = await res.json();
+  return json;
+};

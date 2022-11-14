@@ -85,9 +85,25 @@ const get = async (req, res) => {
 //   }
 // };
 
+const deleteUser = async (req, res) => {
+  try {
+    if (req.user) {
+      const user = await usersModel.findUserByEmail(req.user.email);
+      const id = user._id;
+      const deleted = await usersModel.deleteOne(id);
+      res.send(deleted);
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('Error deleteUser in controller', e);
+  }
+};
+
 module.exports = {
   register,
   login,
   get,
-  logout
+  logout,
+  deleteUser
 };

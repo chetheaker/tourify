@@ -1,5 +1,7 @@
 const client = require('./db');
 
+const { ObjectId } = require('mongodb');
+
 const users = client.db('tourify').collection('users');
 
 const postUser = (user) => {
@@ -16,4 +18,9 @@ const findUserById = async (id) => {
   return user;
 };
 
-module.exports = { postUser, findUserByEmail, findUserById };
+const deleteOne = async (id) => {
+  const deleted = await users.deleteOne({ _id: ObjectId(id) });
+  return deleted;
+};
+
+module.exports = { postUser, findUserByEmail, findUserById, deleteOne };

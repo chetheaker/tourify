@@ -9,7 +9,7 @@ router.get('/user', usersController.get);
 router.post('/login', usersController.login);
 router.post('/register', usersController.register);
 router.post('/logout', usersController.logout);
-// router.delete('/user', usersController.deleteUser); ==> not made yet
+router.delete('/user', usersController.deleteUser);
 
 // TRIP ROUTES
 router.get('/trips/user', tripsController.getUserTrips);

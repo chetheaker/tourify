@@ -10,6 +10,7 @@ import {
   Button,
   useDisclosure
 } from '@chakra-ui/react';
+import { deleteUser } from '../../../Utils/UserService';
 
 function DeleteProfile({ id, handleLogOut }) {
   const cancelRef = useRef();
@@ -17,8 +18,12 @@ function DeleteProfile({ id, handleLogOut }) {
 
   const handleProfileDelete = async () => {
     console.log(id);
-    // await handleLogOut();
-    onClose();
+    const res = await deleteUser();
+    console.log(res);
+    if (res.acknowledged) {
+      onClose();
+      await handleLogOut();
+    }
   };
 
   return (
