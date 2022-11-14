@@ -66,7 +66,7 @@ function SignIn({ rightActive, setRightActive }) {
       renderErrorToast('Email cannot be blank');
       return;
     }
-    if (password === '') {
+    if (e.target.password.value === '') {
       setPasswordError(true);
       renderErrorToast('Password cannot be blank');
       return;
@@ -74,7 +74,7 @@ function SignIn({ rightActive, setRightActive }) {
 
     const data = {
       email: email,
-      password: password
+      password: e.target.password.value
     };
     const res = await loginUser(data);
     console.log('login res', res);
