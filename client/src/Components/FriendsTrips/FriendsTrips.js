@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './FriendsTrips.css';
 import { getFriendTrips } from '../../Utils/TripService';
 import ExploreTripPreview from '../ExploreTripPreview/ExploreTripPreview';
+import UserContext from '../../Context/UserContext';
 
 function FriendsTrips() {
   const [friendTrips, setFriendTrips] = useState([]);
+  const [activeUser] = useContext(UserContext);
 
   useEffect(() => {
     const getTrips = async () => {
@@ -13,7 +15,7 @@ function FriendsTrips() {
       setFriendTrips(trips);
     };
     getTrips();
-  }, []);
+  }, [activeUser]);
   return (
     <div className="friends-trips">
       <div className="heading">
