@@ -25,7 +25,6 @@ function ExploreTripsContainer() {
   };
 
   useEffect(() => {
-    console.log('running');
     startScroll();
 
     return () => stopScroll();
@@ -41,13 +40,6 @@ function ExploreTripsContainer() {
     fetchTrips();
   }, []);
 
-  const getRandomSize = () => {
-    const index = Math.floor(Math.random() * 3);
-    if (index === 2) return 'large';
-    else if (index === 1) return 'medium';
-    else return 'small';
-  };
-
   if (isLoading) return <Loading />;
 
   return (
@@ -55,7 +47,6 @@ function ExploreTripsContainer() {
       {exploreTrips.map((trip, index) => (
         <ExploreTripPreview
           key={index}
-          size={getRandomSize()}
           trip={trip}
           stopScroll={stopScroll}
           startScroll={startScroll}

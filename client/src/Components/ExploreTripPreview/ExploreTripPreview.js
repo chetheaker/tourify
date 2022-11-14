@@ -6,9 +6,18 @@ import { useEffect, useState } from 'react';
 import { randomPhoto } from '../../Utils/image';
 import { getUserByTrip } from '../../Utils/UserService';
 
-function ExploreTripPreview({ size, stopScroll, startScroll, trip }) {
+function ExploreTripPreview({ stopScroll, startScroll, trip }) {
   const [tripUser, setTripUser] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [size, setSize] = useState(null);
+  const [image, setImage] = useState(null);
+
+  const getRandomSize = () => {
+    const index = Math.floor(Math.random() * 3);
+    if (index === 2) return 'large';
+    else if (index === 1) return 'medium';
+    else return 'small';
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -16,11 +25,13 @@ function ExploreTripPreview({ size, stopScroll, startScroll, trip }) {
       setTripUser(user);
       setIsLoading(false);
     };
+    setSize(getRandomSize());
+    setImage(randomPhoto());
     getUser();
   }, [trip._id]);
 
   const handleTripDetails = () => {
-    console.log('do omething');
+    console.log('do something');
   };
 
   if (isLoading) return <Skeleton style={styles[size]} />;
@@ -37,7 +48,7 @@ function ExploreTripPreview({ size, stopScroll, startScroll, trip }) {
         className="preview-img"
         width="320px"
         height="320px"
-        src={require(`../../media/${randomPhoto()}`)}
+        src={require(`../../media/${image}`)}
         alt=""
       />
       <div className="overlay"></div>
