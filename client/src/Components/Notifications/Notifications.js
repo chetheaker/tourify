@@ -58,7 +58,7 @@ function Notifications() {
         </PopoverHeader>
         <PopoverCloseButton />
         <PopoverBody>
-          {activeUser.notifications.length ? (
+          {activeUser?.notifications?.length ? (
             activeUser.notifications.map((notification, index) => (
               <div className="notification" key={index}>
                 <h1>
@@ -86,13 +86,6 @@ function Notifications() {
             <h1>You have no new notifications</h1>
           )}
         </PopoverBody>
-        {/* <PopoverFooter>
-          {activeUser.notifications.length ? (
-            <button className="clear-notifications">
-              Clear All Notifications
-            </button>
-          ) : null}
-        </PopoverFooter> */}
       </PopoverContent>
     </Popover>
   );
