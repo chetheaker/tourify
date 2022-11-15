@@ -11,7 +11,6 @@ function FriendsTrips() {
   useEffect(() => {
     const getTrips = async () => {
       const trips = await getFriendTrips();
-      console.log(trips);
       setFriendTrips(trips);
     };
     getTrips();

@@ -1,20 +1,40 @@
 import './Dashboard.css';
 
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
 import TripsContainer from '../TripsContainer/TripsContainer';
 import FriendsTrips from '../FriendsTrips/FriendsTrips';
 import NavBar from '../NavBar/NavBar';
 import ProUpgrade from '../ProUpgrade/ProUpgrade';
 import ProDeals from '../ProDeals/ProDeals';
+import { getUser } from '../../Utils/UserService';
+import Loading from '../Loading/Loading';
 
 // TODO check frontedendjoe dashboard layouts
 function Dashboard() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [activeUser, setActiveUser] = useContext(UserContext);
+  const [searchParams] = useSearchParams();
+  const session_id = searchParams.get('session_id');
   const navigate = useNavigate();
-  const [activeUser] = useContext(UserContext);
+
+  useEffect(() => {
+    if (!session_id) {
+      setIsLoading(false);
+      return;
+    }
+    const getUserAfterPurchase = async () => {
+      const user = await getUser();
+      setActiveUser(user);
+      setIsLoading(false);
+    };
+    getUserAfterPurchase();
+  }, [session_id, setActiveUser]);
 
   const planTrip = () => navigate('/plan');
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="container">

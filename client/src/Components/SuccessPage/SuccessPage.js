@@ -79,7 +79,10 @@ function SuccessPage() {
         </div>
         <h1 className="success">Success!</h1>
         <h2 className="tag">Congratulations, you are now a pro member!</h2>
-        <Button colorScheme="green" onClick={() => navigate('/dashboard')}>
+        <Button
+          colorScheme="green"
+          onClick={() => navigate(`/dashboard?session_id=${session_id}`)}
+        >
           <BsFillArrowRightCircleFill />
           <span>Go to Dashboard</span>
         </Button>
