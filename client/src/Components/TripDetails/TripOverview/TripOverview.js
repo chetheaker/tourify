@@ -23,13 +23,16 @@ function TripOverview({ trip, directionsResponse }) {
     const times = directionsResponse.routes[0].legs.map((leg) =>
       leg.duration.text.split(' ')
     );
+    let days = 0;
     let hours = 0;
     let mins = 0;
     times.forEach((time) => {
       if (time[1].includes('hour')) hours += +time[0];
       else if (time[1].includes('min')) mins += +time[0];
+      else if (time[1].includes('day')) days += +time[0];
 
       if (time[3]?.includes('min')) mins += +time[2];
+      else if (time[3]?.includes('hour')) hours += +time[2];
     });
 
     while (mins >= 60) {
@@ -41,10 +44,20 @@ function TripOverview({ trip, directionsResponse }) {
     hours === 1 ? (resultHrs = hours + ' hr') : (resultHrs = hours + ' hrs');
     let resultMins;
     mins === 1 ? (resultMins = mins + ' min') : (resultMins = mins + ' mins');
-
-    if (hours < 1) return `${mins} mins`;
-    if (mins === 0) return resultHrs;
-    return `${resultHrs} ${resultMins}`;
+    let resultDays;
+    days === 1 ? (resultDays = days + ' day') : (resultDays = days + ' days');
+    if (days < 1) {
+      if (hours < 1) return `${mins} mins`;
+      if (mins === 0) return resultHrs;
+      return `${resultHrs} ${resultMins}`;
+    }
+    if (hours === 0 && mins === 0) {
+      return resultDays;
+    }
+    if (mins >= 30) {
+      resultHrs = hours + 1 + ' hrs';
+    }
+    return `${resultDays} ${resultHrs}`;
   };
 
   const getTotalDays = () => {

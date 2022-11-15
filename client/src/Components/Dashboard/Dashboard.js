@@ -23,17 +23,19 @@ function Dashboard() {
           <FriendsTrips />
         </div>
         <div className="trips">
-          <div className="header">
-            <div className="left">
-              <h1>Your Trips 🌎</h1>
+          <div className="my-trips">
+            <div className="header">
+              <div className="left">
+                <h1>Your Trips 🌎</h1>
+              </div>
+              <div className="right">
+                <button onClick={planTrip}>
+                  <span>Create Trip</span>
+                </button>
+              </div>
             </div>
-            <div className="right">
-              <button onClick={planTrip}>
-                <span>Create Trip</span>
-              </button>
-            </div>
+            <TripsContainer planTrip={planTrip} />
           </div>
-          <TripsContainer planTrip={planTrip} />
         </div>
       </div>
     </div>

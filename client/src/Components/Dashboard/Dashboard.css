@@ -23,9 +23,15 @@
 }
 
 .trips {
-  width: 45%;
-  margin: 5% 2.5%;
-  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-trips {
+  width: 90%;
+  height: 95%;
   background-color: white;
   border-radius: 25px;
   padding: 1rem;
