@@ -8,7 +8,7 @@ export const createCheckoutSession = async () => {
       'Content-type': 'application/json'
     },
     body: JSON.stringify({
-      items: [{ id: 1, quantity: 1 }]
+      items: [{ id: 'price_1M4MZeGsIQQOt2gpVjyaZI0N', quantity: 1 }]
     })
   });
 
