@@ -40,7 +40,8 @@ const register = async (req, res) => {
       last_name: last_name,
       email: email,
       password: hashedPassword,
-      notifications: []
+      notifications: [],
+      account_type: 'basic'
     };
     const user = await usersModel.postUser(newUser);
     res.status(201);
