@@ -9,6 +9,14 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(12.5px);
   -webkit-backdrop-filter: blur(12.5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+}
+
+.pro-upgrade:hover {
+  transform: scale(1.08);
 }
 
 .pro-upgrade .header {
@@ -45,4 +53,44 @@
   background-size: cover;
   background-position: center;
   margin: 0;
+}
+
+.pro-upgrade .body {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.pro-upgrade .body .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pro-upgrade .body .feature {
+  display: flex;
+  align-items: center;
+}
+
+.pro-upgrade .body .left {
+  width: 50%;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
+  border-radius: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pro-upgrade .body .left .price {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5rem;
+  margin: -10px 0;
+  padding: -10px 0;
 }

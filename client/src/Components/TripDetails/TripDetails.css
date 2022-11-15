@@ -11,6 +11,7 @@
   width: 60%;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 .details .trip-details-header {
