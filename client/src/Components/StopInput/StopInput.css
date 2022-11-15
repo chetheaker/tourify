@@ -3,7 +3,7 @@
 }
 
 .editable .stop-input-container {
-  display: flex;
+  display: flex !important;
   align-items: center;
   width: 100%;
   border-radius: 15px;
