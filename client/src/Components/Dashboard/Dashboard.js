@@ -7,6 +7,7 @@ import TripsContainer from '../TripsContainer/TripsContainer';
 import FriendsTrips from '../FriendsTrips/FriendsTrips';
 import NavBar from '../NavBar/NavBar';
 import ProUpgrade from '../ProUpgrade/ProUpgrade';
+import ProDeals from '../ProDeals/ProDeals';
 
 // TODO check frontedendjoe dashboard layouts
 function Dashboard() {
@@ -24,7 +25,11 @@ function Dashboard() {
             <h1 className="welcome">
               Welcome back, {activeUser.first_name}! 🙌
             </h1>
-            <ProUpgrade />
+            {activeUser.account_type === 'basic' ? (
+              <ProUpgrade />
+            ) : (
+              <ProDeals />
+            )}
             <FriendsTrips />
           </div>
         </div>
