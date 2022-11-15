@@ -6,7 +6,6 @@ import UserContext from '../../Context/UserContext';
 import TripsContainer from '../TripsContainer/TripsContainer';
 import FriendsTrips from '../FriendsTrips/FriendsTrips';
 import NavBar from '../NavBar/NavBar';
-import { Button } from '@chakra-ui/react';
 import ProUpgrade from '../ProUpgrade/ProUpgrade';
 
 // TODO check frontedendjoe dashboard layouts
