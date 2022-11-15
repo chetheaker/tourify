@@ -4,6 +4,8 @@ const usersModel = require('./users.model');
 const trips = client.db('tourify').collection('trips');
 const users = client.db('tourify').collection('users');
 
+const { ObjectId } = require('mongodb');
+
 const findTripsByEmail = async (email) => {
   return await trips.find({ user: email }).toArray();
 };
@@ -14,7 +16,7 @@ const postTrip = async (trip) => {
 
 const findTripById = async (id) => {
   try {
-    const trip = await trips.findOne({ _id: id });
+    const trip = await trips.findOne({ _id: ObjectId(id) });
     return trip;
   } catch (e) {
     console.log('error findTripById', e);
@@ -25,7 +27,7 @@ const updateName = (id, name) => {
   try {
     const trip = trips.updateOne(
       {
-        _id: id
+        _id: ObjectId(id)
       },
       { $set: { trip_name: name } }
     );
@@ -37,7 +39,10 @@ const updateName = (id, name) => {
 
 const updateRoute = (id, route) => {
   try {
-    const update = trips.updateOne({ _id: id }, { $set: { stops: route } });
+    const update = trips.updateOne(
+      { _id: ObjectId(id) },
+      { $set: { stops: route } }
+    );
     return update;
   } catch (e) {
     console.log('Error updating route in model', e);
@@ -46,14 +51,14 @@ const updateRoute = (id, route) => {
 
 const updateItinerary = async (id, itinerary) => {
   const update = await trips.updateOne(
-    { _id: id },
+    { _id: ObjectId(id) },
     { $set: { itinerary: itinerary } }
   );
   return update;
 };
 
 const deleteOne = async (id) => {
-  const deleted = await trips.deleteOne({ _id: id });
+  const deleted = await trips.deleteOne({ _id: ObjectId(id) });
   return deleted;
 };
 
@@ -63,16 +68,14 @@ const getAllTrips = async () => {
 };
 
 const getTripUser = async (id) => {
-  const trip = await trips.findOne({ _id: id });
-  console.log(id);
-  console.log(trip);
+  const trip = await trips.findOne({ _id: ObjectId(id) });
   const email = trip.user;
   const user = await users.findOne({ email: email });
   return user;
 };
 
 const inviteUser = async (id, email) => {
-  const trip = await trips.findOne({ _id: id });
+  const trip = await trips.findOne({ _id: ObjectId(id) });
   const inviter = await usersModel.findUserByEmail(trip.user);
   const notification = {
     trip: {
@@ -96,7 +99,7 @@ const acceptInvite = async (id, email) => {
 
   // add invitee to atendees arr
   const updateTrip = await trips.updateOne(
-    { _id: id },
+    { _id: ObjectId(id) },
     { $push: { attendees: email } }
   );
   return updateTrip;

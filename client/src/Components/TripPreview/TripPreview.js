@@ -8,6 +8,7 @@ function TripPreview({ trip }) {
   const navigate = useNavigate();
 
   const handleTripDetails = () => {
+    console.log(trip._id);
     navigate('/trips/' + trip._id);
   };
 
