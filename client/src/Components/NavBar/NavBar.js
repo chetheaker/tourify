@@ -17,7 +17,10 @@ function NavBar() {
     <>
       <nav className="navbar">
         <div className="left">
-          <div className="logo"></div>
+          <button
+            className="logo"
+            onClick={() => navigate('/dashboard')}
+          ></button>
           <button onClick={() => navigate('/dashboard')}>
             <FaHome color="#1FC28B" size="2em" className="icon" />
             <span>Dashboard</span>
