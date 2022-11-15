@@ -20,10 +20,6 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!session_id) {
-      setIsLoading(false);
-      return;
-    }
     const getUserAfterPurchase = async () => {
       const user = await getUser();
       setActiveUser(user);
