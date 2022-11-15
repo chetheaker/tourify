@@ -29,8 +29,6 @@ const removeNotification = async (id, email) => {
   const newNotifs = notifications.filter((notif) => {
     return notif.trip.id != id;
   });
-  // user.notifications = newNotifs;
-  // console.log('new Notifcs', newNotifs);
   const updatedNotifs = await users.updateOne(
     { email: email },
     { $set: { notifications: newNotifs } }
