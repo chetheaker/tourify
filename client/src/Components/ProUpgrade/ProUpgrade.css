@@ -1,0 +1,48 @@
+.stats-container .pro-upgrade {
+  width: 90%;
+  margin: 0 5%;
+  height: 25%;
+  border-radius: 1rem;
+  padding: 1rem;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
+}
+
+.pro-upgrade .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pro-upgrade .header .left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 50%;
+}
+
+.pro-upgrade .header .right {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.pro-upgrade .header h1 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-family: 'Pacifico', cursive;
+  text-transform: lowercase;
+}
+
+.pro-upgrade .logo {
+  background: url('../../../public/assets/icons/tourify-1FC28B-white.png');
+  height: 50px;
+  width: 100px;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+}

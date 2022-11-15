@@ -6,6 +6,8 @@ import UserContext from '../../Context/UserContext';
 import TripsContainer from '../TripsContainer/TripsContainer';
 import FriendsTrips from '../FriendsTrips/FriendsTrips';
 import NavBar from '../NavBar/NavBar';
+import { Button } from '@chakra-ui/react';
+import ProUpgrade from '../ProUpgrade/ProUpgrade';
 
 // TODO check frontedendjoe dashboard layouts
 function Dashboard() {
@@ -23,7 +25,7 @@ function Dashboard() {
             <h1 className="welcome">
               Welcome back, {activeUser.first_name}! 🙌
             </h1>
-            <div className="pro-upgrade"></div>
+            <ProUpgrade />
             <FriendsTrips />
           </div>
         </div>
