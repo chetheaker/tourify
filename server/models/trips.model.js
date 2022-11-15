@@ -70,9 +70,7 @@ const getAllTrips = async () => {
 const getTripUser = async (id) => {
   const trip = await trips.findOne({ _id: ObjectId(id) });
   const email = trip.user;
-  console.log('email', email);
   const user = await users.findOne({ email: email });
-  console.log('user', user);
   return user;
 };
 
