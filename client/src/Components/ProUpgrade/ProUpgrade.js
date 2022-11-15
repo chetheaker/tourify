@@ -1,8 +1,15 @@
 import './ProUpgrade.css';
 import { Button } from '@chakra-ui/react';
 import { TiTick } from 'react-icons/ti';
+import { createCheckoutSession } from '../../Utils/CheckoutService';
 
 function ProUpgrade() {
+  const handleUpgrade = async () => {
+    const res = await createCheckoutSession();
+    const { url } = res;
+    window.location = url;
+  };
+
   return (
     <div className="pro-upgrade">
       <div className="header">
@@ -11,7 +18,9 @@ function ProUpgrade() {
           <h1>PRO</h1>
         </div>
         <div className="right">
-          <Button colorScheme="green">UPGRADE</Button>
+          <Button colorScheme="green" onClick={handleUpgrade}>
+            UPGRADE
+          </Button>
         </div>
       </div>
       <div className="body">

@@ -12,12 +12,6 @@ export const createCheckoutSession = async () => {
     })
   });
 
-  if (res.ok) {
-    const json = await res.json();
-    const { url } = json;
-    window.location = url;
-  } else {
-    const json = await res.json();
-    return json;
-  }
+  const json = await res.json();
+  return json;
 };
