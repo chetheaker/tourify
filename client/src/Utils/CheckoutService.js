@@ -11,6 +11,7 @@ export const createCheckoutSession = async () => {
       items: [{ id: 'price_1M4MZeGsIQQOt2gpVjyaZI0N', quantity: 1 }]
     })
   });
+  // priceID is currently in test mode
 
   const json = await res.json();
   return json;

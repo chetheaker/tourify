@@ -35,7 +35,7 @@ function ProUpgrade() {
           </div>
           <div className="feature">
             <TiTick size="1.5em" color="#1FC28B" />
-            <h1>Customised Suggestions</h1>
+            <h1>Context For You</h1>
           </div>
           <div className="feature">
             <TiTick size="1.5em" color="#1FC28B" />

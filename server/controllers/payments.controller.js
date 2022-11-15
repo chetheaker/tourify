@@ -1,9 +1,7 @@
 require('dotenv').config();
 const usersModel = require('../models/users.model');
 
-const stripe = require('stripe')(
-  'sk_test_51M4LnHGsIQQOt2gpj414ybQB2ZUJpucP2DLHw6wAkdEZuE2zaMKQCKwahXjeWO07rI0R93i6vbnQ22ZBPDk56hSI00qsQh6Vrb'
-);
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 
 const checkout = async (req, res) => {
   try {

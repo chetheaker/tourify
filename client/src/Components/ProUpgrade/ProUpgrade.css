@@ -65,12 +65,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
+  gap: 7px;
 }
 
 .pro-upgrade .body .feature {
   display: flex;
   align-items: center;
+  font-size: 1rem;
 }
 
 .pro-upgrade .body .left {
