@@ -56,6 +56,7 @@ const getUserTrip = async (req, res) => {
 
 const createTrip = async (req, res) => {
   try {
+    console.log('user', req.user);
     if (req.user) {
       const trip = {
         ...req.body,
