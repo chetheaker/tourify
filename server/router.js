@@ -1,6 +1,7 @@
 const express = require('express');
 const usersController = require('./controllers/users.controller');
 const tripsController = require('./controllers/trips.controller');
+const paymentsController = require('./controllers/payments.controller');
 
 const router = express.Router();
 
