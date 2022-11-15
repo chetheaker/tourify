@@ -46,7 +46,7 @@ function Notifications() {
       <PopoverTrigger>
         <button className="notif-btn">
           <IoMdNotifications color="#1FC28B" size="2em" className="icon" />
-          {activeUser.notifications.length ? (
+          {activeUser?.notifications?.length ? (
             <GoPrimitiveDot className="notification-alert" />
           ) : null}
         </button>
