@@ -1,6 +1,12 @@
-const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
-const client = new MongoClient('mongodb://127.0.0.1:27017/');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+
+const client = new MongoClient(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1
+});
 
 (async function () {
   try {
