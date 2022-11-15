@@ -32,5 +32,6 @@ router.put('/trips/:id/decline', tripsController.declineInvite);
 
 // PAYMENTS
 router.post('/checkout', paymentsController.checkout);
+router.post('/success/auth', paymentsController.authenticatePurchase);
 
 module.exports = router;

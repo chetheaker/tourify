@@ -25,7 +25,6 @@ const deleteOne = async (id) => {
 
 const removeNotification = async (id, email) => {
   const user = await users.findOne({ email: email });
-  console.log('user with notification', user);
   const { notifications } = user;
   const newNotifs = notifications.filter((notif) => {
     return notif.trip.id != id;
@@ -39,10 +38,19 @@ const removeNotification = async (id, email) => {
   return updatedNotifs;
 };
 
+const upgradeAccountToPro = async (email) => {
+  const upgraded = await users.updateOne(
+    { email: email },
+    { $set: { account_type: 'pro' } }
+  );
+  return upgraded;
+};
+
 module.exports = {
   postUser,
   findUserByEmail,
   findUserById,
   deleteOne,
-  removeNotification
+  removeNotification,
+  upgradeAccountToPro
 };

@@ -1,4 +1,6 @@
 require('dotenv').config();
+const usersModel = require('../models/users.model');
+
 const stripe = require('stripe')(
   'sk_test_51M4LnHGsIQQOt2gpj414ybQB2ZUJpucP2DLHw6wAkdEZuE2zaMKQCKwahXjeWO07rI0R93i6vbnQ22ZBPDk56hSI00qsQh6Vrb'
 );
@@ -29,4 +31,24 @@ const checkout = async (req, res) => {
   }
 };
 
-module.exports = { checkout };
+const authenticatePurchase = async (req, res) => {
+  try {
+    if (req.user) {
+      const { session_id } = req.body;
+      const session = await stripe.checkout.sessions.retrieve(session_id);
+      if (session.payment_status !== 'paid') {
+        res.send({ authenticated: false });
+        return;
+      }
+      await usersModel.upgradeAccountToPro(req.user.email);
+      res.send({ authenticated: true });
+    } else {
+      res.send({ user: false });
+    }
+  } catch (e) {
+    console.log('Error authenticating purchase', e);
+    res.send({ authenticated: false });
+  }
+};
+
+module.exports = { checkout, authenticatePurchase };

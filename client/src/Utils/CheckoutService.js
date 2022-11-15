@@ -15,3 +15,19 @@ export const createCheckoutSession = async () => {
   const json = await res.json();
   return json;
 };
+
+export const authenticateCheckoutSession = async (session_id) => {
+  const res = await fetch(baseUrl + '/success/auth', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      session_id: session_id
+    })
+  });
+
+  const json = await res.json();
+  return json;
+};
