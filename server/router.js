@@ -29,4 +29,7 @@ router.post('/trips/:id/invite/:email', tripsController.inviteUser);
 router.put('/trips/:id/accept', tripsController.acceptInvite);
 router.put('/trips/:id/decline', tripsController.declineInvite);
 
+// PAYMENTS
+router.post('/checkout', paymentsController.checkout);
+
 module.exports = router;
