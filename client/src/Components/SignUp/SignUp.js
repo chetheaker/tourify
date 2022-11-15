@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
 import { registerUser, loginUser } from '../../Utils/UserService';
 
-// TODO Clean up code ==> refactor  inputs into components etc
-// TODO Make custom hook to show error toast
 function SignUp({ setRightActive, rightActive }) {
   const navigate = useNavigate();
 

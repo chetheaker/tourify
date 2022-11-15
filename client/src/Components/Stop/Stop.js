@@ -6,7 +6,6 @@ import { Draggable } from 'react-beautiful-dnd';
 function Stop({ setStops, stop, isEdit, index, stops, renderToast }) {
   const deleteStop = () => {
     if (stops.length === 2) {
-      // toast
       renderToast('Error', 'error', 'Trip must have at least 2 stops');
       return;
     }

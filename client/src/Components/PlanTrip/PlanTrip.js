@@ -8,15 +8,23 @@ import './PlanTrip.css';
 import { useRef } from 'react';
 import { createNewTrip } from '../../Utils/TripService';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
 
 function PlanTrip() {
   const dateRef = useRef();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const formatDates = () => {
     if (!dateRef.current.value) {
-      // send error toast
-      alert('dates cannot be empty');
+      toast({
+        position: 'top',
+        title: 'Error',
+        description: 'Dates cannot be empty',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      });
       return;
     }
 
@@ -67,8 +75,14 @@ function PlanTrip() {
     const end = e.target.end.value;
 
     if (!start || !end) {
-      // send error toast
-      alert('Must have a start location and end destination');
+      toast({
+        position: 'top',
+        title: 'Error',
+        description: 'Must have a start location and end destination',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      });
       return;
     }
     const dates = formatDates();

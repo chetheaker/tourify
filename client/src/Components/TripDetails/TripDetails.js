@@ -10,7 +10,6 @@ import Map from '../Map/Map';
 import TripOverview from './TripOverview/TripOverview';
 import TripRoute from './TripRoute/TripRoute';
 import TripItinerary from './TripItinerary/TripItinerary';
-// import TripChecklist from './TripChecklist/TripChecklist';
 import TripDetailsNav from './TripDetailsNav/TripDetailsNav';
 import TripSuggestions from './TripSuggestions/TripSuggestions';
 import RouteDetails from './RouteDetails/RouteDetails';
@@ -26,7 +25,6 @@ function TripDetails() {
   const [stops, setStops] = useState([]);
   const [itinerary, setItinerary] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [activeSection, setActiveSection] = useState('overview');
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [activeUser] = useContext(UserContext);
   const [isAuth, setIsAuth] = useState(false);
@@ -45,7 +43,6 @@ function TripDetails() {
   };
 
   useEffect(() => {
-    // GET TRIP DATA FROM BACKEND
     const getTrip = async () => {
       const id = params.tripId;
       const t = await getUserTripById(id);
@@ -69,15 +66,12 @@ function TripDetails() {
   }, [params.tripId, navigate, activeUser.email]);
 
   const handleNameChangeBlur = async (e) => {
-    // HANDLE UPDATE NAME
     const newName = e.target.value;
-    // check if newName is the same as previous one
     if (newName === trip.trip_name) return;
     const updated = await updateTripName(trip._id, newName);
     if (updated.acknowledged) {
       renderToast('Name Updated', 'success', 'Trip name successfully updated');
     } else {
-      // send error toast
       renderToast(
         'Error',
         'error',
@@ -87,7 +81,6 @@ function TripDetails() {
   };
 
   const calculateRoute = async () => {
-    // GET ROUTE DIRECTIONS FROM GOOGLE API
     if (!trip) return;
 
     setDirectionsResponse(null);
@@ -181,7 +174,6 @@ function TripDetails() {
                 isAuth={isAuth}
               />
             </NavContextProvider>
-            {/* <TripChecklist /> */}
             {isAuth ? (
               <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
             ) : null}

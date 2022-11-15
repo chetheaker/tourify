@@ -11,7 +11,6 @@ import ProDeals from '../ProDeals/ProDeals';
 import { getUser } from '../../Utils/UserService';
 import Loading from '../Loading/Loading';
 
-// TODO check frontedendjoe dashboard layouts
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeUser, setActiveUser] = useContext(UserContext);

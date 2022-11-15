@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Notifications from '../Notifications/Notifications';
 
 // ICON IMPORTS
-import Hamburger from 'hamburger-react'; // for mobile
+import Hamburger from 'hamburger-react';
 import { FaHome, FaUser } from 'react-icons/fa';
 import { MdExplore } from 'react-icons/md';
 import { IoMdNotifications } from 'react-icons/io';

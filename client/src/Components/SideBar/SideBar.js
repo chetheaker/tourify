@@ -9,7 +9,6 @@ import UserContext from '../../Context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../Utils/APIService';
 
-// TODO WORK ON RESPONSIVE DESIGN
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();

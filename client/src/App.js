@@ -66,6 +66,4 @@ function App() {
   );
 }
 
-// entering protected endpoints always redirects to the dashboard page
-
 export default App;

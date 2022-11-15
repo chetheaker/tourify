@@ -49,7 +49,6 @@ function SignIn({ rightActive, setRightActive }) {
       e.target.value.length > 15
     ) {
       setPasswordError(true);
-      // password must be between 5 - 15 characters (toast)
       renderErrorToast('Password must be between 5 and 15 characters');
     } else {
       setPassword(e.target.value);
@@ -60,7 +59,7 @@ function SignIn({ rightActive, setRightActive }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEmail(e.target.email.value);
-    setPassword(e.target.password.value); // problem with password being updated here and it doesn't change the state until next render so password on line 69 will be wrong
+    setPassword(e.target.password.value);
     if (email === '') {
       setEmailError(true);
       renderErrorToast('Email cannot be blank');
