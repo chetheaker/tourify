@@ -13,6 +13,7 @@ import ProfilePage from './Components/ProfilePage/ProfilePage';
 import PlanTrip from './Components/PlanTrip/PlanTrip';
 import TripDetails from './Components/TripDetails/TripDetails';
 import Loading from './Components/Loading/Loading';
+import SuccessPage from './Components/SuccessPage/SuccessPage';
 const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
 const LoginPage = lazy(() => import('./Components/LoginPage/LoginPage'));
 
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/plan" element={<PlanTrip />} />
                 <Route path="/trips/:tripId" element={<TripDetails />} />
+                <Route path="/success" element={<SuccessPage />} />
               </Route>
               <Route element={<PublicRoutes />}>
                 <Route path="/" element={<LoginPage />} />
