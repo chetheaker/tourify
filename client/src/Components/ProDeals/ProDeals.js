@@ -16,23 +16,6 @@ function ProDeals() {
           <Button colorScheme="green">EXPLORE</Button>
         </div>
       </div>
-      {/* <div className="body">
-        <div className="left">
-          <h1 className="price">$9.99</h1>
-          <h1 className="month">per month</h1>
-        </div>
-        <div className="right">
-          <div className="feature">
-            <h1>Unlimited Road Trips</h1>
-          </div>
-          <div className="feature">
-            <h1>Customised Suggestions</h1>
-          </div>
-          <div className="feature">
-            <h1>No Ads</h1>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }
