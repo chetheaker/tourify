@@ -19,8 +19,13 @@ function Dashboard() {
       <NavBar />
       <div className="dashboard">
         <div className="stats-container">
-          <h1 className="welcome">Welcome back, {activeUser.first_name}! 🙌</h1>
-          <FriendsTrips />
+          <div className="left">
+            <h1 className="welcome">
+              Welcome back, {activeUser.first_name}! 🙌
+            </h1>
+            <div className="pro-upgrade"></div>
+            <FriendsTrips />
+          </div>
         </div>
         <div className="trips">
           <div className="my-trips">
