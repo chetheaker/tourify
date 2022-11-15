@@ -29,8 +29,6 @@ function InviteFriend({ renderToast, tripId }) {
       inviteRef.current.value = '';
       return;
     }
-    console.log(inviteEmail);
-    console.log(tripId);
     const res = await inviteUser(tripId, inviteEmail);
     if (res.modifiedCount) {
       renderToast('Success', 'success', 'Invite sucessfully sent');

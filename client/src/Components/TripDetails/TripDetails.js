@@ -57,7 +57,6 @@ function TripDetails() {
         navigate('/');
         return;
       }
-      console.log('trip: ', t);
       if (activeUser.email === t.user) {
         setIsAuth(true);
       }
@@ -75,7 +74,6 @@ function TripDetails() {
     // check if newName is the same as previous one
     if (newName === trip.trip_name) return;
     const updated = await updateTripName(trip._id, newName);
-    console.log(updated);
     if (updated.acknowledged) {
       renderToast('Name Updated', 'success', 'Trip name successfully updated');
     } else {

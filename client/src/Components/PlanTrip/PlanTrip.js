@@ -20,12 +20,9 @@ function PlanTrip() {
       return;
     }
 
-    console.log('raw data', dateRef.current.value);
     const dates = dateRef.current.value
       .split(' – ')
       .map((date) => date.replace(',', '').split(' '));
-
-    console.log('split dates', dates);
 
     let start =
       dates[0][2] + '/' + monthFormat(dates[0][0]) + '/' + dates[0][1];

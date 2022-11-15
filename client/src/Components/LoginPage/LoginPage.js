@@ -14,8 +14,6 @@ function LoginPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // console.log('user in login: ', activeUser);
-    // if (activeUser) navigate('/dashboard');
     setIsLoading(false);
   }, [setIsLoading, activeUser, navigate]);
 

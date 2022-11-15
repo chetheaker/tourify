@@ -34,7 +34,6 @@ function App() {
       if (user._id) {
         setActiveUser(user);
       }
-      console.log('active user: ', user);
       setIsLoading(false);
     }
     getUserFromAPI();

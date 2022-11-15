@@ -15,7 +15,6 @@ function Attendees({ attendees, adminUser }) {
       }
       const admin = await getUserByEmail(adminUser);
       attendeesArr.push(admin);
-      console.log(attendeesArr);
       setAttendeeUsers(attendeesArr);
     };
     getAttendees();

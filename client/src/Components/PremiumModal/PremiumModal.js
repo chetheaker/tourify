@@ -12,9 +12,7 @@ import {
 import { TiTick } from 'react-icons/ti';
 
 function PremiumModal({ isOpen, onClose }) {
-  const handlePremiumPurchase = () => {
-    console.log('premium');
-  };
+  const handlePremiumPurchase = () => {};
 
   return (
     <Modal

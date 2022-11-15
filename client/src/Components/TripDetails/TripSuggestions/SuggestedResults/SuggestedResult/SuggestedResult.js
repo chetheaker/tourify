@@ -110,7 +110,6 @@ function SuggestedResult({ place, itinerary, setItinerary, isAuth }) {
           places: prev[i].places.filter((p) => p.id !== placeId)
         });
       }
-      console.log('newItinerary', newItinerary);
       return newItinerary;
     });
     setIsAdded(false);

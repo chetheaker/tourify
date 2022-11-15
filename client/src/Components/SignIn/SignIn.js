@@ -77,7 +77,6 @@ function SignIn({ rightActive, setRightActive }) {
       password: e.target.password.value
     };
     const res = await loginUser(data);
-    console.log('login res', res);
     if (res.user === false) {
       renderErrorToast('Incorrect email or password');
       return;

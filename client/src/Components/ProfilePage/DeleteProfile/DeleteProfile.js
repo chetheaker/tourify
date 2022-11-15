@@ -17,9 +17,7 @@ function DeleteProfile({ id, handleLogOut }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const handleProfileDelete = async () => {
-    console.log(id);
     const res = await deleteUser();
-    console.log(res);
     if (res.acknowledged) {
       onClose();
       await handleLogOut();

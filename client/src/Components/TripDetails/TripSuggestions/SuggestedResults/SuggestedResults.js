@@ -39,7 +39,6 @@ function SuggestedResults({
           ].end_location.lng()
         );
       }
-      console.log('location', location);
 
       // eslint-disable-next-line no-undef
       const map = new google.maps.Map(

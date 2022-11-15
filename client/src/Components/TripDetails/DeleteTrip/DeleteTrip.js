@@ -21,7 +21,6 @@ function DeleteTrip({ tripId, renderToast }) {
 
   const handleTripDelete = async () => {
     const res = await deleteTrip(tripId);
-    console.log(res);
     if (res.acknowledged) {
       renderToast('Success', 'success', 'Trip deleted successfully');
       navigate('/dashboard');

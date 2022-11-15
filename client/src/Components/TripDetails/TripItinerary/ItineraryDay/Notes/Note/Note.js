@@ -17,7 +17,6 @@ function Note({
 
   const handleEditStart = () => {
     setIsEdit(true);
-    console.log(noteRef.current);
     noteRef.current.focus();
     noteRef.current.setSelectionRange(
       noteRef.current.value.length,
