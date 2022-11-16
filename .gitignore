@@ -1,3 +1,5 @@
 .env
 node_modules
 fly.toml
+tourify_me.csr
+tourify_me.key
