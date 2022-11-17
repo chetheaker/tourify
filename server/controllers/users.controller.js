@@ -11,6 +11,7 @@ const login = async (req, res, next) => {
       req.logIn(user, (err) => {
         if (err) console.log(err);
         else res.send(user);
+        console.log('user', req.user);
       });
     }
   })(req, res, next);
@@ -54,6 +55,7 @@ const register = async (req, res) => {
 
 const get = async (req, res) => {
   try {
+    console.log(req.user);
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.user.email);
       res.send(user);
