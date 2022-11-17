@@ -3,7 +3,7 @@ import { GiPathDistance } from 'react-icons/gi';
 import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { GrLocation } from 'react-icons/gr';
-import Loading from '../../Loading/Loading';
+import Loading from '../../../Components/Loading/Loading';
 import { useNav } from '../../../Hooks/useNav';
 
 function TripOverview({ trip, directionsResponse }) {

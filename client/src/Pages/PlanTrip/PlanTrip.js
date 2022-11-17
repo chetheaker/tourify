@@ -1,4 +1,4 @@
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../../Components/NavBar/NavBar';
 import { DateRangePicker } from '@mantine/dates';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { Autocomplete } from '@react-google-maps/api';

@@ -1,6 +1,6 @@
 import './ExplorePage.css';
-import NavBar from '../NavBar/NavBar';
-import ExploreTripsContainer from '../ExploreTripsContainer/ExploreTripsContainer';
+import NavBar from '../../Components/NavBar/NavBar';
+import ExploreTripsContainer from '../../Components/ExploreTripsContainer/ExploreTripsContainer';
 
 function ExplorePage() {
   return (

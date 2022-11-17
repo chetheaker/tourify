@@ -2,7 +2,7 @@ import './SuccessPage.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { authenticateCheckoutSession } from '../../Utils/CheckoutService';
-import Loading from '../Loading/Loading';
+import Loading from '../../Components/Loading/Loading';
 import { Button } from '@chakra-ui/react';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 

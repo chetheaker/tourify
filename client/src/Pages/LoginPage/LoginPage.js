@@ -5,8 +5,8 @@ import { useContext, useState, useEffect } from 'react';
 import UserContext from '../../Context/UserContext';
 
 //COMPONENTS
-import SignUp from '../SignUp/SignUp';
-import SignIn from '../SignIn/SignIn';
+import SignUp from '../../Components/SignUp/SignUp';
+import SignIn from '../../Components/SignIn/SignIn';
 
 function LoginPage() {
   const navigate = useNavigate();
