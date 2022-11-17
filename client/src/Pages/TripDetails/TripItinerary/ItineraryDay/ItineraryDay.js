@@ -6,7 +6,7 @@ import { MdOutlineChecklistRtl } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import Places from './Places/Places';
 import Notes from './Notes/Notes';
-import Checklists from './Checklists/Checklists';
+// import Checklists from './Checklists/Checklists';
 
 function ItineraryDay({
   day,
@@ -89,10 +89,10 @@ function ItineraryDay({
             renderToast={renderToast}
             isAuth={isAuth}
           />
-          <Checklists
+          {/* <Checklists
             checklists={checklists}
             checklistsInputActive={checklistsInputActive}
-          />
+          /> */}
         </div>
       ) : (
         <div className="no-itinerary">

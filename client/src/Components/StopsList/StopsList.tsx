@@ -1,11 +1,13 @@
 import Stop from '../Stop/Stop';
 import './StopsList.css';
-import { Droppable } from 'react-beautiful-dnd';
+import { DroppableProvided, Droppable } from 'react-beautiful-dnd';
+import { StopsListProps } from '../../../types/props';
+import React from 'react';
 
-function StopsList({ stops, isEdit, setStops, renderToast }) {
+function StopsList({ stops, isEdit, setStops, renderToast }: StopsListProps) {
   return (
     <Droppable droppableId="droppable-1">
-      {(provided) => (
+      {(provided: DroppableProvided) => (
         <div
           className="stops-list"
           {...provided.droppableProps}

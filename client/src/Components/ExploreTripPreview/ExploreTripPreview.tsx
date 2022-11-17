@@ -2,16 +2,26 @@ import './ExploreTripPreview.css';
 import { formatDate } from '../../Utils/date';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { Avatar, Skeleton } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { randomPhoto } from '../../Utils/image';
 import { getUserByTrip } from '../../Utils/UserService';
 import { useNavigate } from 'react-router-dom';
+import { ExploreTripPreviewProps } from '../../../types/props';
+import { User } from '../../../types/models';
 
-function ExploreTripPreview({ stopScroll, startScroll, trip }) {
-  const [tripUser, setTripUser] = useState('');
+function ExploreTripPreview({ stopScroll, startScroll, trip }: ExploreTripPreviewProps) {
+  const [tripUser, setTripUser] = useState<User>({
+    _id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    notifications: [],
+    account_type: '',
+  });
   const [isLoading, setIsLoading] = useState(true);
-  const [size, setSize] = useState(null);
-  const [image, setImage] = useState(null);
+  const [size, setSize] = useState('');
+  const [image, setImage] = useState('');
   const navigate = useNavigate();
 
   const getRandomSize = () => {
@@ -71,7 +81,11 @@ function ExploreTripPreview({ stopScroll, startScroll, trip }) {
   );
 }
 
-const styles = {
+type Style = {
+  [key: string]: {gridRowEnd: string}
+}
+
+const styles: Style = {
   small: {
     gridRowEnd: 'span 18'
   },

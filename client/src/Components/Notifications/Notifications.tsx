@@ -10,14 +10,15 @@ import {
   PopoverArrow,
   PopoverCloseButton
 } from '@chakra-ui/react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../Context/UserContext';
 import { acceptInvite, declineInvite } from '../../Utils/TripService';
+import { Notification } from '../../../types/models';
 
 function Notifications() {
   const [activeUser, setActiveUser] = useContext(UserContext);
 
-  const handleAccept = async (notification) => {
+  const handleAccept = async (notification: Notification) => {
     const res = await acceptInvite(notification.trip.id);
     if (res.modifiedCount) {
       setActiveUser((prev) => ({
@@ -29,7 +30,7 @@ function Notifications() {
     }
   };
 
-  const handleDecline = async (notification) => {
+  const handleDecline = async (notification: Notification) => {
     const res = await declineInvite(notification.trip.id);
     if (res.modifiedCount) {
       setActiveUser((prev) => ({
@@ -42,7 +43,7 @@ function Notifications() {
   };
 
   return (
-    <Popover variant="responsive" className="notifications-container" size="lg">
+    <Popover variant="responsive" size="lg">
       <PopoverTrigger>
         <button className="notif-btn">
           <IoMdNotifications color="#1FC28B" size="2em" className="icon" />

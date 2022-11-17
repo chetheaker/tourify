@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import ExploreTripPreview from '../ExploreTripPreview/ExploreTripPreview';
 import './ExploreTripsContainer.css';
 import { getExploreTrips } from '../../Utils/TripService';
 import Loading from '../Loading/Loading';
 
 function ExploreTripsContainer() {
-  const [scrollID, setScrollID] = useState(null);
+  const [scrollID, setScrollID] = useState(0);
   const [exploreTrips, setExploreTrips] = useState([]);
-  const containerRef = useRef();
+  const containerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const [isLoading, setIsLoading] = useState(true);
 
   const startScroll = () => {
@@ -15,7 +15,7 @@ function ExploreTripsContainer() {
       if (containerRef.current) {
         containerRef.current.scrollBy(0, 0.5);
       }
-    }, 25);
+    }, 25) as unknown as number;
     setScrollID(id);
   };
 

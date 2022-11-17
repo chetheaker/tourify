@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { deleteUser } from '../../../Utils/UserService';
 
-function DeleteProfile({ id, handleLogOut }) {
+function DeleteProfile({ handleLogOut }) {
   const cancelRef = useRef();
   const { isOpen, onClose, onOpen } = useDisclosure();
 

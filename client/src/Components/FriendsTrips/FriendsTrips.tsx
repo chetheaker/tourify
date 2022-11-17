@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './FriendsTrips.css';
 import { getFriendTrips } from '../../Utils/TripService';
 import ExploreTripPreview from '../ExploreTripPreview/ExploreTripPreview';
 import UserContext from '../../Context/UserContext';
+import { Trip } from '../../../types/models';
 
 function FriendsTrips() {
-  const [friendTrips, setFriendTrips] = useState([]);
+  const [friendTrips, setFriendTrips] = useState<Trip[]>([]);
   const [activeUser] = useContext(UserContext);
 
   useEffect(() => {

@@ -1,9 +1,11 @@
 import './Stop.css';
 import { GrLocation } from 'react-icons/gr';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
+import { StopProps } from '../../../types/props';
+import React from 'react';
 
-function Stop({ setStops, stop, isEdit, index, stops, renderToast }) {
+function Stop({ setStops, stop, isEdit, index, stops, renderToast }: StopProps) {
   const deleteStop = () => {
     if (stops.length === 2) {
       renderToast('Error', 'error', 'Trip must have at least 2 stops');
@@ -14,7 +16,7 @@ function Stop({ setStops, stop, isEdit, index, stops, renderToast }) {
 
   return (
     <Draggable draggableId={stop.id} index={index}>
-      {(provided) => (
+      {(provided: DraggableProvided) => (
         <div
           className="stop"
           {...provided.draggableProps}

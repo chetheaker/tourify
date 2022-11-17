@@ -2,11 +2,13 @@ import './TripsContainer.css';
 import { getUserTrips } from '../../Utils/TripService';
 import TripPreview from '../TripPreview/TripPreview';
 import { RiRoadsterLine } from 'react-icons/ri';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { TripsContainerProps } from '../../../types/props';
+import { Trip } from '../../../types/models';
 
 // TODO Make the trips container a random offsetted collage of trips (maybe fireship has a video or hyperplexed?)
-function TripsContainer({ planTrip }) {
-  const [trips, setTrips] = useState([]);
+function TripsContainer({ planTrip }: TripsContainerProps) {
+  const [trips, setTrips] = useState<Trip[]>([]);
 
   const getTrips = async () => {
     const userTrips = await getUserTrips();
