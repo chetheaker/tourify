@@ -7,7 +7,7 @@ import Hamburger from 'hamburger-react';
 import { FaHome, FaUser } from 'react-icons/fa';
 import { MdExplore } from 'react-icons/md';
 import { IoMdNotifications } from 'react-icons/io';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,7 @@
 import './ProDeals.css';
 import { Button } from '@chakra-ui/react';
 import { BsDot } from 'react-icons/bs';
+import React from 'react';
 
 function ProDeals() {
   return (

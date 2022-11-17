@@ -1,11 +1,12 @@
 import './SignIn.css';
 import { useToast } from '@chakra-ui/react';
-import { useState, useContext } from 'react';
+import React, { useState, useContext, FocusEvent, FormEvent } from 'react';
 import { loginUser } from '../../Utils/UserService';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
+import { SignInProps } from '../../../types/props';
 
-function SignIn({ rightActive, setRightActive }) {
+function SignIn({ rightActive, setRightActive }: SignInProps) {
   const navigate = useNavigate();
 
   // eslint-disable-next-line
@@ -13,7 +14,7 @@ function SignIn({ rightActive, setRightActive }) {
 
   const toast = useToast();
 
-  const renderErrorToast = (message) => {
+  const renderErrorToast = (message: string) => {
     toast({
       position: 'top',
       title: 'Error',
@@ -27,13 +28,12 @@ function SignIn({ rightActive, setRightActive }) {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
 
-  const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
-  const handleEmailChange = (e) => {
-    if (
-      (e.target.value.includes('@') && e.target.value.includes('.')) ||
-      e.target.value === ''
+  const handleEmailChange = (e: FocusEvent<HTMLInputElement>) => {
+    if ((e.target !== null) &&
+      ((e.target.value.includes('@') && e.target.value.includes('.')) ||
+      (e.target.value === ''))
     ) {
       setEmail(e.target.value);
       setEmailError(false);
@@ -43,7 +43,7 @@ function SignIn({ rightActive, setRightActive }) {
     }
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: FocusEvent<HTMLInputElement>) => {
     if (
       (e.target.value.length > 0 && e.target.value.length < 5) ||
       e.target.value.length > 15
@@ -51,21 +51,29 @@ function SignIn({ rightActive, setRightActive }) {
       setPasswordError(true);
       renderErrorToast('Password must be between 5 and 15 characters');
     } else {
-      setPassword(e.target.value);
       setPasswordError(false);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    type TargetType = EventTarget & {
+      email: {
+        value: string
+      },
+      password: {
+        value: string
+      }
+    }
     e.preventDefault();
-    setEmail(e.target.email.value);
-    setPassword(e.target.password.value);
+    const target = e.target as TargetType;
+
+    setEmail(target.email.value);
     if (email === '') {
       setEmailError(true);
       renderErrorToast('Email cannot be blank');
       return;
     }
-    if (e.target.password.value === '') {
+    if (target.password.value === '') {
       setPasswordError(true);
       renderErrorToast('Password cannot be blank');
       return;
@@ -73,7 +81,7 @@ function SignIn({ rightActive, setRightActive }) {
 
     const data = {
       email: email,
-      password: e.target.password.value
+      password: target.password.value
     };
     const res = await loginUser(data);
     if (res.user === false) {

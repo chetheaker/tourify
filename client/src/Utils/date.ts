@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 
-export const formatDate = (date) => {
+export const formatDate = (date: string) => {
   const day = dayjs(date).date();
   const month = formatMonth(dayjs(date).month());
   return `${month} ${day}`;
 };
 
-const formatMonth = (month) => {
+const formatMonth = (month: number) => {
   switch (month) {
     case 0:
       return 'January';

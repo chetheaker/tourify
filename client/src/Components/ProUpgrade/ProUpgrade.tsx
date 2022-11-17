@@ -2,6 +2,7 @@ import './ProUpgrade.css';
 import { Button } from '@chakra-ui/react';
 import { TiTick } from 'react-icons/ti';
 import { createCheckoutSession } from '../../Utils/CheckoutService';
+import React from 'react';
 
 function ProUpgrade() {
   const handleUpgrade = async () => {

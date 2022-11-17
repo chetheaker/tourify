@@ -32,6 +32,11 @@ export type StopProps = StopsListProps &
   index: number,
 };
 
+export type StopInputProps = {
+  isEdit: boolean,
+  setStops: React.Dispatch<React.SetStateAction<Stop[]>>,
+}
+
 export type TripPreviewProps = {
   trip: Trip
 };

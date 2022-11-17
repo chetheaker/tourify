@@ -1,8 +1,9 @@
 import './Map.css';
 import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { MapProps } from '../../../types/props';
 
-function Map({ directionsResponse }) {
+function Map({ directionsResponse }: MapProps) {
   const center = useMemo(() => ({ lat: 0, lng: 0 }), []);
   const options = useMemo(
     () => ({

@@ -1,12 +1,13 @@
 import './SignUp.css';
 
-import { useState, useContext } from 'react';
+import React, { useState, useContext, FocusEvent, FormEvent } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
 import { registerUser, loginUser } from '../../Utils/UserService';
+import { SignUpProps } from '../../../types/props';
 
-function SignUp({ setRightActive, rightActive }) {
+function SignUp({ setRightActive, rightActive }: SignUpProps) {
   const navigate = useNavigate();
 
   // eslint-disable-next-line
@@ -14,7 +15,7 @@ function SignUp({ setRightActive, rightActive }) {
 
   const toast = useToast();
 
-  const renderErrorToast = (message) => {
+  const renderErrorToast = (message: string) => {
     toast({
       position: 'top',
       title: 'Error',
@@ -37,7 +38,7 @@ function SignUp({ setRightActive, rightActive }) {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
-  const handleFirstNameChange = (e) => {
+  const handleFirstNameChange = (e: FocusEvent<HTMLInputElement>) => {
     if (!/^[A-Z]+$/i.test(e.target.value) && e.target.value !== '') {
       setFirstNameError(true);
       renderErrorToast('First name can only container letters');
@@ -49,7 +50,7 @@ function SignUp({ setRightActive, rightActive }) {
     }
   };
 
-  const handleLastNameChange = (e) => {
+  const handleLastNameChange = (e: FocusEvent<HTMLInputElement>) => {
     if (/\d/.test(e.target.value)) {
       setLastNameError(true);
       renderErrorToast('Last name can only container letters');
@@ -61,7 +62,7 @@ function SignUp({ setRightActive, rightActive }) {
     }
   };
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: FocusEvent<HTMLInputElement>) => {
     if (
       (e.target.value.includes('@') && e.target.value.includes('.')) ||
       e.target.value === ''
@@ -74,7 +75,7 @@ function SignUp({ setRightActive, rightActive }) {
     }
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: FocusEvent<HTMLInputElement>) => {
     if (
       (e.target.value.length > 0 && e.target.value.length < 5) ||
       e.target.value.length > 15
@@ -87,7 +88,7 @@ function SignUp({ setRightActive, rightActive }) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (firstName === '') {
@@ -130,7 +131,6 @@ function SignUp({ setRightActive, rightActive }) {
 
   return (
     <div className={`signup ${rightActive ? 'show' : 'hide'}`}>
-      {/* <div className='route-icon'></div> */}
       <h1>Hey there, traveller!</h1>
       <h2>Create an account to start exploring</h2>
       <form className="signup-form" onSubmit={handleSubmit}>

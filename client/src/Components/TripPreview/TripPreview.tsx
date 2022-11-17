@@ -3,8 +3,10 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../Utils/date';
 import { randomPhoto } from '../../Utils/image';
+import React from 'react';
+import { TripPreviewProps } from '../../../types/props';
 
-function TripPreview({ trip }) {
+function TripPreview({ trip }: TripPreviewProps) {
   const navigate = useNavigate();
 
   const handleTripDetails = () => {

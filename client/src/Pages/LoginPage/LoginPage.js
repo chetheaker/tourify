@@ -6,7 +6,7 @@ import UserContext from '../../Context/UserContext';
 
 //COMPONENTS
 import SignUp from '../../Components/SignUp/SignUp';
-import SignIn from '../../Components/SignIn/SignIn';
+import SignIn from '../../Components/SignIn/SignIn.tsx';
 
 function LoginPage() {
   const navigate = useNavigate();

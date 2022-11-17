@@ -11,8 +11,8 @@ export type Trip = {
 export type Stop = {
   id: string,
   stop: string,
-  departure: string,
-  arrival: boolean
+  departure: boolean,
+  arrival: boolean,
 }
 
 type Itinerary = {
@@ -31,7 +31,7 @@ type Place = {
   id: string
 }
 
-type User = {
+export type User = {
   _id: string,
   first_name: string,
   last_name: string,
@@ -41,7 +41,7 @@ type User = {
   account_type: string
 }
 
-type Notification = {
+export type Notification = {
   trip: NotificationTrip,
   inviter: NotificationInviter
 }
