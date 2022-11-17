@@ -31,13 +31,13 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    proxy: true,
-    cookie: {
-      secure: false,
-      httpOnly: false,
-      sameSite: 'none',
-      maxAge: 1000 * 60 * 60 * 48
-    }
+    // proxy: true,
+    // cookie: {
+    //   secure: false,
+    //   httpOnly: false,
+    //   sameSite: 'none',
+    //   maxAge: 1000 * 60 * 60 * 48
+    // }
   })
 );
 
