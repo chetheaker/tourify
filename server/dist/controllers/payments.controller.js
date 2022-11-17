@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 var usersModel = require('../models/users.model');
 var stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
@@ -49,8 +50,8 @@ var checkout = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 return [4 /*yield*/, stripe.checkout.sessions.create({
                         payment_method_types: ['card'],
                         mode: 'subscription',
-                        success_url: "".concat(process.env.CLIENT_URL, "/success?session_id={CHECKOUT_SESSION_ID}"),
-                        cancel_url: "".concat(process.env.CLIENT_URL, "/dashboard"),
+                        success_url: "".concat(process.env.ORIGIN, "/success?session_id={CHECKOUT_SESSION_ID}"),
+                        cancel_url: "".concat(process.env.ORIGIN, "/dashboard"),
                         line_items: [
                             {
                                 price: priceId,

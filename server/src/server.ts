@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 // IMPORTS
-const express = require('express');
+import express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const userRouter = require('./routes/user.router');
@@ -53,4 +53,4 @@ app.use(tripsRouter);
 app.use(paymentsRouter);
 
 // SERVER LISTENING
-app.listen(PORT, console.log(`Server running at http://${HOST}:${PORT}`));
+app.listen(PORT, () => console.log(`Server running at http://${HOST}:${PORT}`));

@@ -4,17 +4,18 @@ const usersModel = require('./users.model');
 const trips = client.db('tourify').collection('trips');
 const users = client.db('tourify').collection('users');
 
+import { Itinerary, Stop, Trip } from "../types/types";
 const { ObjectId } = require('mongodb');
 
-const findTripsByEmail = async (email) => {
+const findTripsByEmail = async (email: string) => {
   return await trips.find({ user: email }).toArray();
 };
 
-const postTrip = async (trip) => {
+const postTrip = async (trip: Trip) => {
   return await trips.insertOne(trip);
 };
 
-const findTripById = async (id) => {
+const findTripById = async (id: string) => {
   try {
     const trip = await trips.findOne({ _id: ObjectId(id) });
     return trip;
@@ -23,7 +24,7 @@ const findTripById = async (id) => {
   }
 };
 
-const updateName = (id, name) => {
+const updateName = (id: string, name: string) => {
   try {
     const trip = trips.updateOne(
       {
@@ -37,7 +38,7 @@ const updateName = (id, name) => {
   }
 };
 
-const updateRoute = (id, route) => {
+const updateRoute = (id: string, route: Stop[]) => {
   try {
     const update = trips.updateOne(
       { _id: ObjectId(id) },
@@ -49,7 +50,7 @@ const updateRoute = (id, route) => {
   }
 };
 
-const updateItinerary = async (id, itinerary) => {
+const updateItinerary = async (id: string, itinerary: Itinerary) => {
   const update = await trips.updateOne(
     { _id: ObjectId(id) },
     { $set: { itinerary: itinerary } }
@@ -57,7 +58,7 @@ const updateItinerary = async (id, itinerary) => {
   return update;
 };
 
-const deleteOne = async (id) => {
+const deleteOne = async (id: string) => {
   const deleted = await trips.deleteOne({ _id: ObjectId(id) });
   return deleted;
 };
@@ -67,14 +68,14 @@ const getAllTrips = async () => {
   return exploreTrips;
 };
 
-const getTripUser = async (id) => {
+const getTripUser = async (id: string) => {
   const trip = await trips.findOne({ _id: ObjectId(id) });
   const email = trip.user;
   const user = await users.findOne({ email: email });
   return user;
 };
 
-const inviteUser = async (id, email) => {
+const inviteUser = async (id: string, email: string) => {
   const trip = await trips.findOne({ _id: ObjectId(id) });
   const inviter = await usersModel.findUserByEmail(trip.user);
   const notification = {
@@ -93,7 +94,7 @@ const inviteUser = async (id, email) => {
   return updateInviteeNotifications;
 };
 
-const acceptInvite = async (id, email) => {
+const acceptInvite = async (id: string, email: string) => {
   // remove notif
   await usersModel.removeNotification(id, email);
 
@@ -105,12 +106,12 @@ const acceptInvite = async (id, email) => {
   return updateTrip;
 };
 
-const declineInvite = async (id, email) => {
+const declineInvite = async (id: string, email: string) => {
   const removedNotif = await usersModel.removeNotification(id, email);
   return removedNotif;
 };
 
-const getFriendTrips = async (email) => {
+const getFriendTrips = async (email: string) => {
   const friendTrips = await trips.find({ attendees: [email] }).toArray();
   return friendTrips;
 };

@@ -1,17 +1,20 @@
+import { Response } from "express";
+import { MyRequest } from "../types/types";
+
 require('dotenv').config();
 const usersModel = require('../models/users.model');
 
 const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 
-const checkout = async (req, res) => {
+const checkout = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const priceId = req.body.items[0].id;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         mode: 'subscription',
-        success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.CLIENT_URL}/dashboard`,
+        success_url: `${process.env.ORIGIN}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.ORIGIN}/dashboard`,
         line_items: [
           {
             price: priceId,
@@ -29,7 +32,7 @@ const checkout = async (req, res) => {
   }
 };
 
-const authenticatePurchase = async (req, res) => {
+const authenticatePurchase = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const { session_id } = req.body;

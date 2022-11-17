@@ -1,10 +1,13 @@
+import { NextFunction, Request, Response } from "express";
+import { MyRequest, User } from "../types/types";
+
 const usersModel = require('../models/users.model');
 
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
-const login = async (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
+  passport.authenticate('local', (err: Error, user: User) => {
     if (err) console.log(err);
     if (!user) res.send({ user: false });
     else {
@@ -16,14 +19,14 @@ const login = async (req, res, next) => {
   })(req, res, next);
 };
 
-const logout = async (req, res) => {
+const logout = async (req: Request, res: Response) => {
   req.logout(function (err) {
     if (err) console.log(err);
     else res.send({});
   });
 };
 
-const register = async (req, res) => {
+const register = async (req: Request, res: Response) => {
   try {
     const { email, first_name, last_name, password } = req.body;
     // check username doesn't exist
@@ -52,7 +55,7 @@ const register = async (req, res) => {
   }
 };
 
-const get = async (req, res) => {
+const get = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.user.email);
@@ -65,7 +68,7 @@ const get = async (req, res) => {
   }
 };
 
-const getUserByEmail = async (req, res) => {
+const getUserByEmail = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.params.email);
@@ -78,7 +81,7 @@ const getUserByEmail = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.user.email);

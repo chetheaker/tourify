@@ -1,5 +1,6 @@
 "use strict";
-var express = require('express');
+Object.defineProperty(exports, "__esModule", { value: true });
+var express = require("express");
 var tripsController = require('./../controllers/trips.controller');
 var router = express.Router();
 router.get('/trips/user', tripsController.getUserTrips);

@@ -1,7 +1,8 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 // IMPORTS
-var express = require('express');
+var express = require("express");
 var cors = require('cors');
 var session = require('express-session');
 var userRouter = require('./routes/user.router');
@@ -9,7 +10,7 @@ var tripsRouter = require('./routes/trips.router');
 var paymentsRouter = require('./routes/payments.router');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
-var initialisePassport = require('./passport-config');
+var initialisePassport = require('./../passport-config');
 var PORT = process.env.PORT;
 var HOST = process.env.HOST;
 // Initialise server
@@ -41,4 +42,4 @@ app.use(userRouter);
 app.use(tripsRouter);
 app.use(paymentsRouter);
 // SERVER LISTENING
-app.listen(PORT, console.log("Server running at http://".concat(HOST, ":").concat(PORT)));
+app.listen(PORT, function () { return console.log("Server running at http://".concat(HOST, ":").concat(PORT)); });

@@ -1,6 +1,9 @@
+import { Request, Response } from "express";
+import { MyRequest } from "../types/types";
+
 const tripsModel = require('../models/trips.model');
 
-const getUserTrips = async (req, res) => {
+const getUserTrips = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const trips = await tripsModel.findTripsByEmail(req.user.email);
@@ -13,7 +16,7 @@ const getUserTrips = async (req, res) => {
   }
 };
 
-const getExploreTrips = async (req, res) => {
+const getExploreTrips = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const trips = await tripsModel.getAllTrips();
@@ -26,7 +29,7 @@ const getExploreTrips = async (req, res) => {
   }
 };
 
-const getFriendTrips = async (req, res) => {
+const getFriendTrips = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const trips = await tripsModel.getFriendTrips(req.user.email);
@@ -39,7 +42,7 @@ const getFriendTrips = async (req, res) => {
   }
 };
 
-const getUserTrip = async (req, res) => {
+const getUserTrip = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const id = req.params.id;
@@ -54,7 +57,7 @@ const getUserTrip = async (req, res) => {
   }
 };
 
-const createTrip = async (req, res) => {
+const createTrip = async (req: MyRequest, res: Response) => {
   try {
     console.log('user', req.user);
     if (req.user) {
@@ -75,7 +78,7 @@ const createTrip = async (req, res) => {
   }
 };
 
-const updateTripName = async (req, res) => {
+const updateTripName = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const id = req.params.id;
@@ -90,7 +93,7 @@ const updateTripName = async (req, res) => {
   }
 };
 
-const updateTripRoute = async (req, res) => {
+const updateTripRoute = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const id = req.params.id;
@@ -105,7 +108,7 @@ const updateTripRoute = async (req, res) => {
   }
 };
 
-const updateTripItinerary = async (req, res) => {
+const updateTripItinerary = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const id = req.params.id;
@@ -120,7 +123,7 @@ const updateTripItinerary = async (req, res) => {
   }
 };
 
-const deleteTrip = async (req, res) => {
+const deleteTrip = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const id = req.params.id;
@@ -134,7 +137,7 @@ const deleteTrip = async (req, res) => {
   }
 };
 
-const getTripUser = async (req, res) => {
+const getTripUser = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const { id } = req.params;
@@ -148,7 +151,7 @@ const getTripUser = async (req, res) => {
   }
 };
 
-const inviteUser = async (req, res) => {
+const inviteUser = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const { id, email } = req.params;
@@ -162,7 +165,7 @@ const inviteUser = async (req, res) => {
   }
 };
 
-const acceptInvite = async (req, res) => {
+const acceptInvite = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const { id } = req.params;
@@ -177,7 +180,7 @@ const acceptInvite = async (req, res) => {
   }
 };
 
-const declineInvite = async (req, res) => {
+const declineInvite = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const { id } = req.params;
