@@ -1,6 +1,6 @@
 import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useRef } from 'react';
+import React, { useContext, useRef, MutableRefObject } from 'react';
 import UserContext from '../../Context/UserContext';
 import { logoutUser } from '../../Utils/UserService';
 import NavBar from '../../Components/NavBar/NavBar';
@@ -12,7 +12,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Button,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/react';
 import DeleteProfile from './DeleteProfile/DeleteProfile';
 
@@ -20,12 +20,20 @@ function ProfilePage() {
   // eslint-disable-next-line
   const [activeUser, setActiveUser] = useContext(UserContext);
   const navigate = useNavigate();
-  const cancelRef = useRef();
+  const cancelRef = useRef() as MutableRefObject<HTMLButtonElement>;
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const handleLogOut = async () => {
     await logoutUser();
-    setActiveUser(null);
+    setActiveUser((prev) => ({
+      _id: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      notifications: [],
+      account_type: '',
+    }));
     navigate('/');
   };
 
