@@ -3,13 +3,13 @@ import './Dashboard.css';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
-import TripsContainer from '../TripsContainer/TripsContainer';
-import FriendsTrips from '../FriendsTrips/FriendsTrips';
-import NavBar from '../NavBar/NavBar';
-import ProUpgrade from '../ProUpgrade/ProUpgrade';
-import ProDeals from '../ProDeals/ProDeals';
+import TripsContainer from '../../Components/TripsContainer/TripsContainer';
+import FriendsTrips from '../../Components/FriendsTrips/FriendsTrips';
+import NavBar from '../../Components/NavBar/NavBar';
+import ProUpgrade from '../../Components/ProUpgrade/ProUpgrade';
+import ProDeals from '../../Components/ProDeals/ProDeals';
 import { getUser } from '../../Utils/UserService';
-import Loading from '../Loading/Loading';
+import Loading from '../../Components/Loading/Loading';
 
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);

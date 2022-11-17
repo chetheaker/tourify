@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useRef } from 'react';
 import UserContext from '../../Context/UserContext';
 import { logoutUser } from '../../Utils/UserService';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../../Components/NavBar/NavBar';
 import {
   AlertDialog,
   AlertDialogBody,

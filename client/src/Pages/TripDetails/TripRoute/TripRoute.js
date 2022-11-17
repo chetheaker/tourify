@@ -1,8 +1,8 @@
 import './TripRoute.css';
-import StopsList from '../../StopsList/StopsList';
+import StopsList from '../../../Components/StopsList/StopsList';
 import { FiEdit } from 'react-icons/fi';
 import { useState } from 'react';
-import StopInput from '../../StopInput/StopInput';
+import StopInput from '../../../Components/StopInput/StopInput';
 import { updateTripRoute } from '../../../Utils/TripService';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useNav } from '../../../Hooks/useNav';
