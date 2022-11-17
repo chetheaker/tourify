@@ -8,14 +8,14 @@ import PrivateRoutes from './PrivateRoutes';
 import { useJsApiLoader } from '@react-google-maps/api';
 
 // COMPONENTS
-import ExplorePage from './Components/ExplorePage/ExplorePage';
-import ProfilePage from './Components/ProfilePage/ProfilePage';
-import PlanTrip from './Components/PlanTrip/PlanTrip';
-import TripDetails from './Components/TripDetails/TripDetails';
+import ExplorePage from './Pages/ExplorePage/ExplorePage';
+import ProfilePage from './Pages/ProfilePage/ProfilePage';
+import PlanTrip from './Pages/PlanTrip/PlanTrip';
+import TripDetails from './Pages/TripDetails/TripDetails';
 import Loading from './Components/Loading/Loading';
-import SuccessPage from './Components/SuccessPage/SuccessPage';
-const Dashboard = lazy(() => import('./Components/Dashboard/Dashboard'));
-const LoginPage = lazy(() => import('./Components/LoginPage/LoginPage'));
+import SuccessPage from './Pages/SuccessPage/SuccessPage';
+const Dashboard = lazy(() => import('./Pages/Dashboard/Dashboard'));
+const LoginPage = lazy(() => import('./Pages/LoginPage/LoginPage'));
 
 const libraries = ['places'];
 
