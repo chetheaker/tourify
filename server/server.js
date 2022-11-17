@@ -33,7 +33,7 @@ app.use(
     saveUninitialized: true,
     proxy: true,
     cookie: {
-      secure: true,
+      secure: false,
       httpOnly: false,
       sameSite: 'none',
       maxAge: 1000 * 60 * 60 * 48
