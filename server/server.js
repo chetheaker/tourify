@@ -18,7 +18,7 @@ const app = express();
 // MIDDLEWARE
 app.use(
   cors({
-    origin: process.env.ORIGIN || 'http://localhost:3000',
+    origin: process.env.ORIGIN || 'http://localhost:3001',
     credentials: true
   })
 );
