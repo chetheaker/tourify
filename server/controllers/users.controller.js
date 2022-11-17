@@ -1,5 +1,5 @@
 const usersModel = require('../models/users.model');
-// const { sendInvite } = require('../models/email');
+
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
