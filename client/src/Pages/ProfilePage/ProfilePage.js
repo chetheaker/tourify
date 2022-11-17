@@ -66,7 +66,7 @@ function ProfilePage() {
                   </AlertDialogContent>
                 </AlertDialogOverlay>
               </AlertDialog>
-              <DeleteProfile handleLogOut={handleLogOut} id={activeUser._id} />
+              <DeleteProfile handleLogOut={handleLogOut} />
             </div>
           </div>
         </div>

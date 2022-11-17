@@ -1,5 +1,5 @@
 import React from "react";
-import { Trip, Stop } from "./models"
+import { Trip, Stop, Note, Itinerary, Place } from "./models"
 
 export type ExploreTripPreviewProps = {
   stopScroll?: () => void,
@@ -43,4 +43,129 @@ export type TripPreviewProps = {
 
 export type TripsContainerProps = {
   planTrip: () => void
+};
+
+export type DeleteProfileProps = {
+  handleLogOut: () => Promise<void>,
+};
+
+export type AttendeesProps = {
+  attendees: string[],
+  adminUser: string
+};
+
+export type DeleteTripProps = {
+  tripId: string,
+  renderToast: (title: string, status: string, message: string) => void
+};
+
+export type InviteFriendsProps = DeleteTripProps;
+
+export type RouteDetailsProps = MapProps;
+
+export type RouteDetailProps = {
+  index: number,
+  leg: google.maps.DirectionsLeg
+};
+
+export type NoteProps = {
+  note: Note,
+  deleteNote: (note: Note) => void,
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  dayIndex: number,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+};
+
+export type NotesProps = {
+  notesInputActive: boolean,
+  notes: Note[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  dayIndex: number,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+};
+
+export type PacesProps = {
+  placesInputActive: boolean,
+  places: Place[],
+  setPlaces: React.Dispatch<React.SetStateAction<Place[]>>,
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  dayIndex: number,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+};
+
+export type ItineraryDayProps = {
+  day: Itinerary,
+  index: number,
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  dayIndex: number,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+};
+
+export type ItineraryListProps = {
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  dayIndex: number,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+};
+
+export type TripItineraryProps = {
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  tripId: string,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+};
+
+export type TripOverviewProps = {
+  trip: Trip,
+  directionsResponse: google.maps.DirectionsResult | null
+};
+
+export type TripRouteProps = {
+  stops: Stop[],
+  setStops: React.Dispatch<React.SetStateAction<Stop[]>>,
+  tripStops: Stop[],
+  id: string,
+  renderToast: (title: string, status: string, message: string) => void,
+  isAuth: boolean,
+  setTrip: React.Dispatch<React.SetStateAction<Trip>>,
+};
+
+export type SuggestedResultProps = {
+  place: Place,
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  isAuth: boolean
+};
+
+export type SuggestedResults = {
+  place: Place,
+  category: string,
+  directionsResponse: google.maps.DirectionsResult | null,
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  isAuth: boolean
+};
+
+export type SuggestionCategoriesProps = {
+  place: Place,
+  directionsResponse: google.maps.DirectionsResult | null,
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  isAuth: boolean
+};
+
+export type TripSuggestionsProps = {
+  stops: Stop[],
+  renderToast: (title: string, status: string, message: string) => void,
+  directionsResponse: google.maps.DirectionsResult | null,
+  itinerary: Itinerary[],
+  setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
+  isAuth: boolean
 };

@@ -15,18 +15,18 @@ export type Stop = {
   arrival: boolean,
 }
 
-type Itinerary = {
+export type Itinerary = {
   date: string,
   notes: Note[],
   places: Place[]
 }
 
-type Note = {
+export type Note = {
   note: string,
   id: string
 }
 
-type Place = {
+export type Place = {
   place: string,
   id: string
 }
