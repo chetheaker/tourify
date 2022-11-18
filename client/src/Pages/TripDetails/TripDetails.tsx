@@ -2,7 +2,7 @@ import './TripDetails.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import NavContextProvider from '../../Context/NavContext';
 import { useToast } from '@chakra-ui/react';
-import { useContext, useEffect, useState } from 'react';
+import { FocusEvent, useContext, useEffect, useState } from 'react';
 import { getUserTripById, updateTripName } from '../../Utils/TripService';
 import NavBar from '../../Components/NavBar/NavBar';
 import Loading from '../../Components/Loading/Loading';
@@ -17,21 +17,31 @@ import DeleteTrip from './DeleteTrip/DeleteTrip';
 import UserContext from '../../Context/UserContext';
 import InviteFriend from './InviteFriend/InviteFriend';
 import Attendees from './Attendees/Attendees';
+import { Stop, Trip, Itinerary } from '../../../types/models';
 
 function TripDetails() {
   const params = useParams();
   const navigate = useNavigate();
-  const [trip, setTrip] = useState(null);
-  const [stops, setStops] = useState([]);
-  const [itinerary, setItinerary] = useState([]);
+  const [trip, setTrip] = useState<Trip & {user: string}>({
+    _id: '',
+    trip_name: '',
+    start_date: '',
+    end_date: '',
+    stops: [],
+    itinerary: [],
+    attendees: [],
+    user: ''
+  });
+  const [stops, setStops] = useState<Stop[]>([]);
+  const [itinerary, setItinerary] = useState<Itinerary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
   const [activeUser] = useContext(UserContext);
   const [isAuth, setIsAuth] = useState(false);
 
   const toast = useToast();
 
-  const renderToast = (title, status, message) => {
+  const renderToast = (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => {
     toast({
       position: 'bottom-left',
       title: title,
@@ -65,7 +75,7 @@ function TripDetails() {
     getTrip();
   }, [params.tripId, navigate, activeUser.email]);
 
-  const handleNameChangeBlur = async (e) => {
+  const handleNameChangeBlur = async (e: FocusEvent<HTMLInputElement>) => {
     const newName = e.target.value;
     if (newName === trip.trip_name) return;
     const updated = await updateTripName(trip._id, newName);
@@ -130,7 +140,7 @@ function TripDetails() {
               <h1 className="trip-name">{trip.trip_name}</h1>
             )}
             <Attendees attendees={trip.attendees} adminUser={trip.user} />
-            {isAuth ? (
+            {isAuth && params.tripId ? (
               <div className="invite">
                 <InviteFriend
                   renderToast={renderToast}
@@ -169,12 +179,11 @@ function TripDetails() {
                 itinerary={itinerary}
                 setItinerary={setItinerary}
                 renderToast={renderToast}
-                setTrip={setTrip}
-                tripId={params.tripId}
+                tripId={params.tripId || ''}
                 isAuth={isAuth}
               />
             </NavContextProvider>
-            {isAuth ? (
+            {isAuth && params.tripId ? (
               <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
             ) : null}
           </div>

@@ -9,14 +9,15 @@ import {
   PopoverCloseButton,
   Button
 } from '@chakra-ui/react';
-import { useContext, useRef, useState } from 'react';
+import { MutableRefObject, useContext, useRef, useState } from 'react';
 import UserContext from '../../../Context/UserContext';
 import { inviteUser } from '../../../Utils/TripService';
+import { InviteFriendsProps } from '../../../../types/props';
 
-function InviteFriend({ renderToast, tripId }) {
+function InviteFriend({ renderToast, tripId }: InviteFriendsProps) {
   const [activeUser] = useContext(UserContext);
   const [inviteEmail, setInviteEmail] = useState('');
-  const inviteRef = useRef();
+  const inviteRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const handleInvite = async () => {
     if (activeUser.email === inviteEmail) {

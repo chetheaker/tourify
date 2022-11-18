@@ -23,7 +23,7 @@ export type StopsListProps = {
   stops: Stop[],
   isEdit: boolean,
   setStops: React.Dispatch<React.SetStateAction<Stop[]>>,
-  renderToast: (title: string, status: string, message: string) => void
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void
 };
 
 export type StopProps = StopsListProps &
@@ -56,7 +56,7 @@ export type AttendeesProps = {
 
 export type DeleteTripProps = {
   tripId: string,
-  renderToast: (title: string, status: string, message: string) => void
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void
 };
 
 export type InviteFriendsProps = DeleteTripProps;
@@ -73,26 +73,27 @@ export type NoteProps = {
   deleteNote: (note: Note) => void,
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
   dayIndex: number,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
 };
 
 export type NotesProps = {
   notesInputActive: boolean,
   notes: Note[],
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>,
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
   dayIndex: number,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
 };
 
-export type PacesProps = {
+export type PlacesProps = {
   placesInputActive: boolean,
   places: Place[],
   setPlaces: React.Dispatch<React.SetStateAction<Place[]>>,
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
   dayIndex: number,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
 };
 
@@ -101,16 +102,14 @@ export type ItineraryDayProps = {
   index: number,
   itinerary: Itinerary[],
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
-  dayIndex: number,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
 };
 
 export type ItineraryListProps = {
   itinerary: Itinerary[],
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
-  dayIndex: number,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
 };
 
@@ -118,7 +117,7 @@ export type TripItineraryProps = {
   itinerary: Itinerary[],
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
   tripId: string,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
 };
 
@@ -132,20 +131,20 @@ export type TripRouteProps = {
   setStops: React.Dispatch<React.SetStateAction<Stop[]>>,
   tripStops: Stop[],
   id: string,
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   isAuth: boolean,
-  setTrip: React.Dispatch<React.SetStateAction<Trip>>,
+  setTrip: React.Dispatch<React.SetStateAction<Trip & { user: string; }>>,
 };
 
 export type SuggestedResultProps = {
-  place: Place,
+  place: google.maps.places.PlaceResult,
   itinerary: Itinerary[],
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
   isAuth: boolean
 };
 
-export type SuggestedResults = {
-  place: Place,
+export type SuggestedResultsProps = {
+  place: Place & {stop: string},
   category: string,
   directionsResponse: google.maps.DirectionsResult | null,
   itinerary: Itinerary[],
@@ -154,7 +153,9 @@ export type SuggestedResults = {
 };
 
 export type SuggestionCategoriesProps = {
-  place: Place,
+  place: Place & {
+    stop: string;
+},
   directionsResponse: google.maps.DirectionsResult | null,
   itinerary: Itinerary[],
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,
@@ -163,7 +164,7 @@ export type SuggestionCategoriesProps = {
 
 export type TripSuggestionsProps = {
   stops: Stop[],
-  renderToast: (title: string, status: string, message: string) => void,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
   directionsResponse: google.maps.DirectionsResult | null,
   itinerary: Itinerary[],
   setItinerary: React.Dispatch<React.SetStateAction<Itinerary[]>>,

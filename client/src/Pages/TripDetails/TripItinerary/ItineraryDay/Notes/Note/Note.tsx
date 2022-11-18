@@ -2,7 +2,8 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { MdSaveAlt } from 'react-icons/md';
 import { FiEdit } from 'react-icons/fi';
 import { BiNote } from 'react-icons/bi';
-import { useRef, useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
+import { NoteProps } from '../../../../../../../types/props';
 
 function Note({
   note,
@@ -11,9 +12,9 @@ function Note({
   dayIndex,
   renderToast,
   isAuth
-}) {
+}: NoteProps) {
   const [isEdit, setIsEdit] = useState(false);
-  const noteRef = useRef();
+  const noteRef = useRef() as MutableRefObject<HTMLTextAreaElement>;
 
   const handleEditStart = () => {
     setIsEdit(true);

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './SuggestedResults.css';
 import SuggestedResult from './SuggestedResult/SuggestedResult';
 import { Skeleton } from '@chakra-ui/react';
+import { SuggestedResultsProps } from './../../../../../types/props';
 
 function SuggestedResults({
   place,
@@ -10,8 +11,8 @@ function SuggestedResults({
   itinerary,
   setItinerary,
   isAuth
-}) {
-  const [suggestedPlaces, setSuggestedPlaces] = useState([]);
+}: SuggestedResultsProps) {
+  const [suggestedPlaces, setSuggestedPlaces] = useState<google.maps.places.PlaceResult[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (!directionsResponse) return;
@@ -41,24 +42,27 @@ function SuggestedResults({
       }
 
       // eslint-disable-next-line no-undef
-      const map = new google.maps.Map(
-        document.getElementById('places-map-div'),
+      let map;
+      const mapDiv = document.getElementById('places-map-div');
+      if (mapDiv) map = new google.maps.Map(
+        mapDiv,
         {
           center: location,
           zoom: 15
         }
       );
 
-      const request = {
+      const request: google.maps.places.PlaceSearchRequest = {
         location: location,
-        radius: '2000',
-        type: [category]
+        radius: 2000,
+        type: category
       };
       // eslint-disable-next-line no-undef
-      const service = new google.maps.places.PlacesService(map);
-      service.nearbySearch(request, (results, status) => {
+      let service;
+      if (map) service = new google.maps.places.PlacesService(map);
+      if (service) service.nearbySearch(request, (results, status) => {
         if (status === 'OK') {
-          setSuggestedPlaces(results);
+          if (results) setSuggestedPlaces(results);
           setIsLoading(false);
         }
       });
@@ -87,8 +91,8 @@ function SuggestedResults({
           itinerary={itinerary}
           setItinerary={setItinerary}
           isAuth={isAuth}
-        />
-      ))}
+        />)
+      )}
     </div>
   );
 }

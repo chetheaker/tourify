@@ -3,6 +3,9 @@ import { GrLocation } from 'react-icons/gr';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Autocomplete } from '@react-google-maps/api';
 import { v4 as uuidv4 } from 'uuid';
+import { PlacesProps } from '../../../../../../types/props';
+import { FormEvent } from 'react';
+import { Place } from '../../../../../../types/models';
 
 function Places({
   placesInputActive,
@@ -12,12 +15,20 @@ function Places({
   dayIndex,
   renderToast,
   isAuth
-}) {
-  const addPlace = async (e) => {
+}: PlacesProps) {
+  const addPlace = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (e.target.place.value === '') return;
+    type TargetType = EventTarget & {
+      place: {
+        value: string
+      }
+    };
+
+    const target = e.target as TargetType;
+
+    if (target.place.value === '') return;
     const newPlace = {
-      place: e.target.place.value,
+      place: target.place.value,
       id: uuidv4()
     };
     setItinerary((prev) => {
@@ -35,11 +46,11 @@ function Places({
       return newItinerary;
     });
     setPlaces((prev) => [...prev, newPlace]);
-    e.target.place.value = '';
+    target.place.value = '';
     renderToast('Success', 'success', 'itinerary updated successfully');
   };
 
-  const deletePlace = (place) => {
+  const deletePlace = (place: Place) => {
     setItinerary((prev) => {
       const newItinerary = [];
       for (let i = 0; i < prev.length; i++) {

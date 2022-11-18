@@ -28,7 +28,7 @@ export type Note = {
 
 export type Place = {
   place: string,
-  id: string
+  id: string,
 }
 
 export type User = {

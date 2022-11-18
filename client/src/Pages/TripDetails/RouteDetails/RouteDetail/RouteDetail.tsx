@@ -3,14 +3,16 @@ import { GiPathDistance } from 'react-icons/gi';
 import { BiTimeFive, BiGasPump } from 'react-icons/bi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { Tooltip } from '@chakra-ui/react';
+import { RouteDetailProps } from '../../../../../types/props';
 
-function RouteDetail({ index, leg }) {
+function RouteDetail({ index, leg }: RouteDetailProps) {
   const calculateFuelPrice = () => {
-    const metres = leg.distance.value;
+    let metres, litresRequired, totalPrice;
+    if (leg.distance) metres = leg.distance.value;
     const pricePerLitre = 1.5;
     const metresPerLitre = 15000;
-    const litresRequired = metres / metresPerLitre;
-    const totalPrice = (litresRequired * pricePerLitre).toFixed(2);
+    if (metres) litresRequired = metres / metresPerLitre;
+    if (litresRequired) totalPrice = (litresRequired * pricePerLitre).toFixed(2);
     return totalPrice;
   };
 
@@ -38,11 +40,11 @@ function RouteDetail({ index, leg }) {
       <div className="leg-details">
         <div className="leg-detail">
           <GiPathDistance />
-          <h4>{leg.distance.text}</h4>
+          <h4>{leg.distance !== undefined && leg.distance.text}</h4>
         </div>
         <div className="leg-detail">
           <BiTimeFive />
-          <h4>{leg.duration.text}</h4>
+          <h4>{leg.duration !== undefined && leg.duration.text}</h4>
         </div>
         <div className="leg-detail">
           <BiGasPump />

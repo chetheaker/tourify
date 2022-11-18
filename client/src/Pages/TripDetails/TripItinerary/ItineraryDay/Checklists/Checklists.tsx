@@ -1,3 +1,4 @@
+//@ts-nocheck
 import './Checklists.css';
 
 function Checklists({ checklists, checklistsInputActive }) {

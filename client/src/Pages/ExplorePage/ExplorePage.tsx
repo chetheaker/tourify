@@ -1,6 +1,7 @@
 import './ExplorePage.css';
 import NavBar from '../../Components/NavBar/NavBar';
 import ExploreTripsContainer from '../../Components/ExploreTripsContainer/ExploreTripsContainer';
+import React from 'react';
 
 function ExplorePage() {
   return (

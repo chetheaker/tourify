@@ -6,6 +6,8 @@ import { MdOutlineChecklistRtl } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import Places from './Places/Places';
 import Notes from './Notes/Notes';
+import { ItineraryDayProps } from '../../../../../types/props';
+import { Place, Note } from '../../../../../types/models';
 // import Checklists from './Checklists/Checklists';
 
 function ItineraryDay({
@@ -15,10 +17,10 @@ function ItineraryDay({
   setItinerary,
   renderToast,
   isAuth
-}) {
-  const [places, setPlaces] = useState([]);
-  const [notes, setNotes] = useState([]);
-  const [checklists, setChecklists] = useState([]);
+}: ItineraryDayProps) {
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
+  // const [checklists, setChecklists] = useState([]);
   const [placesInputActive, setPlacesInputActive] = useState(false);
   const [notesInputActive, setNotesInputActive] = useState(false);
   const [checklistsInputActive, setChecklistsInputActive] = useState(false);
@@ -26,8 +28,8 @@ function ItineraryDay({
   useEffect(() => {
     setPlaces(day.places);
     setNotes(day.notes);
-    setChecklists(day.checklists);
-  }, [day.checklists, day.notes, day.places, itinerary]);
+    // setChecklists(day.checklists);
+  }, [/*day.checklists,*/ day.notes, day.places, itinerary]);
 
   const togglePlacesInput = () => {
     setPlacesInputActive(!placesInputActive);
@@ -66,7 +68,7 @@ function ItineraryDay({
       </div>
       {places.length ||
       notes.length ||
-      checklists.length ||
+      // checklists.length ||
       placesInputActive ||
       checklistsInputActive ||
       notesInputActive ? (

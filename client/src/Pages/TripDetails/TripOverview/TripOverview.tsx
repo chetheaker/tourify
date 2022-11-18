@@ -5,28 +5,40 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import { GrLocation } from 'react-icons/gr';
 import Loading from '../../../Components/Loading/Loading';
 import { useNav } from '../../../Hooks/useNav';
+import { TripOverviewProps } from '../../../../types/props';
 
-function TripOverview({ trip, directionsResponse }) {
+function TripOverview({ trip, directionsResponse }: TripOverviewProps) {
   const overviewRef = useNav('overview');
   const getTotalDistance = () => {
-    const units =
-      directionsResponse.routes[0].legs[0].distance.text.split(' ')[1];
-    const distances = directionsResponse.routes[0].legs.map(
-      (leg) => +leg.distance.text.split(' ')[0].split(',').join('')
-    );
-    return `${distances
-      .reduce((prev, cv) => cv + prev, 0)
-      .toLocaleString('en-US')} ${units}`;
+    let distances, units;
+    if (directionsResponse) {
+      if (directionsResponse.routes[0].legs[0].distance) units =
+        directionsResponse.routes[0].legs[0].distance.text.split(' ')[1];
+      distances = directionsResponse.routes[0].legs.map(
+        (leg) => {
+          if (leg.distance) return +leg.distance.text.split(' ')[0].split(',').join('')
+          return ''
+        }
+      );
+      if (distances !== undefined) return `${(distances
+        .filter(el => el !== undefined) as number[])
+        .reduce((prev, cv) => cv + prev, 0)
+        .toLocaleString('en-US')} ${units}`;
+    }
   };
 
   const getTotalTime = () => {
-    const times = directionsResponse.routes[0].legs.map((leg) =>
-      leg.duration.text.split(' ')
+    let times: string[][] = [];
+    if (directionsResponse) times = directionsResponse.routes[0].legs.map((leg) =>
+      {
+        if (leg.duration) return leg.duration.text.split(' ');
+        return ''.split(' ');
+      }
     );
     let days = 0;
     let hours = 0;
     let mins = 0;
-    times.forEach((time) => {
+    if (times) times.forEach((time) => {
       if (time[1].includes('hour')) hours += +time[0];
       else if (time[1].includes('min')) mins += +time[0];
       else if (time[1].includes('day')) days += +time[0];

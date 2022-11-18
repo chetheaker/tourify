@@ -25,18 +25,20 @@ import {
   MenuItem,
   useToast
 } from '@chakra-ui/react';
+import { SuggestedResultProps } from '../../../../../../types/props';
+import { Itinerary } from '../../../../../../types/models';
 
-function SuggestedResult({ place, itinerary, setItinerary, isAuth }) {
+function SuggestedResult({ place, itinerary, setItinerary, isAuth }: SuggestedResultProps) {
   const [placeUrl, setPlaceUrl] = useState('');
   const [isAdded, setIsAdded] = useState(false);
   const [activeDay, setActiveDay] = useState(itinerary[0].date);
   const [activeDayIndex, setActiveDayIndex] = useState(0);
-  const [placeId, setPlaceId] = useState(null);
+  const [placeId, setPlaceId] = useState<string>('');
   const toast = useToast();
 
   useEffect(() => {
-    const request = {
-      placeId: place.place_id,
+    const request: google.maps.places.PlaceDetailsRequest = {
+      placeId: place.place_id || '',
       fields: ['url']
     };
 
@@ -44,20 +46,24 @@ function SuggestedResult({ place, itinerary, setItinerary, isAuth }) {
     const location = new google.maps.LatLng(0, 0);
 
     // eslint-disable-next-line no-undef
-    const map = new google.maps.Map(document.getElementById('places-map-div'), {
+    let map;
+    const mapDiv = document.getElementById('places-map-div');
+    if (mapDiv) map = new google.maps.Map(mapDiv, {
       center: location,
       zoom: 15
     });
 
     // eslint-disable-next-line no-undef
-    const detailsService = new google.maps.places.PlacesService(map);
-    detailsService.getDetails(request, callback);
+    let detailsService;
+    if (map) detailsService = new google.maps.places.PlacesService(map);
 
-    function callback(placeRes, status) {
+    const callback: (a: google.maps.places.PlaceResult | null, b: google.maps.places.PlacesServiceStatus) => void = (placeRes, status) => {
       if (status === 'OK') {
-        setPlaceUrl(placeRes.url);
+        if (placeRes && placeRes.url) setPlaceUrl(placeRes.url);
       }
     }
+    if (detailsService) detailsService.getDetails(request, callback);
+
 
     for (let i = 0; i < itinerary.length; i++) {
       for (let j = 0; j < itinerary[i].places.length; j++) {
@@ -69,27 +75,29 @@ function SuggestedResult({ place, itinerary, setItinerary, isAuth }) {
     }
   }, [place, itinerary]);
 
-  if (placeUrl === '' || !place.photos || !place.rating) return;
+  if (placeUrl === '' || !place.photos || !place.rating) return <></>;
 
   const handlePlaceAdd = () => {
-    const newPlace = {
-      place: place.name,
-      id: uuidv4()
-    };
-    setItinerary((prev) => {
-      const newItinerary = [];
-      for (let i = 0; i < prev.length; i++) {
-        if (i === activeDayIndex) {
-          newItinerary.push({
-            ...prev[i],
-            places: [...prev[i].places, newPlace]
-          });
-        } else {
-          newItinerary.push(prev[i]);
+    if (place.name) {
+      const newPlace = {
+        place: place.name,
+        id: uuidv4()
+      };
+      setItinerary((prev) => {
+        const newItinerary: Itinerary[] = [];
+        for (let i = 0; i < prev.length; i++) {
+          if (i === activeDayIndex && newPlace) {
+            newItinerary.push({
+              ...prev[i],
+              places: [...prev[i].places, newPlace]
+            });
+          } else {
+            newItinerary.push(prev[i]);
+          }
         }
-      }
-      return newItinerary;
-    });
+        return newItinerary;
+      });
+    }
     toast({
       position: 'bottom-left',
       title: 'Success',
@@ -115,7 +123,7 @@ function SuggestedResult({ place, itinerary, setItinerary, isAuth }) {
     setIsAdded(false);
   };
 
-  const handleDayChange = (day, index) => {
+  const handleDayChange = (day: Itinerary, index: number) => {
     setActiveDay(day.date);
     setActiveDayIndex(index);
   };
@@ -164,7 +172,7 @@ function SuggestedResult({ place, itinerary, setItinerary, isAuth }) {
                   <PopoverCloseButton />
                   <PopoverHeader>Select a day in your itinerary</PopoverHeader>
                   <PopoverBody className="popover-body">
-                    <Menu className="menu">
+                    <Menu>
                       <MenuButton as={Button} rightIcon={<AiFillCaretDown />}>
                         {formatDate(activeDay)}
                       </MenuButton>

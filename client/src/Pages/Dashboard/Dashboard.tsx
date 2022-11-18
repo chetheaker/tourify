@@ -1,6 +1,6 @@
 import './Dashboard.css';
 
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import UserContext from '../../Context/UserContext';
 import TripsContainer from '../../Components/TripsContainer/TripsContainer';
