@@ -9,7 +9,7 @@ export const getUser = async () => {
   return json;
 };
 
-export const getUserByEmail = async (email) => {
+export const getUserByEmail = async (email: string) => {
   const user = await fetch(baseUrl + '/user/' + email, {
     method: 'GET',
     credentials: 'include'
@@ -18,7 +18,7 @@ export const getUserByEmail = async (email) => {
   return json;
 };
 
-export const getUserByTrip = async (id) => {
+export const getUserByTrip = async (id: string) => {
   const user = await fetch(baseUrl + '/get-user/' + id, {
     method: 'GET',
     credentials: 'include'
@@ -28,7 +28,10 @@ export const getUserByTrip = async (id) => {
   return json;
 };
 
-export const loginUser = async (user) => {
+export const loginUser = async (user: {
+  email: string,
+  password: string
+}) => {
   const res = await fetch(baseUrl + '/login', {
     method: 'POST',
     credentials: 'include',
@@ -41,7 +44,12 @@ export const loginUser = async (user) => {
   return json;
 };
 
-export const registerUser = async (user) => {
+export const registerUser = async (user: {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+}) => {
   try {
     const res = await fetch(baseUrl + '/register', {
       method: 'POST',

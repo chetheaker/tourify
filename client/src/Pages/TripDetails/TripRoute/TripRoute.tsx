@@ -4,8 +4,9 @@ import { FiEdit } from 'react-icons/fi';
 import { useState } from 'react';
 import StopInput from '../../../Components/StopInput/StopInput';
 import { updateTripRoute } from '../../../Utils/TripService';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { useNav } from '../../../Hooks/useNav';
+import { TripRouteProps } from '../../../../types/props';
 
 function TripRoute({
   tripStops,
@@ -15,7 +16,7 @@ function TripRoute({
   renderToast,
   setTrip,
   isAuth
-}) {
+}: TripRouteProps) {
   const [isEdit, setIsEdit] = useState(false);
   const routeRef = useNav('route');
 
@@ -44,7 +45,7 @@ function TripRoute({
     }
   };
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
 
     if (!destination) return; // destination is null

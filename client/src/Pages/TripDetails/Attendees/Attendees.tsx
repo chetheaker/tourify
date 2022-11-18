@@ -2,9 +2,11 @@ import { Avatar, AvatarGroup, Tooltip } from '@chakra-ui/react';
 import './Attendees.css';
 import { useEffect, useState } from 'react';
 import { getUserByEmail } from '../../../Utils/UserService';
+import { AttendeesProps } from '../../../../types/props';
+import { User } from '../../../../types/models';
 
-function Attendees({ attendees, adminUser }) {
-  const [attendeeUsers, setAttendeeUsers] = useState([]);
+function Attendees({ attendees, adminUser }: AttendeesProps) {
+  const [attendeeUsers, setAttendeeUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const getAttendees = async () => {
@@ -33,7 +35,7 @@ function Attendees({ attendees, adminUser }) {
         placement="right"
       >
         <span>
-          <AvatarGroup max="2">
+          <AvatarGroup max={2}>
             {attendeeUsers.map((user, index) => (
               <Avatar
                 name={`${user.first_name} ${user.last_name}`}

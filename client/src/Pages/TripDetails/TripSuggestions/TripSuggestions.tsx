@@ -4,6 +4,8 @@ import { Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import SuggestionCategories from './SuggestionCategories/SuggestionCategories';
 import { useNav } from '../../../Hooks/useNav';
+import { TripSuggestionsProps } from '../../../../types/props';
+import { Stop } from '../../../../types/models';
 
 function TripSuggestions({
   stops,
@@ -12,13 +14,13 @@ function TripSuggestions({
   itinerary,
   setItinerary,
   isAuth
-}) {
-  const [activeStop, setActiveStop] = useState({ stop: 'a place' });
+}: TripSuggestionsProps) {
+  const [activeStop, setActiveStop] = useState({place: '', id: '', stop: 'a place' });
   const [showCat, setShowCat] = useState(false);
   const suggestionsRef = useNav('suggestions');
 
-  const handleStopChoice = (stop) => {
-    setActiveStop(stop);
+  const handleStopChoice = (stop: Stop) => {
+    setActiveStop({...stop, place: '', id: '',});
   };
 
   const showCategories = () => {
@@ -32,7 +34,7 @@ function TripSuggestions({
     <div id="suggestions" ref={suggestionsRef}>
       <div className="heading">
         <h1>Explore:</h1>
-        <Menu className="menu">
+        <Menu>
           <MenuButton as={Button} rightIcon={<AiFillCaretDown />}>
             {activeStop.stop}
           </MenuButton>

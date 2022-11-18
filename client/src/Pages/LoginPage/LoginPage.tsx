@@ -1,12 +1,12 @@
 import './LoginPage.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../Context/UserContext';
 
 //COMPONENTS
 import SignUp from '../../Components/SignUp/SignUp';
-import SignIn from '../../Components/SignIn/SignIn.tsx';
+import SignIn from '../../Components/SignIn/SignIn';
 
 function LoginPage() {
   const navigate = useNavigate();

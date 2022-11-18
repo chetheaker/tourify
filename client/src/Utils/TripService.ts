@@ -1,3 +1,5 @@
+import { Itinerary, Stop, Trip } from "../../types/models";
+
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const getUserTrips = async () => {
@@ -10,7 +12,7 @@ export const getUserTrips = async () => {
   return trips;
 };
 
-export const createNewTrip = async (trip) => {
+export const createNewTrip = async (trip: Trip) => {
   const res = await fetch(baseUrl + '/trips/create', {
     method: 'POST',
     credentials: 'include',
@@ -24,7 +26,7 @@ export const createNewTrip = async (trip) => {
   return json;
 };
 
-export const getUserTripById = async (id) => {
+export const getUserTripById = async (id: string) => {
   const res = await fetch(baseUrl + '/trips/' + id, {
     method: 'GET',
     credentials: 'include'
@@ -33,7 +35,7 @@ export const getUserTripById = async (id) => {
   return trip;
 };
 
-export const updateTripName = async (id, newName) => {
+export const updateTripName = async (id: string, newName: string) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/name', {
     method: 'PUT',
     credentials: 'include',
@@ -46,7 +48,7 @@ export const updateTripName = async (id, newName) => {
   return json;
 };
 
-export const updateTripRoute = async (id, newRoute) => {
+export const updateTripRoute = async (id: string, newRoute: Stop[]) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/route', {
     method: 'PUT',
     credentials: 'include',
@@ -59,7 +61,7 @@ export const updateTripRoute = async (id, newRoute) => {
   return json;
 };
 
-export const updateTripItinerary = async (id, newItinerary) => {
+export const updateTripItinerary = async (id: string, newItinerary: Itinerary[]) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/itinerary', {
     method: 'PUT',
     credentials: 'include',
@@ -73,7 +75,7 @@ export const updateTripItinerary = async (id, newItinerary) => {
   return json;
 };
 
-export const deleteTrip = async (id) => {
+export const deleteTrip = async (id: string) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/delete', {
     method: 'DELETE',
     credentials: 'include',
@@ -106,7 +108,7 @@ export const getFriendTrips = async () => {
   return json;
 };
 
-export const inviteUser = async (id, email) => {
+export const inviteUser = async (id: string, email: string) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/invite/' + email, {
     method: 'POST',
     credentials: 'include',
@@ -120,7 +122,7 @@ export const inviteUser = async (id, email) => {
   return json;
 };
 
-export const acceptInvite = async (id) => {
+export const acceptInvite = async (id: string) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/accept', {
     method: 'PUT',
     credentials: 'include',
@@ -134,7 +136,7 @@ export const acceptInvite = async (id) => {
   return json;
 };
 
-export const declineInvite = async (id) => {
+export const declineInvite = async (id: string) => {
   const res = await fetch(baseUrl + '/trips/' + id + '/decline', {
     method: 'PUT',
     credentials: 'include',

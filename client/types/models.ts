@@ -11,8 +11,8 @@ export type Trip = {
 export type Stop = {
   id: string,
   stop: string,
-  departure: boolean,
-  arrival: boolean,
+  departure: boolean | string,
+  arrival: boolean | string,
 }
 
 export type Itinerary = {
@@ -28,7 +28,7 @@ export type Note = {
 
 export type Place = {
   place: string,
-  id: string
+  id: string,
 }
 
 export type User = {

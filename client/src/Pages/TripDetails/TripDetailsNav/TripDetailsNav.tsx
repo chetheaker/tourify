@@ -5,10 +5,10 @@ import { NavContext } from '../../../Context/NavContext';
 function TripDetailsNav() {
   const { activeNavLink, setActiveNavLink } = useContext(NavContext);
 
-  const handleClick = (id, scrollId) => {
+  const handleClick = (id: string, scrollId: string) => {
     setActiveNavLink(id);
     const elementToShow = document.getElementById(scrollId);
-    elementToShow.scrollIntoView({ behavior: 'smooth' });
+    if (elementToShow) elementToShow.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

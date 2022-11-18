@@ -2,6 +2,9 @@ import './Notes.css';
 import { v4 as uuidv4 } from 'uuid';
 import { BiNote } from 'react-icons/bi';
 import Note from './Note/Note';
+import { NotesProps } from '../../../../../../types/props';
+import { FormEvent } from 'react';
+import { Note as NoteType } from '../../../../../../types/models';
 
 function Notes({
   notesInputActive,
@@ -11,12 +14,20 @@ function Notes({
   dayIndex,
   renderToast,
   isAuth
-}) {
-  const addNote = (e) => {
+}: NotesProps) {
+  const addNote = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (e.target.note.value === '') return;
+    type TargetType = EventTarget & {
+      note: {
+        value: string
+      }
+    };
+
+    const target = e.target as TargetType;
+
+    if (target.note.value === '') return;
     const newNote = {
-      note: e.target.note.value,
+      note: target.note.value,
       id: uuidv4()
     };
     setItinerary((prev) => {
@@ -34,11 +45,11 @@ function Notes({
       return newItinerary;
     });
     setNotes((prev) => [...prev, newNote]);
-    e.target.note.value = '';
+    target.note.value = '';
     renderToast('Success', 'success', 'itinerary successfully updated');
   };
 
-  const deleteNote = (note) => {
+  const deleteNote = (note: NoteType) => {
     setItinerary((prev) => {
       const newItinerary = [];
       for (let i = 0; i < prev.length; i++) {

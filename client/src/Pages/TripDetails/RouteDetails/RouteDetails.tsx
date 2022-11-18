@@ -1,7 +1,8 @@
 import './RouteDetails.css';
 import RouteDetail from './RouteDetail/RouteDetail';
+import { RouteDetailsProps } from '../../../../types/props';
 
-function RouteDetails({ directionsResponse }) {
+function RouteDetails({ directionsResponse }: RouteDetailsProps) {
   return (
     <div className="route-details">
       {directionsResponse

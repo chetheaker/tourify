@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './SuggestionCategories.css';
 import SuggestedResults from '../SuggestedResults/SuggestedResults';
+import { SuggestionCategoriesProps } from '../../../../../types/props';
 
 function SuggestionCategories({
   place,
@@ -8,10 +9,10 @@ function SuggestionCategories({
   itinerary,
   setItinerary,
   isAuth
-}) {
+}: SuggestionCategoriesProps) {
   const [active, setActive] = useState('tourist_attraction');
 
-  const handleCategoryChange = (category) => {
+  const handleCategoryChange = (category: string) => {
     setActive(category);
   };
 

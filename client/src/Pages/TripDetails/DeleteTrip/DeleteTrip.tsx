@@ -1,5 +1,5 @@
-import './DeleteProfile.css';
-import { useRef } from 'react';
+import './DeleteTrip.css';
+
 import {
   AlertDialog,
   AlertDialogBody,
@@ -10,26 +10,29 @@ import {
   Button,
   useDisclosure
 } from '@chakra-ui/react';
-import { deleteUser } from '../../../Utils/UserService';
+import { MutableRefObject, useRef } from 'react';
+import { deleteTrip } from '../../../Utils/TripService';
+import { useNavigate } from 'react-router-dom';
+import { DeleteTripProps } from '../../../../types/props';
 
-function DeleteProfile({ handleLogOut }) {
-  const cancelRef = useRef();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+function DeleteTrip({ tripId, renderToast }: DeleteTripProps) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef() as MutableRefObject<HTMLButtonElement>;
+  const navigate = useNavigate();
 
-  const handleProfileDelete = async () => {
-    const res = await deleteUser();
+  const handleTripDelete = async () => {
+    const res = await deleteTrip(tripId);
     if (res.acknowledged) {
-      onClose();
-      await handleLogOut();
+      renderToast('Success', 'success', 'Trip deleted successfully');
+      navigate('/dashboard');
     }
+    onClose();
   };
 
   return (
     <>
-      <div className="delete-profile">
-        <Button colorScheme="red" onClick={onOpen}>
-          Delete Profile
-        </Button>
+      <div className="delete" onClick={onOpen}>
+        <Button colorScheme="red">Delete Trip</Button>
       </div>
       <AlertDialog
         isOpen={isOpen}
@@ -39,7 +42,7 @@ function DeleteProfile({ handleLogOut }) {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Profile
+              Delete Trip
             </AlertDialogHeader>
 
             <AlertDialogBody>
@@ -50,7 +53,7 @@ function DeleteProfile({ handleLogOut }) {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={handleProfileDelete} ml={3}>
+              <Button colorScheme="red" onClick={handleTripDelete} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -61,4 +64,4 @@ function DeleteProfile({ handleLogOut }) {
   );
 }
 
-export default DeleteProfile;
+export default DeleteTrip;

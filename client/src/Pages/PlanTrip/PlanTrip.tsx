@@ -5,13 +5,14 @@ import { Autocomplete } from '@react-google-maps/api';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import './PlanTrip.css';
-import { useRef } from 'react';
+import { FormEvent, MutableRefObject, useRef } from 'react';
 import { createNewTrip } from '../../Utils/TripService';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
+import { Itinerary, Stop, Trip } from '../../../types/models';
 
 function PlanTrip() {
-  const dateRef = useRef();
+  const dateRef = useRef() as MutableRefObject<HTMLInputElement>;
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -39,7 +40,7 @@ function PlanTrip() {
     return [new Date(start), new Date(end)];
   };
 
-  const monthFormat = (month) => {
+  const monthFormat = (month: string) => {
     switch (month) {
       case 'January':
         return '1';
@@ -68,11 +69,23 @@ function PlanTrip() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    type TargetType = EventTarget & {
+      start: {
+        value: string
+      },
+      end: {
+        value: string
+      },
+      tripName: {
+        value: string
+      }
+    }
     e.preventDefault();
+    const target = e.target as TargetType;
 
-    const start = e.target.start.value;
-    const end = e.target.end.value;
+    const start = target.start.value;
+    const end = target.end.value;
 
     if (!start || !end) {
       toast({
@@ -86,49 +99,54 @@ function PlanTrip() {
       return;
     }
     const dates = formatDates();
-    const name = e.target.tripName.value || 'My Amazing Road Trip';
+    const name = target.tripName.value || 'My Amazing Road Trip';
 
-    const startLocation = {
-      stop: start,
-      id: uuidv4(),
-      depature: dates[0],
-      arrival: false
-    };
+    if (dates) {
+      const startLocation = {
+        stop: start,
+        id: uuidv4(),
+        depature: dates[0].toISOString(),
+        arrival: false
+      } as unknown as Stop;
+  
+      const endLocation = {
+        stop: end,
+        id: uuidv4(),
+        depature: false,
+        arrival: dates[1].toISOString()
+      } as unknown as Stop;
+  
+      const itinerary = getItineraryDates(dates[0].toISOString(), dates[1].toISOString());
+  
+      const trip: Trip = {
+        _id: '',
+        attendees: [],
+        trip_name: name,
+        start_date: dates[0].toISOString(),
+        end_date: dates[1].toISOString(),
+        stops: [startLocation, endLocation],
+        itinerary: itinerary
+      };
 
-    const endLocation = {
-      stop: end,
-      id: uuidv4(),
-      depature: false,
-      arrival: dates[1]
-    };
+      const res = await createNewTrip(trip);
+      const tripId = res.insertedId;
+      navigate('/trips/' + tripId);
 
-    const itinerary = getItineraryDates(dates[0], dates[1]);
-
-    const trip = {
-      trip_name: name,
-      start_date: dates[0],
-      end_date: dates[1],
-      stops: [startLocation, endLocation],
-      itinerary: itinerary
-    };
-
-    const res = await createNewTrip(trip);
-    const tripId = res.insertedId;
-    navigate('/trips/' + tripId);
+    }
   };
 
-  const getItineraryDates = (start, end) => {
+  const getItineraryDates = (start: string, end: string) => {
     let date1 = Date.parse(start);
     const date2 = Date.parse(end);
 
     const itinerary = [];
     while (date1 <= date2) {
       itinerary.push({
-        date: new Date(date1),
-        checklists: [],
+        date: new Date(date1).toISOString(),
+        // checklists: [],
         notes: [],
         places: []
-      });
+      } as Itinerary);
       date1 += 1000 * 60 * 60 * 24;
     }
 
