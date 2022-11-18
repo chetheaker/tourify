@@ -43,3 +43,4 @@ app.use(tripsRouter);
 app.use(paymentsRouter);
 // SERVER LISTENING
 app.listen(PORT, function () { return console.log("Server running at http://".concat(HOST, ":").concat(PORT)); });
+module.exports = app;

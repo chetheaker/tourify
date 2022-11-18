@@ -13,9 +13,9 @@ export type Trip = {
 export type Stop = {
     id: string,
     stop: string,
-    departure: string,
-    arrival: boolean
-}
+    departure: boolean,
+    arrival: boolean,
+  }
 
 export type Itinerary = {
     date: string,
