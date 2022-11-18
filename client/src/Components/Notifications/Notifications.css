@@ -1,9 +1,3 @@
-.notifications-container {
-  width: 500px;
-  display: flex;
-  gap: 10px;
-}
-
 .notif-btn {
   position: relative;
 }
