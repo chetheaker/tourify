@@ -9,7 +9,7 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 function SuccessPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
-  const session_id = searchParams.get('session_id');
+  const session_id = searchParams.get('session_id') || '';
   const navigate = useNavigate();
 
   useEffect(() => {

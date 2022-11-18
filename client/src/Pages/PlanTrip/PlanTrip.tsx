@@ -9,6 +9,7 @@ import { FormEvent, MutableRefObject, useRef } from 'react';
 import { createNewTrip } from '../../Utils/TripService';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
+import { Itinerary, Stop, Trip } from '../../../types/models';
 
 function PlanTrip() {
   const dateRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -104,23 +105,25 @@ function PlanTrip() {
       const startLocation = {
         stop: start,
         id: uuidv4(),
-        depature: dates[0],
+        depature: dates[0].toISOString(),
         arrival: false
-      };
+      } as unknown as Stop;
   
       const endLocation = {
         stop: end,
         id: uuidv4(),
         depature: false,
-        arrival: dates[1]
-      };
+        arrival: dates[1].toISOString()
+      } as unknown as Stop;
   
       const itinerary = getItineraryDates(dates[0].toISOString(), dates[1].toISOString());
   
-      const trip = {
+      const trip: Trip = {
+        _id: '',
+        attendees: [],
         trip_name: name,
-        start_date: dates[0],
-        end_date: dates[1],
+        start_date: dates[0].toISOString(),
+        end_date: dates[1].toISOString(),
         stops: [startLocation, endLocation],
         itinerary: itinerary
       };
@@ -139,11 +142,11 @@ function PlanTrip() {
     const itinerary = [];
     while (date1 <= date2) {
       itinerary.push({
-        date: new Date(date1),
-        checklists: [],
+        date: new Date(date1).toISOString(),
+        // checklists: [],
         notes: [],
         places: []
-      });
+      } as Itinerary);
       date1 += 1000 * 60 * 60 * 24;
     }
 

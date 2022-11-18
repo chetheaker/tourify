@@ -122,7 +122,7 @@ function SignUp({ setRightActive, rightActive }: SignUpProps) {
       renderErrorToast('Email already exists');
       return;
     }
-    await loginUser({ email: email, password: password });
+    await loginUser({ email, password });
     setActiveUser(res);
     navigate('/dashboard');
   };

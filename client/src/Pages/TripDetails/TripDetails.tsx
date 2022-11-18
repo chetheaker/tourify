@@ -54,7 +54,7 @@ function TripDetails() {
 
   useEffect(() => {
     const getTrip = async () => {
-      const id = params.tripId;
+      const id = params.tripId || '';
       const t = await getUserTripById(id);
       if (!t._id) {
         navigate('/dashboard');
