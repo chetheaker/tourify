@@ -101,14 +101,18 @@ function TripDetails() {
 
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: stops[0].stop,
-      destination: stops[trip.stops.length - 1].stop,
-      // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.DRIVING,
-      waypoints: [...waypoints]
-    });
-    setDirectionsResponse(results);
+    try {
+      const results = await directionsService.route({
+        origin: stops[0].stop,
+        destination: stops[trip.stops.length - 1].stop,
+        // eslint-disable-next-line no-undef
+        travelMode: google.maps.TravelMode.DRIVING,
+        waypoints: [...waypoints]
+      });
+      setDirectionsResponse(results);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

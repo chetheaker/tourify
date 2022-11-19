@@ -5,7 +5,7 @@ import UserContext from './Context/UserContext';
 function PublicRoutes() {
   const [activeUser] = useContext(UserContext);
 
-  return !activeUser ? <Outlet /> : <Navigate to="/dashboard" />;
+  return activeUser.email === '' ? <Outlet /> : <Navigate to="/dashboard" />;
 }
 
 export default PublicRoutes;

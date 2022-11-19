@@ -118,9 +118,13 @@ function PlanTrip() {
   
       const itinerary = getItineraryDates(dates[0].toISOString(), dates[1].toISOString());
   
-      const trip: Trip = {
-        _id: '',
-        attendees: [],
+      const trip: {
+        trip_name: string,
+        start_date: string,
+        end_date: string,
+        stops: Stop[],
+        itinerary: Itinerary[]
+      } = {
         trip_name: name,
         start_date: dates[0].toISOString(),
         end_date: dates[1].toISOString(),
@@ -130,6 +134,8 @@ function PlanTrip() {
 
       const res = await createNewTrip(trip);
       const tripId = res.insertedId;
+      console.log(trip);
+      
       navigate('/trips/' + tripId);
 
     }

@@ -1,4 +1,4 @@
-import { Itinerary, Stop, Trip } from "../../types/models";
+import { Itinerary, Stop } from "../../types/models";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -12,7 +12,13 @@ export const getUserTrips = async () => {
   return trips;
 };
 
-export const createNewTrip = async (trip: Trip) => {
+export const createNewTrip = async (trip: {
+  trip_name: string,
+  start_date: string,
+  end_date: string,
+  stops: Stop[],
+  itinerary: Itinerary[]
+}) => {
   const res = await fetch(baseUrl + '/trips/create', {
     method: 'POST',
     credentials: 'include',

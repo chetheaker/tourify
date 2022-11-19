@@ -21,7 +21,7 @@ function NavBar() {
             className="logo"
             onClick={() => navigate('/dashboard')}
           ></button>
-          <button onClick={() => navigate('/dashboard')}>
+          <button className="dashboard-link" onClick={() => navigate('/dashboard')}>
             <FaHome color="#1FC28B" size="2em" className="icon" />
             <span>Dashboard</span>
           </button>
@@ -35,7 +35,7 @@ function NavBar() {
             <Hamburger toggled={isOpen} toggle={setIsOpen} color="#1FC28B" />
           </button>
           <Notifications />
-          <button onClick={() => navigate('/profile')}>
+          <button className="profile-link" onClick={() => navigate('/profile')}>
             <FaUser color="#1FC28B" size="1.5em" className="icon" />
           </button>
         </div>

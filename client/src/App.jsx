@@ -20,7 +20,15 @@ const LoginPage = lazy(() => import('./Pages/LoginPage/LoginPage'));
 const libraries = ['places'];
 
 function App() {
-  const [activeUser, setActiveUser] = useState(null);
+  const [activeUser, setActiveUser] = useState({
+    _id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    notifications: [],
+    account_type: '',
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   const { isLoaded } = useJsApiLoader({
