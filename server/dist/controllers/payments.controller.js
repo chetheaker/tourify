@@ -61,11 +61,10 @@ var checkout = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                     })];
             case 1:
                 session = _a.sent();
-                res.status(201);
-                res.send({ url: session.url });
+                res.status(201).send({ url: session.url });
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
@@ -88,7 +87,7 @@ var authenticatePurchase = function (req, res) { return __awaiter(void 0, void 0
             case 1:
                 session = _a.sent();
                 if (session.payment_status !== 'paid') {
-                    res.send({ authenticated: false });
+                    res.status(400).send({ authenticated: false });
                     return [2 /*return*/];
                 }
                 return [4 /*yield*/, usersModel.upgradeAccountToPro(req.user.email)];
@@ -97,7 +96,7 @@ var authenticatePurchase = function (req, res) { return __awaiter(void 0, void 0
                 res.send({ authenticated: true });
                 return [3 /*break*/, 4];
             case 3:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 4;
             case 4: return [3 /*break*/, 6];
             case 5:

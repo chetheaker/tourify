@@ -43,13 +43,13 @@ var login = function (req, res, next) { return __awaiter(void 0, void 0, void 0,
     return __generator(this, function (_a) {
         passport.authenticate('local', function (err, user) {
             if (err)
-                console.log(err);
+                console.warn(err);
             if (!user)
-                res.send({ user: false });
+                res.status(401).send({ user: false });
             else {
                 req.logIn(user, function (err) {
                     if (err)
-                        console.log(err);
+                        console.warn(err);
                     else
                         res.send(user);
                 });
@@ -60,11 +60,13 @@ var login = function (req, res, next) { return __awaiter(void 0, void 0, void 0,
 }); };
 var logout = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
+        //Todo: add logout session removal
         req.logout(function (err) {
             if (err)
-                console.log(err);
+                console.warn(err);
+            //Might Break
             else
-                res.send({});
+                res.status(205).send({});
         });
         return [2 /*return*/];
     });
@@ -79,9 +81,8 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 return [4 /*yield*/, usersModel.findUserByEmail(email)];
             case 1:
                 isFound = _b.sent();
-                console.log(isFound);
                 if (isFound) {
-                    res.send(JSON.stringify({ existingEmail: true }));
+                    res.status(400).send(JSON.stringify({ existingEmail: true }));
                     return [2 /*return*/];
                 }
                 return [4 /*yield*/, bcrypt.hash(password, 10)];
@@ -99,12 +100,11 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
             case 3:
                 user = _b.sent();
                 res.status(201);
-                console.log('create user', user);
                 res.send(user);
                 return [3 /*break*/, 5];
             case 4:
                 e_1 = _b.sent();
-                console.log(e_1);
+                console.warn(e_1);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -120,20 +120,21 @@ var get = function (req, res) { return __awaiter(void 0, void 0, void 0, functio
                 return [4 /*yield*/, usersModel.findUserByEmail(req.user.email)];
             case 1:
                 user = _a.sent();
-                res.send(user);
+                res.status(200).send(user);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ id: false });
+                res.status(404).send({ id: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_2 = _a.sent();
-                console.log(e_2);
+                console.warn(e_2);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
     });
 }); };
+//Might Break
 var getUserByEmail = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, e_3;
     return __generator(this, function (_a) {
@@ -144,15 +145,15 @@ var getUserByEmail = function (req, res) { return __awaiter(void 0, void 0, void
                 return [4 /*yield*/, usersModel.findUserByEmail(req.params.email)];
             case 1:
                 user = _a.sent();
-                res.send(user);
+                res.status(200).send(user);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(404).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_3 = _a.sent();
-                console.log('Error getuserByEmail in controller', e_3);
+                console.warn('Error getuserByEmail in controller', e_3);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -172,15 +173,15 @@ var deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, usersModel.deleteOne(id)];
             case 2:
                 deleted = _a.sent();
-                res.send(deleted);
+                res.status(200).send(deleted);
                 return [3 /*break*/, 4];
             case 3:
-                res.send({ user: false });
+                res.status(404).send({ user: false });
                 _a.label = 4;
             case 4: return [3 /*break*/, 6];
             case 5:
                 e_4 = _a.sent();
-                console.log('Error deleteUser in controller', e_4);
+                console.warn('Error deleteUser in controller', e_4);
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }

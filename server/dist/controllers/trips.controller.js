@@ -58,15 +58,15 @@ var getUserTrips = function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [4 /*yield*/, tripsModel.findTripsByEmail(req.user.email)];
             case 1:
                 trips = _a.sent();
-                res.send(trips);
+                res.status(200).send(trips);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_1 = _a.sent();
-                console.log("error getting users' trips", e_1);
+                console.warn("error getting users' trips", e_1);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -82,15 +82,15 @@ var getExploreTrips = function (req, res) { return __awaiter(void 0, void 0, voi
                 return [4 /*yield*/, tripsModel.getAllTrips()];
             case 1:
                 trips = _a.sent();
-                res.send(trips);
+                res.status(200).send(trips);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_2 = _a.sent();
-                console.log("error getting users' trips", e_2);
+                console.warn("error getting users' trips", e_2);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -106,15 +106,15 @@ var getFriendTrips = function (req, res) { return __awaiter(void 0, void 0, void
                 return [4 /*yield*/, tripsModel.getFriendTrips(req.user.email)];
             case 1:
                 trips = _a.sent();
-                res.send(trips);
+                res.status(200).send(trips);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_3 = _a.sent();
-                console.log("error getting users' trips", e_3);
+                console.warn("error getting users' trips", e_3);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -131,18 +131,18 @@ var getUserTrip = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, tripsModel.findTripById(id)];
             case 1:
                 trip = _a.sent();
-                if (trip === null)
-                    res.send({ _id: false });
+                if (!trip)
+                    res.status(404).send({ _id: false });
                 else
-                    res.send(trip);
+                    res.status(200).send(trip);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_4 = _a.sent();
-                console.log('error getting trip', e_4);
+                console.warn('error getting trip', e_4);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -154,7 +154,6 @@ var createTrip = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 4, , 5]);
-                console.log('user', req.user);
                 if (!req.user) return [3 /*break*/, 2];
                 trip = __assign(__assign({}, req.body), { user: req.user.email, checklists: [], attendees: [] });
                 return [4 /*yield*/, tripsModel.postTrip(trip)];
@@ -164,12 +163,12 @@ var createTrip = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 res.send(result);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_5 = _a.sent();
-                console.log('error getting trip', e_5);
+                console.warn('error getting trip', e_5);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -187,15 +186,15 @@ var updateTripName = function (req, res) { return __awaiter(void 0, void 0, void
                 return [4 /*yield*/, tripsModel.updateName(id, name_1)];
             case 1:
                 updated = _a.sent();
-                res.send(updated);
+                res.status(200).send(updated);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_6 = _a.sent();
-                console.log('error getting trip', e_6);
+                console.warn('error getting trip', e_6);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -213,15 +212,15 @@ var updateTripRoute = function (req, res) { return __awaiter(void 0, void 0, voi
                 return [4 /*yield*/, tripsModel.updateRoute(id, route)];
             case 1:
                 updated = _a.sent();
-                res.send(updated);
+                res.status(200).send(updated);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_7 = _a.sent();
-                console.log('error updating trip route', e_7);
+                console.warn('error updating trip route', e_7);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -239,15 +238,15 @@ var updateTripItinerary = function (req, res) { return __awaiter(void 0, void 0,
                 return [4 /*yield*/, tripsModel.updateItinerary(id, itinerary)];
             case 1:
                 updated = _a.sent();
-                res.send(updated);
+                res.status(200).send(updated);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_8 = _a.sent();
-                console.log('Error updateTripItinerary in controller', e_8);
+                console.warn('Error updateTripItinerary in controller', e_8);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -264,15 +263,15 @@ var deleteTrip = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, tripsModel.deleteOne(id)];
             case 1:
                 deleted = _a.sent();
-                res.send(deleted);
+                res.status(204).send(deleted);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_9 = _a.sent();
-                console.log('Error deleteTrip in controller', e_9);
+                console.warn('Error deleteTrip in controller', e_9);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -289,15 +288,15 @@ var getTripUser = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, tripsModel.getTripUser(id)];
             case 1:
                 user = _a.sent();
-                res.send(user);
+                res.status(200).send(user);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_10 = _a.sent();
-                console.log('Error in getTripUser controller', e_10);
+                console.warn('Error in getTripUser controller', e_10);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -314,15 +313,15 @@ var inviteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, tripsModel.inviteUser(id, email)];
             case 1:
                 result = _b.sent();
-                res.send(result);
+                res.status(200).send(result);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _b.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_11 = _b.sent();
-                console.log('Error inviting user', e_11);
+                console.warn('Error inviting user', e_11);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -340,15 +339,15 @@ var acceptInvite = function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [4 /*yield*/, tripsModel.acceptInvite(id, email)];
             case 1:
                 accepted = _a.sent();
-                res.send(accepted);
+                res.status(200).send(accepted);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_12 = _a.sent();
-                console.log('error accepting invite', e_12);
+                console.warn('error accepting invite', e_12);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -366,15 +365,15 @@ var declineInvite = function (req, res) { return __awaiter(void 0, void 0, void 
                 return [4 /*yield*/, tripsModel.declineInvite(id, email)];
             case 1:
                 declined = _a.sent();
-                res.send(declined);
+                res.status(200).send(declined);
                 return [3 /*break*/, 3];
             case 2:
-                res.send({ user: false });
+                res.status(401).send({ user: false });
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_13 = _a.sent();
-                console.log('error declining invite', e_13);
+                console.warn('error declining invite', e_13);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
