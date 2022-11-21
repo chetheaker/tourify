@@ -9,7 +9,7 @@ import { FormEvent, MutableRefObject, useRef } from 'react';
 import { createNewTrip } from '../../Utils/TripService';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
-import { Itinerary, Stop, Trip } from '../../../types/models';
+import { Itinerary, Stop } from '../../../types/models';
 
 function PlanTrip() {
   const dateRef = useRef() as MutableRefObject<HTMLInputElement>;

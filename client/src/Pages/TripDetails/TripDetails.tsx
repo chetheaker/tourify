@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import NavContextProvider from '../../Context/NavContext';
 import { useToast } from '@chakra-ui/react';
 import { FocusEvent, useContext, useEffect, useState } from 'react';
-import { getUserTripById, updateTripName } from '../../Utils/TripService';
+import { deleteTrip, getUserTripById, updateTripName } from '../../Utils/TripService';
 import NavBar from '../../Components/NavBar/NavBar';
 import Loading from '../../Components/Loading/Loading';
 import Map from '../../Components/Map/Map';
@@ -91,7 +91,7 @@ function TripDetails() {
   };
 
   const calculateRoute = async () => {
-    if (!trip) return;
+    if (!trip.trip_name) return;
 
     setDirectionsResponse(null);
 
@@ -111,7 +111,15 @@ function TripDetails() {
       });
       setDirectionsResponse(results);
     } catch (err) {
-      console.log(err);
+      const googleErr = err as {code: string | undefined};
+      
+      if (googleErr.code === 'ZERO_RESULTS') {
+        renderToast('No route available', 'error', 'We could not find a way to generate a route with the stops provided');
+
+        deleteTrip(trip._id);
+        navigate(-1);
+      }
+      
     }
   };
 
