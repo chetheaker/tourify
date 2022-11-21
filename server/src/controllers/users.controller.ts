@@ -8,11 +8,11 @@ const passport = require('passport');
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate('local', (err: Error, user: User) => {
-    if (err) console.log(err);
-    if (!user) res.send({ user: false });
+    if (err) console.warn(err);
+    if (!user) res.status(401).send({ user: false });
     else {
       req.logIn(user, (err) => {
-        if (err) console.log(err);
+        if (err) console.warn(err);
         else res.send(user);
       });
     }
@@ -20,9 +20,11 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const logout = async (req: Request, res: Response) => {
+  //Todo: add logout session removal
   req.logout(function (err) {
-    if (err) console.log(err);
-    else res.send({});
+    if (err) console.warn(err);
+    //Might Break
+    else res.status(205).send({});
   });
 };
 
@@ -31,9 +33,8 @@ const register = async (req: Request, res: Response) => {
     const { email, first_name, last_name, password } = req.body;
     // check username doesn't exist
     const isFound = await usersModel.findUserByEmail(email);
-    console.log(isFound);
     if (isFound) {
-      res.send(JSON.stringify({ existingEmail: true }));
+      res.status(400).send(JSON.stringify({ existingEmail: true }));
       return;
     }
     // hash pw
@@ -48,10 +49,9 @@ const register = async (req: Request, res: Response) => {
     };
     const user = await usersModel.postUser(newUser);
     res.status(201);
-    console.log('create user', user);
     res.send(user);
   } catch (e) {
-    console.log(e);
+    console.warn(e);
   }
 };
 
@@ -59,25 +59,26 @@ const get = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.user.email);
-      res.send(user);
+      res.status(200).send(user);
     } else {
-      res.send({ id: false });
+      res.status(404).send({ id: false });
     }
   } catch (e) {
-    console.log(e);
+    console.warn(e);
   }
 };
 
-const getUserByEmail = async (req: Request, res: Response) => {
+//Might Break
+const getUserByEmail = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const user = await usersModel.findUserByEmail(req.params.email);
-      res.send(user);
+      res.status(200).send(user);
     } else {
-      res.send({ user: false });
+      res.status(404).send({ user: false });
     }
   } catch (e) {
-    console.log('Error getuserByEmail in controller', e);
+    console.warn('Error getuserByEmail in controller', e);
   }
 };
 
@@ -87,12 +88,12 @@ const deleteUser = async (req: MyRequest, res: Response) => {
       const user = await usersModel.findUserByEmail(req.user.email);
       const id = user._id;
       const deleted = await usersModel.deleteOne(id);
-      res.send(deleted);
+      res.status(200).send(deleted);
     } else {
-      res.send({ user: false });
+      res.status(404).send({ user: false });
     }
   } catch (e) {
-    console.log('Error deleteUser in controller', e);
+    console.warn('Error deleteUser in controller', e);
   }
 };
 

@@ -22,10 +22,9 @@ const checkout = async (req: MyRequest, res: Response) => {
           }
         ]
       });
-      res.status(201);
-      res.send({ url: session.url });
+      res.status(201).send({ url: session.url });
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
     console.log('Error in checkout controller', e);
@@ -38,13 +37,13 @@ const authenticatePurchase = async (req: MyRequest, res: Response) => {
       const { session_id } = req.body;
       const session = await stripe.checkout.sessions.retrieve(session_id);
       if (session.payment_status !== 'paid') {
-        res.send({ authenticated: false });
+        res.status(400).send({ authenticated: false });
         return;
       }
       await usersModel.upgradeAccountToPro(req.user.email);
       res.send({ authenticated: true });
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
     console.log('Error authenticating purchase', e);

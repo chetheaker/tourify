@@ -55,3 +55,4 @@ app.use(paymentsRouter);
 // SERVER LISTENING
 app.listen(PORT, () => console.log(`Server running at http://${HOST}:${PORT}`));
 
+module.exports = app;
