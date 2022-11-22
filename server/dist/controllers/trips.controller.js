@@ -47,6 +47,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// Require google from googleapis package.
+var google = require('googleapis').google;
+// Require oAuth2 from our google instance.
+var OAuth2 = google.auth.OAuth2;
 var tripsModel = require('../models/trips.model');
 var getUserTrips = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var trips, e_1;
@@ -379,6 +383,35 @@ var declineInvite = function (req, res) { return __awaiter(void 0, void 0, void 
         }
     });
 }); };
+var exportTrip = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var events, token, oAuth2Client, calendar_1;
+    return __generator(this, function (_a) {
+        try {
+            if (req.user) {
+                events = req.body.events;
+                token = req.body.token;
+                oAuth2Client = new OAuth2(process.env.CALENDAR_CLIENT_ID, process.env.CALENDAR_SECRET);
+                oAuth2Client.setCredentials({ access_token: token });
+                calendar_1 = google.calendar({ version: "v3", auth: oAuth2Client });
+                events.forEach(function (event) {
+                    calendar_1.events.insert({
+                        calendarId: "primary",
+                        resource: event
+                    });
+                });
+                res.status(200).send({ status: 200 });
+            }
+            else {
+                res.status(401).send({ user: false, status: 401 });
+            }
+        }
+        catch (e) {
+            console.warn("error exporting trip", e);
+            res.status(500).send({ status: 500 });
+        }
+        return [2 /*return*/];
+    });
+}); };
 module.exports = {
     getUserTrips: getUserTrips,
     getExploreTrips: getExploreTrips,
@@ -392,5 +425,6 @@ module.exports = {
     inviteUser: inviteUser,
     acceptInvite: acceptInvite,
     declineInvite: declineInvite,
-    getFriendTrips: getFriendTrips
+    getFriendTrips: getFriendTrips,
+    exportTrip: exportTrip
 };

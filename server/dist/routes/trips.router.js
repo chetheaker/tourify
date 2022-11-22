@@ -13,6 +13,7 @@ router.put('/trips/:id/name', tripsController.updateTripName);
 router.put('/trips/:id/route', tripsController.updateTripRoute);
 router.put('/trips/:id/itinerary', tripsController.updateTripItinerary);
 router.delete('/trips/:id/delete', tripsController.deleteTrip);
+router.post('/trips/export', tripsController.exportTrip);
 // INVITES
 router.post('/trips/:id/invite/:email', tripsController.inviteUser);
 router.put('/trips/:id/accept', tripsController.acceptInvite);
