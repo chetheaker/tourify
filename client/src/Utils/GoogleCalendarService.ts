@@ -8,7 +8,11 @@ export const addToCalendar = async (events : CalendarEvent[], access_token: stri
       events,
       access_token,
     }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
     method: 'POST',
+    credentials: 'include'
   });
 
   const json = await res.json();

@@ -62,5 +62,9 @@ export type CalendarEvent = {
   summary: string,
   start: {
     date: string
-  }
+  },
+  end: {
+    date: string
+  },
+  description: string
 };

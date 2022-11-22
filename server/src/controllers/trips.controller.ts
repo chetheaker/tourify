@@ -1,4 +1,3 @@
-import { resolveAny } from "dns";
 import { Request, Response } from "express";
 import { MyRequest } from "../types/types";
 // Require google from googleapis package.
@@ -200,28 +199,29 @@ const declineInvite = async (req: MyRequest, res: Response) => {
 };
 
 const exportTrip = async (req: MyRequest, res: Response) => {
+  if (!req.user) {
+    res.status(401).send({ status: 401 });
+    return;
+  }
   try {
-    if (req.user) {
-      const events = req.body.events;
-      const token = req.body.token;
-      const oAuth2Client = new OAuth2(
-        process.env.CALENDAR_CLIENT_ID,
-        process.env.CALENDAR_SECRET
+    const events = req.body.events;
+    const access_token = req.body.access_token;
+    const oAuth2Client = new OAuth2(
+      process.env.CALENDAR_CLIENT_ID,
+      process.env.CALENDAR_SECRET
+    );
+    
+    oAuth2Client.setCredentials({ access_token });
+    const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+    events.forEach((event:Event) => {
+      calendar.events.insert(
+        {
+          calendarId: "primary",
+          resource: event
+        }
       );
-      oAuth2Client.setCredentials({ access_token: token });
-      const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-      events.forEach((event:Event) => {
-        calendar.events.insert(
-          {
-            calendarId: "primary",
-            resource: event
-          }
-        );
-      });
-      res.status(200).send({ status: 200 });
-    } else {
-      res.status(401).send({ user: false, status: 401 });
-    }
+    });
+    res.status(200).send({ status: 200 });
   } catch (e) {
     console.warn("error exporting trip", e);
     res.status(500).send({ status: 500 });

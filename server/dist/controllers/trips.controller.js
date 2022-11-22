@@ -387,23 +387,20 @@ var exportTrip = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     var events, token, oAuth2Client, calendar_1;
     return __generator(this, function (_a) {
         try {
-            if (req.user) {
-                events = req.body.events;
-                token = req.body.token;
-                oAuth2Client = new OAuth2(process.env.CALENDAR_CLIENT_ID, process.env.CALENDAR_SECRET);
-                oAuth2Client.setCredentials({ access_token: token });
-                calendar_1 = google.calendar({ version: "v3", auth: oAuth2Client });
-                events.forEach(function (event) {
-                    calendar_1.events.insert({
-                        calendarId: "primary",
-                        resource: event
-                    });
+            events = req.body.events;
+            token = req.body.token;
+            oAuth2Client = new OAuth2(process.env.CALENDAR_CLIENT_ID, process.env.CALENDAR_SECRET);
+            console.log(events);
+            console.log(token);
+            oAuth2Client.setCredentials({ access_token: token });
+            calendar_1 = google.calendar({ version: "v3", auth: oAuth2Client });
+            events.forEach(function (event) {
+                calendar_1.events.insert({
+                    calendarId: "primary",
+                    resource: event
                 });
-                res.status(200).send({ status: 200 });
-            }
-            else {
-                res.status(401).send({ user: false, status: 401 });
-            }
+            });
+            res.status(200).send({ status: 200 });
         }
         catch (e) {
             console.warn("error exporting trip", e);

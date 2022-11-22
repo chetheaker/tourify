@@ -46,7 +46,6 @@ function TripDetails() {
 
   const login = useGoogleLogin({
     onSuccess: tokenResponse => {
-      console.log(tokenResponse);
       sendEventsToService(tokenResponse.access_token);
     },
     onError: errorResponse => {throw new Error('Error during google auth')},
@@ -147,13 +146,18 @@ function TripDetails() {
     for (const day of itinerary) events.push(...day.places.map(place => ({
       summary: `Visit ${place.place.split(',')[0]} at ${place.place.split(',')[2]}`,
       start: {
-        date: moment(day.date).format('yyyy-mm-dd')
-      }
+        date: moment(new Date(day.date)).format('YYYY-MM-DD')
+      },
+      end: {
+        date: moment(new Date(day.date)).format('YYYY-MM-DD')
+      },
+      description: '- ' + day.notes.join('\n- ')
     })));
 
     const serviceResponse = await addToCalendar(events, accessToken);
 
     if (serviceResponse.status !== 200) renderToast('Error exporting to calendar', 'error', 'Make sure you allowed the google calendar permissions');
+    else renderToast('Itinerary exported to calendar!', 'success', 'The itinerary was successfully exported to Google Calendar');
   }
 
   useEffect(() => {
