@@ -6,6 +6,7 @@ import { getUser } from './Utils/UserService';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import { useJsApiLoader } from '@react-google-maps/api';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // COMPONENTS
 import ExplorePage from './Pages/ExplorePage/ExplorePage';
@@ -51,25 +52,28 @@ function App() {
 
   return (
     <UserContext.Provider value={[activeUser, setActiveUser]}>
-      <ChakraProvider>
-        <Suspense fallback={<Loading />}>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<PrivateRoutes />}>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/explore" element={<ExplorePage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/plan" element={<PlanTrip />} />
-                <Route path="/trips/:tripId" element={<TripDetails />} />
-                <Route path="/success" element={<SuccessPage />} />
-              </Route>
-              <Route element={<PublicRoutes />}>
-                <Route path="/" element={<LoginPage />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </Suspense>
-      </ChakraProvider>
+      <GoogleOAuthProvider 
+          clientId={process.env.REACT_APP_CALENDAR_CLIENT_ID || ''}>
+        <ChakraProvider>
+          <Suspense fallback={<Loading />}>
+            <BrowserRouter>
+              <Routes>
+                <Route element={<PrivateRoutes />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/explore" element={<ExplorePage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/plan" element={<PlanTrip />} />
+                  <Route path="/trips/:tripId" element={<TripDetails />} />
+                  <Route path="/success" element={<SuccessPage />} />
+                </Route>
+                <Route element={<PublicRoutes />}>
+                  <Route path="/" element={<LoginPage />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </Suspense>
+        </ChakraProvider>
+      </GoogleOAuthProvider>
     </UserContext.Provider>
   );
 }

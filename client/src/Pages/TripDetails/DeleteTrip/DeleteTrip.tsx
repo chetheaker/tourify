@@ -15,10 +15,14 @@ import { deleteTrip } from '../../../Utils/TripService';
 import { useNavigate } from 'react-router-dom';
 import { DeleteTripProps } from '../../../../types/props';
 
-function DeleteTrip({ tripId, renderToast }: DeleteTripProps) {
+function DeleteTrip({ tripId, renderToast, onExport }: DeleteTripProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef() as MutableRefObject<HTMLButtonElement>;
   const navigate = useNavigate();
+  const scopes = [
+    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/calendar.events'
+  ]
 
   const handleTripDelete = async () => {
     const res = await deleteTrip(tripId);
@@ -31,8 +35,9 @@ function DeleteTrip({ tripId, renderToast }: DeleteTripProps) {
 
   return (
     <>
-      <div className="delete" onClick={onOpen}>
-        <Button colorScheme="red">Delete Trip</Button>
+      <div className="delete">
+        <Button colorScheme="blue" onClick={onExport}>Export to Google Calendar</Button>
+        <Button colorScheme="red" onClick={onOpen}>Delete Trip</Button>
       </div>
       <AlertDialog
         isOpen={isOpen}

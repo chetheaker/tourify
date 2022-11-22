@@ -17,7 +17,10 @@ import DeleteTrip from './DeleteTrip/DeleteTrip';
 import UserContext from '../../Context/UserContext';
 import InviteFriend from './InviteFriend/InviteFriend';
 import Attendees from './Attendees/Attendees';
-import { Stop, Trip, Itinerary } from '../../../types/models';
+import { Stop, Trip, Itinerary, CalendarEvent } from '../../../types/models';
+import moment from 'moment';
+import { useGoogleLogin } from '@react-oauth/google';
+import { addToCalendar } from '../../Utils/GoogleCalendarService';
 
 function TripDetails() {
   const params = useParams();
@@ -40,6 +43,14 @@ function TripDetails() {
   const [isAuth, setIsAuth] = useState(false);
 
   const toast = useToast();
+
+  const login = useGoogleLogin({
+    onSuccess: tokenResponse => {
+      console.log(tokenResponse);
+      sendEventsToService(tokenResponse.access_token);
+    },
+    onError: errorResponse => {throw new Error('Error during google auth')},
+  })
 
   const renderToast = (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => {
     toast({
@@ -123,6 +134,28 @@ function TripDetails() {
     }
   };
 
+  const handleGoogleLogin = () => {
+    try {
+      login();
+    } catch (err) {
+
+    }
+  };
+
+  const sendEventsToService = async (accessToken: string) => {
+    const events: CalendarEvent[] = [];
+    for (const day of itinerary) events.push(...day.places.map(place => ({
+      summary: `Visit ${place.place.split(',')[0]} at ${place.place.split(',')[2]}`,
+      start: {
+        date: moment(day.date).format('yyyy-mm-dd')
+      }
+    })));
+
+    const serviceResponse = await addToCalendar(events, accessToken);
+
+    if (serviceResponse.status !== 200) renderToast('Error exporting to calendar', 'error', 'Make sure you allowed the google calendar permissions');
+  }
+
   useEffect(() => {
     calculateRoute();
     // eslint-disable-next-line
@@ -196,7 +229,7 @@ function TripDetails() {
               />
             </NavContextProvider>
             {isAuth && params.tripId ? (
-              <DeleteTrip tripId={params.tripId} renderToast={renderToast} />
+              <DeleteTrip tripId={params.tripId} renderToast={renderToast} onExport={handleGoogleLogin} />
             ) : null}
           </div>
         </div>

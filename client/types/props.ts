@@ -56,10 +56,14 @@ export type AttendeesProps = {
 
 export type DeleteTripProps = {
   tripId: string,
-  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
+  onExport: () => void,
 };
 
-export type InviteFriendsProps = DeleteTripProps;
+export type InviteFriendsProps = {
+  tripId: string,
+  renderToast: (title: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined, message: string) => void,
+};
 
 export type RouteDetailsProps = MapProps;
 

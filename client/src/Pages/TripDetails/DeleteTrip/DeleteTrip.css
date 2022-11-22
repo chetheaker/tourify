@@ -1,7 +1,7 @@
 .delete {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 95%;
   margin-bottom: 1rem;
 }

@@ -57,3 +57,10 @@ type NotificationInviter = {
   firstName: string,
   lastName: string
 }
+
+export type CalendarEvent = {
+  summary: string,
+  start: {
+    date: string
+  }
+};
