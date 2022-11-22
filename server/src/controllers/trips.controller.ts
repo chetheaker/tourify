@@ -208,7 +208,7 @@ const exportTrip = async (req: MyRequest, res: Response) => {
         process.env.CALENDAR_CLIENT_ID,
         process.env.CALENDAR_SECRET
       );
-      oAuth2Client.setCredentials({ refresh_token: token });
+      oAuth2Client.setCredentials({ access_token: token });
       const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
       calendar.events.insert({ calendarId: "primary", resource: event });
       res.status(200).send({ status: 200 });
