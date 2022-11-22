@@ -49,7 +49,7 @@ var login = function (req, res, next) { return __awaiter(void 0, void 0, void 0,
             else {
                 req.logIn(user, function (err) {
                     if (err)
-                        console.warn(err);
+                        console.warn('Error login in controller', err);
                     else
                         res.send(user);
                 });
@@ -64,7 +64,6 @@ var logout = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         req.logout(function (err) {
             if (err)
                 console.warn(err);
-            //Might Break
             else
                 res.status(205).send({});
         });
@@ -104,7 +103,8 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 return [3 /*break*/, 5];
             case 4:
                 e_1 = _b.sent();
-                console.warn(e_1);
+                console.warn('Error register in controller', e_1);
+                res.status(500).send({ status: 500 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -128,7 +128,8 @@ var get = function (req, res) { return __awaiter(void 0, void 0, void 0, functio
             case 3: return [3 /*break*/, 5];
             case 4:
                 e_2 = _a.sent();
-                console.warn(e_2);
+                console.warn('Error get in controller', e_2);
+                res.status(500).send({ status: 500 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -154,6 +155,7 @@ var getUserByEmail = function (req, res) { return __awaiter(void 0, void 0, void
             case 4:
                 e_3 = _a.sent();
                 console.warn('Error getuserByEmail in controller', e_3);
+                res.status(500).send({ status: 500 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -182,6 +184,7 @@ var deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 5:
                 e_4 = _a.sent();
                 console.warn('Error deleteUser in controller', e_4);
+                res.status(500).send({ status: 500 });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }

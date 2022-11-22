@@ -69,13 +69,6 @@ describe('User endpoints', () => {
       expect(logout.status).toEqual(205);
       expect(logout.body).toEqual('');
     });
-    //Todo: add logout session removal
-    // it('should not logout user if not logged in', async () => {
-    //   const user = mocks.user;
-    //   const register = await request.post('/register').send(user);
-    //   const logout = await session.post('/logout');
-    //   expect(logout.body).toEqual('No user found');
-    // });
   });
 
   describe('delete', () => {

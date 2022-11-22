@@ -70,6 +70,7 @@ var checkout = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
             case 4:
                 e_1 = _a.sent();
                 console.log('Error in checkout controller', e_1);
+                res.status(500).send({ status: 500 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -102,7 +103,7 @@ var authenticatePurchase = function (req, res) { return __awaiter(void 0, void 0
             case 5:
                 e_2 = _a.sent();
                 console.log('Error authenticating purchase', e_2);
-                res.send({ authenticated: false });
+                res.status(402).send({ authenticated: false });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }

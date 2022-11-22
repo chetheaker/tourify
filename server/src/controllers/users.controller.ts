@@ -23,7 +23,6 @@ const logout = async (req: Request, res: Response) => {
   //Todo: add logout session removal
   req.logout(function (err) {
     if (err) console.warn(err);
-    //Might Break
     else res.status(205).send({});
   });
 };

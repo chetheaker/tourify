@@ -139,7 +139,7 @@ const deleteTrip = async (req: Request, res: Response) => {
     if (req.user) {
       const id = req.params.id;
       const deleted = await tripsModel.deleteOne(id);
-      res.status(204).send(deleted);
+      res.status(200).send(deleted);
     } else {
       res.status(401).send({ user: false });
     }

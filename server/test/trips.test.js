@@ -4,6 +4,7 @@ const request = supertest(app);
 let session = supertest.agent(app);
 const mocks = require('./mocks.js');
 const client = require('../dist/models/db.js');
+
 async function authenticateUser() {
   const user = mocks.user;
   const register = await session.post('/register').send(user);
@@ -16,6 +17,7 @@ async function authenticateUser() {
     .post('/login')
     .send({ email: user.email, password: user.password });
 }
+
 async function authenticateFriend() {
   const user = mocks.friend;
   const register = await session.post('/register').send(user);
@@ -30,6 +32,7 @@ async function authenticateFriend() {
 }
 
 jest.setTimeout(3000);
+
 describe('Trips endpoints', () => {
   beforeEach(async () => {
     session = supertest.agent(app);
@@ -295,7 +298,9 @@ describe('Trips endpoints', () => {
       const deleteTrip = await session.delete(
         `/trips/${trip.body.insertedId}/delete`
       );
-      expect(deleteTrip.status).toBe(204);
+      expect(deleteTrip.status).toBe(200);
+      expect(deleteTrip.body.deletedCount).toBe(1);
+      expect(deleteTrip.body.acknowledged).toBe(true);
       const deletedTrip = await session.get(`/trips/${trip.body.insertedId}`);
       expect(deletedTrip.status).toBe(404);
     });
@@ -304,6 +309,14 @@ describe('Trips endpoints', () => {
       const deleteTrip = await request.delete(`/trips/123/delete`);
       expect(deleteTrip.status).toBe(401);
       expect(deleteTrip.body.user).toBe(false);
+    });
+  });
+
+  describe('export trip to Google Calendar', () => {
+    it('should not export trip to Google Calendar if not logged in', async () => {
+      const exportTrip = await request.get(`/trips/export`);
+      expect(exportTrip.status).toBe(401);
+      expect(exportTrip.body.user).toBe(false);
     });
   });
 });
