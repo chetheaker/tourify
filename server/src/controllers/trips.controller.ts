@@ -1,5 +1,10 @@
+import { resolveAny } from "dns";
 import { Request, Response } from "express";
 import { MyRequest } from "../types/types";
+// Require google from googleapis package.
+const { google } = require('googleapis')
+// Require oAuth2 from our google instance.
+const { OAuth2 } = google.auth
 
 const tripsModel = require('../models/trips.model');
 
@@ -194,6 +199,29 @@ const declineInvite = async (req: MyRequest, res: Response) => {
   }
 };
 
+const exportTrip = async (req: MyRequest, res: Response) => {
+  try {
+    if (req.user) {
+      const event = req.body.events;
+      const token = req.body.token;
+      const oAuth2Client = new OAuth2(
+        process.env.CALENDAR_CLIENT_ID,
+        process.env.CALENDAR_SECRET
+      );
+      oAuth2Client.setCredentials({ refresh_token: token });
+      const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+      calendar.events.insert({ calendarId: "primary", resource: event });
+      res.status(200).send({ status: 200 });
+    } else {
+      res.status(401).send({ user: false, status: 401 });
+    }
+  } catch (e) {
+    console.warn("error exporting trip", e);
+    res.status(500).send({ status: 500 });
+  }
+};
+
+
 module.exports = {
   getUserTrips,
   getExploreTrips,
@@ -207,5 +235,6 @@ module.exports = {
   inviteUser,
   acceptInvite,
   declineInvite,
-  getFriendTrips
+  getFriendTrips,
+  exportTrip
 };
