@@ -62,3 +62,9 @@ export type NotificationInviter = {
 export interface MyRequest extends Request {
     user: User
 }
+export type Event = {
+    summary: string,
+    start: {
+      date: string
+    }
+}

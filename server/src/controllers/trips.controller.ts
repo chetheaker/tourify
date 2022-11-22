@@ -202,7 +202,7 @@ const declineInvite = async (req: MyRequest, res: Response) => {
 const exportTrip = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
-      const event = req.body.events;
+      const events = req.body.events;
       const token = req.body.token;
       const oAuth2Client = new OAuth2(
         process.env.CALENDAR_CLIENT_ID,
@@ -210,7 +210,14 @@ const exportTrip = async (req: MyRequest, res: Response) => {
       );
       oAuth2Client.setCredentials({ access_token: token });
       const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-      calendar.events.insert({ calendarId: "primary", resource: event });
+      events.forEach((event:Event) => {
+        calendar.events.insert(
+          {
+            calendarId: "primary",
+            resource: event
+          }
+        );
+      });
       res.status(200).send({ status: 200 });
     } else {
       res.status(401).send({ user: false, status: 401 });
