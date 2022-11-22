@@ -1,5 +1,10 @@
+import { resolveAny } from "dns";
 import { Request, Response } from "express";
 import { MyRequest } from "../types/types";
+// Require google from googleapis package.
+const { google } = require('googleapis')
+// Require oAuth2 from our google instance.
+const { OAuth2 } = google.auth
 
 const tripsModel = require('../models/trips.model');
 
@@ -7,12 +12,12 @@ const getUserTrips = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const trips = await tripsModel.findTripsByEmail(req.user.email);
-      res.send(trips);
+      res.status(200).send(trips);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log("error getting users' trips", e);
+    console.warn("error getting users' trips", e);
   }
 };
 
@@ -20,12 +25,12 @@ const getExploreTrips = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const trips = await tripsModel.getAllTrips();
-      res.send(trips);
+      res.status(200).send(trips);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log("error getting users' trips", e);
+    console.warn("error getting users' trips", e);
   }
 };
 
@@ -33,12 +38,12 @@ const getFriendTrips = async (req: MyRequest, res: Response) => {
   try {
     if (req.user) {
       const trips = await tripsModel.getFriendTrips(req.user.email);
-      res.send(trips);
+      res.status(200).send(trips);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log("error getting users' trips", e);
+    console.warn("error getting users' trips", e);
   }
 };
 
@@ -47,19 +52,18 @@ const getUserTrip = async (req: Request, res: Response) => {
     if (req.user) {
       const id = req.params.id;
       const trip = await tripsModel.findTripById(id);
-      if (trip === null) res.send({ _id: false });
-      else res.send(trip);
+      if (!trip) res.status(404).send({ _id: false });
+      else res.status(200).send(trip);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('error getting trip', e);
+    console.warn('error getting trip', e);
   }
 };
 
 const createTrip = async (req: MyRequest, res: Response) => {
   try {
-    console.log('user', req.user);
     if (req.user) {
       const trip = {
         ...req.body,
@@ -71,10 +75,10 @@ const createTrip = async (req: MyRequest, res: Response) => {
       res.status(201);
       res.send(result);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('error getting trip', e);
+    console.warn('error getting trip', e);
   }
 };
 
@@ -84,12 +88,12 @@ const updateTripName = async (req: Request, res: Response) => {
       const id = req.params.id;
       const name = req.body.name;
       const updated = await tripsModel.updateName(id, name);
-      res.send(updated);
+      res.status(200).send(updated);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('error getting trip', e);
+    console.warn('error getting trip', e);
   }
 };
 
@@ -99,12 +103,12 @@ const updateTripRoute = async (req: Request, res: Response) => {
       const id = req.params.id;
       const route = req.body.route;
       const updated = await tripsModel.updateRoute(id, route);
-      res.send(updated);
+      res.status(200).send(updated);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('error updating trip route', e);
+    console.warn('error updating trip route', e);
   }
 };
 
@@ -114,12 +118,12 @@ const updateTripItinerary = async (req: Request, res: Response) => {
       const id = req.params.id;
       const itinerary = req.body.itinerary;
       const updated = await tripsModel.updateItinerary(id, itinerary);
-      res.send(updated);
+      res.status(200).send(updated);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('Error updateTripItinerary in controller', e);
+    console.warn('Error updateTripItinerary in controller', e);
   }
 };
 
@@ -128,12 +132,12 @@ const deleteTrip = async (req: Request, res: Response) => {
     if (req.user) {
       const id = req.params.id;
       const deleted = await tripsModel.deleteOne(id);
-      res.send(deleted);
+      res.status(204).send(deleted);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('Error deleteTrip in controller', e);
+    console.warn('Error deleteTrip in controller', e);
   }
 };
 
@@ -142,12 +146,12 @@ const getTripUser = async (req: Request, res: Response) => {
     if (req.user) {
       const { id } = req.params;
       const user = await tripsModel.getTripUser(id);
-      res.send(user);
+      res.status(200).send(user);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('Error in getTripUser controller', e);
+    console.warn('Error in getTripUser controller', e);
   }
 };
 
@@ -156,12 +160,12 @@ const inviteUser = async (req: Request, res: Response) => {
     if (req.user) {
       const { id, email } = req.params;
       const result = await tripsModel.inviteUser(id, email);
-      res.send(result);
+      res.status(200).send(result);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('Error inviting user', e);
+    console.warn('Error inviting user', e);
   }
 };
 
@@ -171,12 +175,12 @@ const acceptInvite = async (req: MyRequest, res: Response) => {
       const { id } = req.params;
       const { email } = req.user;
       const accepted = await tripsModel.acceptInvite(id, email);
-      res.send(accepted);
+      res.status(200).send(accepted);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('error accepting invite', e);
+    console.warn('error accepting invite', e);
   }
 };
 
@@ -186,14 +190,44 @@ const declineInvite = async (req: MyRequest, res: Response) => {
       const { id } = req.params;
       const { email } = req.user;
       const declined = await tripsModel.declineInvite(id, email);
-      res.send(declined);
+      res.status(200).send(declined);
     } else {
-      res.send({ user: false });
+      res.status(401).send({ user: false });
     }
   } catch (e) {
-    console.log('error declining invite', e);
+    console.warn('error declining invite', e);
   }
 };
+
+const exportTrip = async (req: MyRequest, res: Response) => {
+  try {
+    if (req.user) {
+      const events = req.body.events;
+      const token = req.body.token;
+      const oAuth2Client = new OAuth2(
+        process.env.CALENDAR_CLIENT_ID,
+        process.env.CALENDAR_SECRET
+      );
+      oAuth2Client.setCredentials({ access_token: token });
+      const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+      events.forEach((event:Event) => {
+        calendar.events.insert(
+          {
+            calendarId: "primary",
+            resource: event
+          }
+        );
+      });
+      res.status(200).send({ status: 200 });
+    } else {
+      res.status(401).send({ user: false, status: 401 });
+    }
+  } catch (e) {
+    console.warn("error exporting trip", e);
+    res.status(500).send({ status: 500 });
+  }
+};
+
 
 module.exports = {
   getUserTrips,
@@ -208,5 +242,6 @@ module.exports = {
   inviteUser,
   acceptInvite,
   declineInvite,
-  getFriendTrips
+  getFriendTrips,
+  exportTrip
 };
