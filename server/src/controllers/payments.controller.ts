@@ -28,6 +28,7 @@ const checkout = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.log('Error in checkout controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -47,7 +48,7 @@ const authenticatePurchase = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.log('Error authenticating purchase', e);
-    res.send({ authenticated: false });
+    res.status(402).send({ authenticated: false });
   }
 };
 

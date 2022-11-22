@@ -12,7 +12,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) res.status(401).send({ user: false });
     else {
       req.logIn(user, (err) => {
-        if (err) console.warn(err);
+        if (err) console.warn('Error login in controller',err);
         else res.send(user);
       });
     }
@@ -51,7 +51,8 @@ const register = async (req: Request, res: Response) => {
     res.status(201);
     res.send(user);
   } catch (e) {
-    console.warn(e);
+    console.warn('Error register in controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -64,7 +65,8 @@ const get = async (req: MyRequest, res: Response) => {
       res.status(404).send({ id: false });
     }
   } catch (e) {
-    console.warn(e);
+    console.warn('Error get in controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -79,6 +81,7 @@ const getUserByEmail = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn('Error getuserByEmail in controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -94,6 +97,7 @@ const deleteUser = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn('Error deleteUser in controller', e);
+    res.status(500).send({status:500})
   }
 };
 

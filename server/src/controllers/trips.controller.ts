@@ -17,6 +17,7 @@ const getUserTrips = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn("error getting users' trips", e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -30,6 +31,7 @@ const getExploreTrips = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn("error getting users' trips", e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -43,6 +45,7 @@ const getFriendTrips = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn("error getting users' trips", e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -58,6 +61,7 @@ const getUserTrip = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('error getting trip', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -78,6 +82,7 @@ const createTrip = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn('error getting trip', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -93,6 +98,7 @@ const updateTripName = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('error getting trip', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -108,6 +114,7 @@ const updateTripRoute = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('error updating trip route', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -123,6 +130,7 @@ const updateTripItinerary = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('Error updateTripItinerary in controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -137,6 +145,7 @@ const deleteTrip = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('Error deleteTrip in controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -151,6 +160,7 @@ const getTripUser = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('Error in getTripUser controller', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -165,6 +175,7 @@ const inviteUser = async (req: Request, res: Response) => {
     }
   } catch (e) {
     console.warn('Error inviting user', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -180,6 +191,7 @@ const acceptInvite = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn('error accepting invite', e);
+    res.status(500).send({status:500})
   }
 };
 
@@ -195,6 +207,7 @@ const declineInvite = async (req: MyRequest, res: Response) => {
     }
   } catch (e) {
     console.warn('error declining invite', e);
+    res.status(500).send({status:500})
   }
 };
 
