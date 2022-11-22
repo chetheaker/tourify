@@ -65,7 +65,7 @@ var logout = function (req, res) { return __awaiter(void 0, void 0, void 0, func
             if (err)
                 console.warn(err);
             else
-                res.status(205).send({});
+                res.status(200).send({});
         });
         return [2 /*return*/];
     });
