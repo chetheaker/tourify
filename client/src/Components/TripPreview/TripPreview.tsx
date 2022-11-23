@@ -18,7 +18,7 @@ function TripPreview({ trip }: TripPreviewProps) {
       <img
         className="preview-img"
         src={require(`../../media/${randomPhoto()}`)}
-        alt=""
+        alt="Trip Preview"
       />
       <div className="overlay"></div>
       <div className="bottom">

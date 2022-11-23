@@ -8,10 +8,9 @@
     "@mantine/core": "^5.7.1",
     "@mantine/dates": "^5.7.1",
     "@mantine/hooks": "^5.7.1",
-    "@react-google-maps/api": "^2.16.1",
+    "@react-google-maps/api": "^2.17.0",
     "@react-oauth/google": "^0.5.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/gapi": "^0.0.43",
     "@types/google.maps": "^3.50.5",
@@ -64,6 +63,7 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "^8.0.7",
+    "@testing-library/react": "^13.4.0",
     "@types/uuid": "^8.3.4",
     "cypress": "^11.1.0"
   }
