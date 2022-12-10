@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="client/public/assets/icons/no-bg-logo.png" />
+  <img src="https://github.com/chetheaker/tourify/raw/main/client/public/assets/icons/no-bg-logo.png" />
 </p>
 <p align="center"><strong>Tourify is an all-in-one road trip application to help you plan and organise your road trips from scratch.</strong></p>
 
@@ -13,9 +13,9 @@
 ## Screenshots
 
 <p align="center" >
-  <img src="client/public/assets/mockups/mock-explore.png" width="100%"/>
-  <img src="client/public/assets/mockups/mock-home.png" width="100%"/>
-  <img src="client/public/assets/mockups/mock-trip.png" width="100%"/>
+  <img src="https://github.com/chetheaker/tourify/raw/main/client/public/assets/mockups/mock-explore.png" width="100%"/>
+  <img src="https://github.com/chetheaker/tourify/raw/main/client/public/assets/mockups/mock-home.png" width="100%"/>
+  <img src="https://github.com/chetheaker/tourify/raw/main/client/public/assets/mockups/mock-trip.png" width="100%"/>
 </p>
 
 ## Tech Stack
@@ -45,5 +45,5 @@ Che Theaker - [Github](https://github.com/chetheaker) - [LinkedIn](https://www.l
 
 ## Collaborators
 
-- **Eric Lorite** - _Codeworks_ - [Github](https://github.com/loridev)
-- **Sebastian Ricci** - _Codeworks_ - [Github](https://github.com/SebastianRicci)
+- **Eric Lorite** - [LinkedIn](https://www.linkedin.com/in/lorite-eric/) - [Github](https://github.com/loridev)
+- **Sebastian Ricci** - [LinkedIn](https://www.linkedin.com/in/sebastian-ricci/)- [Github](https://github.com/SebastianRicci)
